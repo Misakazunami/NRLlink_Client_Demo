@@ -5,7 +5,7 @@ server:
 
 device:
   callsign: "BH6ERO"  # 设备呼号
-  ssid: 1            # 设备SSID
+  ssid: 1          # 设备SSID
   cpuid: "12345678"  # 设备CPUID
   password: "" # 设备密码
   model: 1           # 设备型号

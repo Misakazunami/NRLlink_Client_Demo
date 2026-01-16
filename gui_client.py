@@ -131,6 +131,12 @@ class NRLGUIClient:
         ttk.Button(self.control_frame, text="测试音频设备", 
                   command=self.test_audio_devices).grid(row=0, column=3, padx=(0, 10))
         
+        # 调试模式：强制解码空包
+        self.debug_force_decode_var = tk.BooleanVar(value=False)
+        self.debug_button = ttk.Button(self.control_frame, text="[调试]强制解码空包", 
+                                       command=self.toggle_debug_force_decode)
+        self.debug_button.grid(row=0, column=4, padx=(0, 10))
+        
         # 发送文本消息
         ttk.Label(self.control_frame, text="消息:").grid(row=1, column=0, sticky=tk.W, pady=(10, 0))
         self.message_entry = ttk.Entry(self.control_frame, width=40)
@@ -546,6 +552,21 @@ CPUID: {device_info.get('cpuid', '未知')}
         """清空日志"""
         if self.log_text:
             self.log_text.delete(1.0, tk.END)
+    
+    def toggle_debug_force_decode(self):
+        """切换调试模式：强制解码空包"""
+        if not self.client:
+            messagebox.showwarning("未连接", "请先连接到服务器")
+            return
+        
+        current_state = self.client.debug_force_decode
+        new_state = not current_state
+        
+        self.client.enable_debug_force_decode(new_state)
+        
+        status = "已启用" if new_state else "已禁用"
+        self.log_message(f"[调试] 强制解码空包 {status}")
+        self.debug_button.config(text=f"[调试]强制解码空包 ({status})")
     
     def show_about(self):
         """显示关于信息"""

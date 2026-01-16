@@ -84,6 +84,9 @@ class NRLClient:
         self.voice_callback: Optional[Callable[[bytes], None]] = None
         self.status_callback: Optional[Callable[[str, Any], None]] = None
         
+        # 调试选项：绕过空包检查，强制解码所有包
+        self.debug_force_decode = False
+        
         # 加载配置
         self.load_config(config_file)
         
@@ -183,10 +186,10 @@ class NRLClient:
                 self.logger.warning("设置接收缓冲区失败，使用默认配置")
             
             # 测试连接 - 发送初始心跳包进行设备注册
-            # 参考nrllink的设备注册流程，使用固定SSID 200表示服务器连接
+            # 使用设备配置的SSID
             test_packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
-                200,  # 心跳包SSID固定为200
+                self.device_config.ssid,  # 使用设备配置的SSID
                 self.device_config.cpuid,  # 使用配置中的CPUID
                 self.device_config.model   # 设备模式
             )
@@ -209,7 +212,12 @@ class NRLClient:
             
             self._update_status('connected', True)
             self.logger.info(f"连接到服务器成功: {self.server_config.host}:{self.server_config.port}")
-            
+            self.logger.info(f"------------------------------------")
+            self.logger.info(f"欢迎使用NRL客户端")
+            self.logger.info(f"当前连接到服务器的设备呼号: {self.device_config.callsign}")
+            self.logger.info(f"当前连接到服务器的设备SSID: {self.device_config.ssid}")
+            self.logger.info(f"------------------------------------")
+
             return True
             
         except socket.error as e:
@@ -360,8 +368,24 @@ class NRLClient:
         try:
             # 验证语音数据
             if not packet.data or len(packet.data) == 0:
-                self.logger.warning(f"收到空语音数据包 from {packet.get_callsign_ssid()}")
-                return
+                if not self.debug_force_decode:
+                    self.logger.warning(f"收到空语音数据包 from {packet.get_callsign_ssid()}")
+                    return
+                else:
+                    self.logger.info(f"[调试模式] 收到空语音数据包，强制解码 from {packet.get_callsign_ssid()}")
+                    # 创建空数据包以供解码
+                    packet.data = b'\x80' * 500
+            elif self.debug_force_decode and len(packet.data) != 500:
+                # 调试模式：忽略长度检查，直接使用最后 500 字节
+                if len(packet.data) > 500:
+                    original_len = len(packet.data)
+                    packet.data = packet.data[-500:]  # 提取最后 500 字节
+                    self.logger.info(f"[调试模式] 语音包长度异常 ({original_len} bytes)，提取最后 500 字节解码")
+                elif len(packet.data) < 500:
+                    # 如果小于 500 字节，前面补静音数据
+                    original_len = len(packet.data)
+                    packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
+                    self.logger.info(f"[调试模式] 语音包长度不足 ({original_len} bytes)，补充静音数据至 500 字节")
             
             # 解码语音数据
             pcm_data = self.voice_processor.decode_voice(packet.data)
@@ -401,8 +425,15 @@ class NRLClient:
         try:
             # 验证文本包格式
             if not packet.data:
-                self.logger.warning(f"收到空文本数据包 from {packet.get_callsign_ssid()}")
-                return
+                if not self.debug_force_decode:
+                    self.logger.warning(f"收到空文本数据包 from {packet.get_callsign_ssid()}")
+                    return
+                else:
+                    self.logger.info(f"[调试模式] 收到空文本数据包，强制解码 from {packet.get_callsign_ssid()}")
+                    packet.data = b'[EmptyTXTPak]'
+            elif self.debug_force_decode:
+                # 调试模式：忽略长度检查，直接使用原始数据解码
+                self.logger.debug(f"[调试模式] 文本包长度: {len(packet.data)} bytes，直接解码")
             
             text_data = packet.data.decode('utf-8', errors='ignore')
             message = {
@@ -431,14 +462,31 @@ class NRLClient:
             
             # 检查语音数据包长度
             if not packet.data:
-                self.logger.warning(f"收到空服务器互联语音数据包 from {packet.get_callsign_ssid()}")
-                return
+                if not self.debug_force_decode:
+                    self.logger.warning(f"收到空服务器互联语音数据包 from {packet.get_callsign_ssid()}")
+                    return
+                else:
+                    self.logger.info(f"[调试模式] 收到空服务器互联语音数据包，强制解码 from {packet.get_callsign_ssid()}")
+                    packet.data = b'\x80' * 500
             
             if len(packet.data) == 0:
-                self.logger.warning(f"服务器互联语音数据包长度为0 from {packet.get_callsign_ssid()}")
-                return
-                
-            if len(packet.data) != 500:
+                if not self.debug_force_decode:
+                    self.logger.warning(f"服务器互联语音数据包长度为0 from {packet.get_callsign_ssid()}")
+                    return
+                else:
+                    packet.data = b'\x80' * 500
+            elif self.debug_force_decode and len(packet.data) != 500:
+                # 调试模式：忽略长度检查，直接使用最后 500 字节
+                if len(packet.data) > 500:
+                    original_len = len(packet.data)
+                    packet.data = packet.data[-500:]  # 提取最后 500 字节
+                    self.logger.info(f"[调试模式] 服务器互联语音包长度异常 ({original_len} bytes)，提取最后 500 字节解码")
+                elif len(packet.data) < 500:
+                    # 如果小于 500 字节，前面补静音数据
+                    original_len = len(packet.data)
+                    packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
+                    self.logger.info(f"[调试模式] 服务器互联语音包长度不足 ({original_len} bytes)，补充静音数据至 500 字节")
+            elif not self.debug_force_decode and len(packet.data) != 500:
                 self.logger.warning(f"服务器互联语音数据包长度不是500字节: {len(packet.data)} from {packet.get_callsign_ssid()}")
                 # 仍然尝试处理非标准长度的数据
             
@@ -593,10 +641,10 @@ class NRLClient:
             if not self.is_connected or not self.socket:
                 return False
             
-            # 创建心跳包（参考nrllink的发送流程）
+            # 创建心跳包
             packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
-                200,  # 心跳包SSID固定为200（表示服务器连接）
+                self.device_config.ssid,  # 使用设备配置的SSID
                 self.device_config.cpuid,  # 使用配置的CPUID
                 self.device_config.model   # 设备模式
             )
@@ -712,6 +760,16 @@ class NRLClient:
     def set_status_callback(self, callback: Callable[[str, Any], None]):
         """设置状态回调"""
         self.status_callback = callback
+    
+    def enable_debug_force_decode(self, enable: bool = True):
+        """启用/禁用调试模式：强制解码空包
+        
+        Args:
+            enable: True 启用调试模式，False 禁用
+        """
+        self.debug_force_decode = enable
+        status = "已启用" if enable else "已禁用"
+        self.logger.info(f"调试模式强制解码空包 {status}")
     
     def close(self):
         """关闭客户端"""
