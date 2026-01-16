@@ -1,0 +1,21 @@
+# NRL客户端配置文件
+server:
+  host: "43.143.14.24"  # 服务器地址
+  port: 60050        # 服务器UDP端口
+
+device:
+  callsign: "BH6ERO"  # 设备呼号
+  ssid: 1            # 设备SSID
+  cpuid: "12345678"  # 设备CPUID
+  password: "" # 设备密码
+  model: 1           # 设备型号
+
+audio:
+  sample_rate: 8000  # 采样率
+  channels: 1         # 声道数
+  chunk_size: 500    # 音频块大小（62.5ms，8000Hz采样率，16位采样，对应500字节G.711包）
+  format: "paInt16" # 音频格式
+
+network:
+  buffer_size: 4096  # 网络缓冲区大小
+  heartbeat_interval: 2  # 心跳间隔（秒）

@@ -1,0 +1,1661 @@
+2026-01-16 22:18:33,455 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 22:18:35,398 - nrl_client - INFO - 配置加载成功
+2026-01-16 22:18:35,652 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 22:18:35,655 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 22:18:35,680 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:18:35,681 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 22:18:36,835 - audio_handler - INFO - 输入设备已设置为:  (Realtek(R) Audio)
+2026-01-16 22:18:37,618 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:18:45,080 - audio_handler - INFO - 使用输出设备: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:18:45,289 - audio_handler - INFO - 开始播放
+2026-01-16 22:18:45,290 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:18:45,352 - audio_handler - INFO - 开始录音
+2026-01-16 22:18:45,353 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:18:47,906 - audio_handler - INFO - 停止录音
+2026-01-16 22:18:47,907 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:18:49,728 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:18:49,771 - audio_handler - INFO - 开始录音
+2026-01-16 22:18:49,772 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:18:52,523 - audio_handler - INFO - 停止录音
+2026-01-16 22:18:52,524 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:18:53,269 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:18:53,313 - audio_handler - INFO - 开始录音
+2026-01-16 22:18:58,351 - audio_handler - INFO - 停止录音
+2026-01-16 22:18:58,352 - audio_handler - WARNING - 已经在播放中
+2026-01-16 22:19:22,117 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 22:19:24,633 - nrl_client - INFO - 配置加载成功
+2026-01-16 22:19:24,828 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 22:19:24,830 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 22:19:26,083 - audio_handler - INFO - 输入设备已设置为:  (Realtek(R) Audio)
+2026-01-16 22:19:26,846 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 22:19:27,091 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:19:28,095 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:19:30,831 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:30,847 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:30,847 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:32,831 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:32,849 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:32,849 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:34,832 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:34,848 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:34,848 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:36,833 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:36,849 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:36,849 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:38,834 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:38,849 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:38,850 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:40,834 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:40,850 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:40,850 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:42,835 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:42,850 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-200, cpuid=6a17abf700)
+2026-01-16 22:19:42,851 - nrl_client - DEBUG - 收到心跳包: BH6ERO-200, CPUID: 6a17abf700
+2026-01-16 22:19:43,934 - audio_handler - INFO - 使用输出设备: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:19:44,107 - audio_handler - INFO - 开始播放
+2026-01-16 22:19:44,107 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:19:44,166 - audio_handler - INFO - 开始录音
+2026-01-16 22:19:44,166 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:19:44,203 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,203 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,220 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-1, cpuid=3132333400)
+2026-01-16 22:19:44,221 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-1
+2026-01-16 22:19:44,243 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,243 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,260 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-1, cpuid=3132333400)
+2026-01-16 22:19:44,261 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-1
+2026-01-16 22:19:44,282 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,282 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,300 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-1, cpuid=3132333400)
+2026-01-16 22:19:44,302 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,302 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,322 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,322 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,342 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,342 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,362 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,362 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,383 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,383 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,403 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,403 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,442 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,442 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,462 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,462 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,482 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,482 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,503 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,503 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,542 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,542 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,562 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,562 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,583 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,583 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,623 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,623 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,643 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,643 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,663 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,663 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,703 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,703 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,743 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,743 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,763 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,763 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,803 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,803 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,823 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,823 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,835 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:44,843 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,843 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,883 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,883 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,923 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,923 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,943 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,943 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,963 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,963 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:44,983 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:44,983 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,023 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,023 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,062 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,062 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,083 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,083 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,123 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,123 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,143 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,143 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,163 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,163 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,203 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,203 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,223 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,223 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,243 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,243 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,283 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,283 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,323 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,323 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,343 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,343 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,383 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,383 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,403 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,403 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,423 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,423 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,443 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,443 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,483 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,483 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,503 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,503 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,523 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,523 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,563 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,563 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,603 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,603 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,623 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,623 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,643 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,643 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,683 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,683 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,702 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,702 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,722 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,722 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,742 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,742 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,782 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,782 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,803 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,803 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,823 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,823 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,863 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,863 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,903 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,903 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,922 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,922 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,962 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,962 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:45,983 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:45,983 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,003 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,003 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,043 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,043 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,083 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,083 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,103 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,103 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,123 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,123 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,143 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,143 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,182 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,182 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,222 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,231 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,243 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,243 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,263 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,263 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,283 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,283 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,323 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:19:46,323 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:19:46,358 - audio_handler - INFO - 停止录音
+2026-01-16 22:19:46,359 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:19:46,836 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:48,837 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:50,838 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:52,839 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:54,840 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:56,841 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:19:58,842 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:00,843 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:02,843 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:04,844 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:06,845 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:08,846 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:10,847 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:12,848 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:14,848 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:16,849 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:18,850 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:20,851 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:22,851 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:24,852 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:26,853 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:28,853 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:29,639 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:20:29,684 - audio_handler - INFO - 开始录音
+2026-01-16 22:20:29,685 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:20:29,717 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,717 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,756 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,756 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,777 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,777 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,797 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,797 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,837 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,837 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,857 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,857 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,896 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,896 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,917 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,917 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,957 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,957 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:29,997 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:29,997 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,017 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,017 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,057 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,057 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,077 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,077 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,097 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,097 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,137 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,137 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,157 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,157 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,197 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,197 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,237 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,237 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,257 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,257 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,277 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,277 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,317 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,317 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,337 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,337 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,376 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,376 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,397 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,397 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,437 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,437 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,476 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,476 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,497 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,497 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,517 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,517 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,537 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,537 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,576 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,576 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,597 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,597 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,637 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,637 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,677 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,677 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,697 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,697 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,717 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,717 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,756 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,756 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,777 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,777 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,797 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,797 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,817 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,817 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,854 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:30,857 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,857 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,877 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,877 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,917 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,917 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,937 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,937 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,957 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,957 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:30,997 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:30,997 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,017 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,017 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,037 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,037 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,077 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,077 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,097 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,097 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,117 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,117 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,137 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,137 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,177 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:31,177 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:31,221 - audio_handler - INFO - 停止录音
+2026-01-16 22:20:31,222 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:20:32,679 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:20:32,722 - audio_handler - INFO - 开始录音
+2026-01-16 22:20:32,723 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:20:32,754 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,754 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,775 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,776 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,815 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,815 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,835 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,835 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,854 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:32,875 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,875 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,914 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,914 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,935 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,935 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,955 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,955 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:32,994 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:32,994 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,015 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,015 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,035 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,035 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,055 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,055 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,095 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,095 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,115 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,115 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,135 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,135 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,155 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,155 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,175 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,175 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,214 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,214 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,234 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,234 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,255 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,255 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,295 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,295 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,335 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,335 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,354 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,354 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,375 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,375 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,395 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,395 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,434 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,434 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,454 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,454 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,495 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,495 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,515 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,515 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,535 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,535 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,575 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,575 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,595 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,595 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,615 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,615 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,635 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,635 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,675 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,675 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,695 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,695 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,715 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,715 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,735 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,735 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,755 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,755 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,795 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,795 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,834 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,834 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,855 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,855 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,894 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,894 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,915 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,915 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,954 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,954 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,975 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,975 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:33,995 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:33,995 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,015 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,015 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,054 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,054 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,075 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,075 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,114 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,114 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,134 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,134 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,155 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,155 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,175 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,175 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,195 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,195 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,234 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,235 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,255 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,255 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,294 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,294 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,314 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,314 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,334 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:34,334 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:34,374 - audio_handler - INFO - 停止录音
+2026-01-16 22:20:34,374 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:20:34,855 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:36,856 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:38,856 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:38,879 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:20:38,923 - audio_handler - INFO - 开始录音
+2026-01-16 22:20:38,923 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:20:38,956 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:38,957 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:38,976 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:38,976 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,016 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,016 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,056 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,056 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,076 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,076 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,116 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,116 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,136 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,136 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,156 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,156 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,196 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,196 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,216 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,216 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,256 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,256 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,276 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,276 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,296 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,296 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,336 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,336 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,356 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,356 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,376 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,376 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,416 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,416 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,436 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,436 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,456 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,456 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,476 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,476 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,496 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,496 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,536 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,536 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,556 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,556 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,576 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,577 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,596 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,597 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,636 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,636 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,656 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,656 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,696 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,696 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,716 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,716 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,736 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,736 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,776 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,776 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,796 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,796 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,815 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,819 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,836 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,836 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,856 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,857 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,896 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,896 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,916 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,916 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,936 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,936 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,956 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,956 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,976 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,976 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:39,996 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:39,997 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,036 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,036 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,056 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,056 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,076 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,076 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,116 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,116 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,136 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,136 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,156 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,156 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,176 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,176 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,196 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,196 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,236 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,236 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,276 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,276 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,296 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,296 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,316 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,316 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,356 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,357 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,376 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,376 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,396 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,396 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,416 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,416 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,456 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,457 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,476 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,476 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,516 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,516 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,536 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,536 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,576 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,576 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,596 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,596 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,616 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,616 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,656 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,656 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,676 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,676 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,716 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,716 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,736 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,736 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,756 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,756 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,776 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,776 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,816 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,816 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,836 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,836 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,856 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,857 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,857 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:40,896 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,896 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,916 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,916 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,936 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,937 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:40,976 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:40,976 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,016 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,016 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,036 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,036 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,056 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,056 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,076 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,076 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,096 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,096 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,136 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,136 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,156 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,156 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,196 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,196 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,236 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,236 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,256 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,257 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,296 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,296 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,316 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,316 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,336 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,336 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,356 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,356 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,396 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,396 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,416 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,416 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,456 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,456 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,496 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,496 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,516 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,516 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,556 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,556 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,576 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,576 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,596 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,596 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,636 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,636 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,676 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,676 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,696 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,696 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,716 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,716 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,736 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,736 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,756 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,756 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,796 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,796 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,816 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,816 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,856 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,856 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,876 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,876 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,896 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,896 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,936 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,936 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,956 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,956 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,976 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,976 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:41,996 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:41,996 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,036 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,036 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,056 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,056 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,076 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,076 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,096 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,096 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,116 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,116 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,136 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,136 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,156 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,156 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,176 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,176 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,216 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,216 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,236 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,236 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,256 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,256 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,296 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,297 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,335 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,336 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,356 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,356 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,376 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,376 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,416 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,416 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,436 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,436 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,456 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,456 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,496 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,496 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,516 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,516 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,556 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,556 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,576 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,576 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,596 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,596 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,636 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,636 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,656 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,656 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,676 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,676 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,716 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,716 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,756 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,756 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,775 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,776 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,796 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,796 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,816 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,816 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,856 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,856 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,857 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:42,876 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,876 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,896 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,896 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,916 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,916 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,955 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,956 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,976 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,976 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:42,996 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:42,996 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,036 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,036 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,056 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,056 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,076 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,076 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,096 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,096 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,136 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,136 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,156 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,156 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,176 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,176 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,216 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,217 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,256 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,256 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,276 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,276 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,296 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,296 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,336 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,336 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,356 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,357 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,396 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,396 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,436 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,436 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,456 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,456 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,476 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,476 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,516 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,516 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,555 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,556 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,576 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,576 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,596 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:43,596 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:43,631 - audio_handler - INFO - 停止录音
+2026-01-16 22:20:43,633 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:20:44,858 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:46,858 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:48,859 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:50,860 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:52,861 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:53,513 - audio_handler - INFO - 输入设备已设置为: Microsoft 声音映射器 - Input
+2026-01-16 22:20:54,802 - audio_handler - INFO - 输出设备已设置为: Microsoft 声音映射器 - Output
+2026-01-16 22:20:54,861 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:55,703 - audio_handler - INFO - 使用输入设备: Microsoft 声音映射器 - Input
+2026-01-16 22:20:55,761 - audio_handler - INFO - 开始录音
+2026-01-16 22:20:55,762 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:20:55,794 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,794 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,814 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,814 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,835 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,835 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,855 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,855 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,894 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,896 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,914 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,914 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,935 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,935 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:55,975 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:55,975 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,014 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,014 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,035 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,035 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,055 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,055 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,095 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,095 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,134 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,134 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,154 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,154 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,195 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,195 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,215 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,215 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,255 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,255 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,275 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,275 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,314 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,314 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,334 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,334 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,375 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,375 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,415 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,415 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,435 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,435 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,455 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,455 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,494 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,494 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,515 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,515 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,554 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,554 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,575 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,575 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,614 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,614 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,635 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,635 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,655 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,655 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,695 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,695 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,715 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,715 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,755 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,755 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,775 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,775 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,795 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,795 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,835 - audio_handler - DEBUG - 语音编码: 500 bytes PCM -> 500 bytes G.711
+2026-01-16 22:20:56,835 - nrl_client - DEBUG - 发送语音数据包: 500 bytes, 总长度: 548 bytes
+2026-01-16 22:20:56,862 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:20:56,875 - audio_handler - INFO - 停止录音
+2026-01-16 22:20:56,876 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:20:58,863 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:21:00,864 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:21:02,864 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:21:04,865 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:21:06,866 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:21:08,867 - nrl_client - DEBUG - 发送心跳包: BH6ERO-200, CPUID: 6a17abf700, 长度: 48 bytes
+2026-01-16 22:21:10,704 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-16 22:21:10,705 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:21:10,705 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:21:10,809 - audio_handler - INFO - 停止播放
+2026-01-16 22:21:10,810 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 22:21:10,811 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:21:10,811 - audio_handler - WARNING - 没有在播放
+2026-01-16 22:21:10,812 - audio_handler - INFO - 音频处理已关闭
+2026-01-16 22:21:10,813 - nrl_client - INFO - NRL客户端已关闭
+2026-01-16 22:31:59,989 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 22:32:05,081 - nrl_client - INFO - 配置加载成功
+2026-01-16 22:32:05,329 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 22:32:05,332 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 22:32:05,347 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 22:32:06,435 - audio_handler - INFO - 输入设备已设置为:  (Realtek(R) Audio)
+2026-01-16 22:32:08,098 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:32:09,450 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:32:12,089 - audio_handler - INFO - 使用输出设备: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:32:12,269 - audio_handler - INFO - 开始播放
+2026-01-16 22:32:12,270 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:32:12,328 - audio_handler - INFO - 开始录音
+2026-01-16 22:32:12,328 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:32:17,840 - audio_handler - INFO - 停止录音
+2026-01-16 22:32:17,841 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:33:17,171 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-16 22:33:17,172 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:33:17,175 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:33:17,301 - audio_handler - INFO - 停止播放
+2026-01-16 22:33:17,302 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 22:33:17,302 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:33:17,302 - audio_handler - WARNING - 没有在播放
+2026-01-16 22:33:17,303 - audio_handler - INFO - 音频处理已关闭
+2026-01-16 22:33:17,304 - nrl_client - INFO - NRL客户端已关闭
+2026-01-16 22:35:30,520 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 22:35:31,928 - nrl_client - INFO - 配置加载成功
+2026-01-16 22:35:32,177 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 22:35:32,179 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 22:35:32,196 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 22:35:52,063 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 22:35:52,233 - audio_handler - INFO - 开始播放
+2026-01-16 22:35:52,233 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 22:35:52,288 - audio_handler - INFO - 开始录音
+2026-01-16 22:35:52,288 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:35:53,241 - audio_handler - INFO - 停止录音
+2026-01-16 22:35:53,242 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:35:58,322 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-16 22:35:58,323 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:35:58,324 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:35:58,446 - audio_handler - INFO - 停止播放
+2026-01-16 22:35:58,447 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 22:35:58,447 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:35:58,448 - audio_handler - WARNING - 没有在播放
+2026-01-16 22:35:58,448 - audio_handler - INFO - 音频处理已关闭
+2026-01-16 22:35:58,449 - nrl_client - INFO - NRL客户端已关闭
+2026-01-16 22:49:11,828 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 22:49:16,457 - nrl_client - INFO - 配置加载成功
+2026-01-16 22:49:16,694 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 22:49:16,695 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-16 22:49:16,696 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 22:49:16,713 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 22:49:16,715 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:18,140 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 22:49:18,320 - audio_handler - INFO - 开始播放
+2026-01-16 22:49:18,321 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 22:49:18,379 - audio_handler - INFO - 开始录音
+2026-01-16 22:49:18,379 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:49:18,712 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:20,713 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:21,608 - audio_handler - INFO - 停止录音
+2026-01-16 22:49:21,609 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:49:22,713 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:23,868 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:23,933 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,024 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,095 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,150 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,228 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,272 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,348 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,429 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,477 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,540 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,595 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,658 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,714 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:24,728 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,777 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,837 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,896 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:24,961 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:25,031 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:25,115 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 22:49:26,715 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:28,645 - audio_handler - INFO - 输入设备已设置为:  (Realtek(R) Audio)
+2026-01-16 22:49:28,715 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:29,648 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-16 22:49:30,716 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:32,721 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:33,291 - audio_handler - INFO - 使用输入设备:  (Realtek(R) Audio)
+2026-01-16 22:49:33,337 - audio_handler - INFO - 开始录音
+2026-01-16 22:49:33,337 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:49:34,717 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:49:35,267 - audio_handler - INFO - 停止录音
+2026-01-16 22:49:35,267 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:49:36,554 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-16 22:49:36,555 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:49:36,556 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:49:36,673 - audio_handler - INFO - 停止播放
+2026-01-16 22:49:36,674 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 22:49:36,675 - audio_handler - WARNING - 没有在录音
+2026-01-16 22:49:36,675 - audio_handler - WARNING - 没有在播放
+2026-01-16 22:49:36,676 - audio_handler - INFO - 音频处理已关闭
+2026-01-16 22:49:36,676 - nrl_client - INFO - NRL客户端已关闭
+2026-01-16 22:50:30,820 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 22:50:32,357 - nrl_client - INFO - 配置加载成功
+2026-01-16 22:50:32,597 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 22:50:32,598 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-16 22:50:32,599 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 22:50:32,618 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:32,620 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 22:50:32,620 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:34,619 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:36,619 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:38,620 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:40,620 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:41,671 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 22:50:41,819 - audio_handler - INFO - 开始播放
+2026-01-16 22:50:41,819 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 22:50:41,879 - audio_handler - INFO - 开始录音
+2026-01-16 22:50:41,880 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:50:42,621 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:44,070 - audio_handler - INFO - 停止录音
+2026-01-16 22:50:44,071 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:50:44,621 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:46,622 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:48,622 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:50,622 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:52,200 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 22:50:52,245 - audio_handler - INFO - 开始录音
+2026-01-16 22:50:52,245 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:50:52,623 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:54,623 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:55,550 - audio_handler - INFO - 停止录音
+2026-01-16 22:50:55,551 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:50:56,623 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:50:58,625 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:00,625 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:02,626 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:04,626 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:06,626 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:08,627 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:10,627 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:12,628 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:14,628 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:16,629 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:18,629 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:20,630 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:22,631 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:24,632 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:26,632 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:28,632 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:30,633 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:32,634 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:34,634 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:36,634 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:37,858 - nrl_client - WARNING - 收到空文本数据包 from BH6ERO-100
+2026-01-16 22:51:38,635 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:40,636 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:42,636 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:44,636 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:46,422 - nrl_client - INFO - 文本消息已发送: 、、、 (长度: 9 字节)
+2026-01-16 22:51:46,636 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:48,636 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:50,637 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:52,638 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:54,638 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:56,639 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:51:58,639 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:00,640 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:02,640 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:03,406 - nrl_client - INFO - 文本消息已发送: 这里是测试文本 (长度: 21 字节)
+2026-01-16 22:52:04,641 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:06,641 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:08,641 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:10,642 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:12,642 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:14,643 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:16,643 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:18,644 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:20,644 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:22,645 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:24,645 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:26,645 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:28,646 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:30,647 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:32,646 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:34,647 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:36,647 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:38,648 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:40,648 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:42,650 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:44,650 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:46,650 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:48,654 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:50,650 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:52,651 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:54,651 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:56,652 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:52:58,652 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:00,652 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:02,653 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:04,653 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:06,654 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:08,655 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:10,655 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:12,656 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:14,657 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:16,656 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:18,656 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:20,657 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:22,657 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:24,658 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:26,658 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:28,658 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:30,659 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:32,659 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:34,659 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:36,660 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:38,659 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:40,661 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:42,661 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:44,662 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:46,662 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:48,663 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:50,663 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:52,664 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:54,664 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:56,665 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:53:58,664 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:00,664 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:02,666 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:04,666 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:06,666 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:08,667 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:10,668 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:12,671 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:14,670 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:16,669 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:16,882 - nrl_client - INFO - 文本消息已发送: 测试文本，来自BH6ERO (长度: 27 字节)
+2026-01-16 22:54:18,669 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:20,671 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:22,670 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:24,671 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:26,671 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:28,673 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:30,673 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:32,674 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:34,674 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:36,676 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:38,675 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:40,675 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:42,675 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:43,711 - nrl_client - INFO - 文本消息已发送: 这里是BH6ERO，现在进行文本信息发送测试 (长度: 54 字节)
+2026-01-16 22:54:44,675 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:46,677 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:48,676 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:50,677 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:52,677 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:54,677 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:56,676 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:54:57,342 - nrl_client - WARNING - 收到空文本数据包 from BH6ERO-100
+2026-01-16 22:54:58,679 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:00,678 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:02,678 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:04,679 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:06,680 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:08,680 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:10,681 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:12,681 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:14,019 - nrl_client - INFO - 文本消息已发送: 666 (长度: 3 字节)
+2026-01-16 22:55:14,681 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:16,682 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:18,683 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:20,684 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:22,684 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:24,685 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:26,685 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:27,162 - nrl_client - INFO - 文本消息已发送: 666 (长度: 3 字节)
+2026-01-16 22:55:28,685 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:30,687 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:32,687 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:34,688 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:36,688 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:37,301 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 22:55:37,347 - audio_handler - INFO - 开始录音
+2026-01-16 22:55:37,347 - nrl_client - INFO - 语音传输已启动
+2026-01-16 22:55:38,502 - audio_handler - INFO - 停止录音
+2026-01-16 22:55:38,503 - nrl_client - INFO - 语音传输已停止
+2026-01-16 22:55:38,689 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:40,688 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:42,690 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:44,690 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:46,690 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:48,691 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:50,690 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:52,691 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:54,692 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:56,692 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:55:58,693 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:00,692 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:02,693 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:04,694 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:06,695 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:08,694 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:10,695 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:12,695 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:14,696 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:16,696 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:18,698 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:20,697 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:22,698 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:24,699 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:26,700 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:28,700 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:30,700 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:32,701 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:34,701 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:36,701 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:38,701 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:40,702 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:42,702 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:44,702 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:46,702 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:48,704 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:50,704 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:52,705 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:54,705 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:56,706 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:56:58,706 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:00,707 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:02,707 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:04,709 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:06,708 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:08,709 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:10,709 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:12,710 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:14,757 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:16,710 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:18,711 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:20,712 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:22,711 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:24,712 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:26,713 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:28,713 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:30,714 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:32,713 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:34,716 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:36,715 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:38,716 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:40,716 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:42,716 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:44,716 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:46,718 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:48,718 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:50,718 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:52,719 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:54,719 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:56,719 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:57:58,720 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:00,719 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:02,720 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:04,720 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:06,722 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:08,721 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:10,723 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 22:58:11,529 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 23:01:47,318 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 23:01:48,958 - nrl_client - INFO - 配置加载成功
+2026-01-16 23:01:49,208 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 23:01:49,209 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-16 23:01:49,211 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 23:01:49,230 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:01:49,231 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 23:01:49,231 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:01:51,231 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:01:53,230 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:01:53,617 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 23:01:53,730 - audio_handler - INFO - 开始播放
+2026-01-16 23:01:53,731 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:01:53,788 - audio_handler - INFO - 开始录音
+2026-01-16 23:01:53,788 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:01:54,816 - audio_handler - INFO - 停止录音
+2026-01-16 23:01:54,817 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:01:55,230 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:01:57,231 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:01:59,231 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:00,788 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:02:00,837 - audio_handler - INFO - 开始录音
+2026-01-16 23:02:00,838 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:02:01,232 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:02,526 - audio_handler - INFO - 停止录音
+2026-01-16 23:02:02,526 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:02:03,232 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:05,233 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:07,233 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:09,234 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:11,234 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:13,235 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:15,235 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:17,235 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:19,237 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:21,239 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:23,240 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:25,241 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:27,240 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:29,241 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:31,242 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:33,241 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:35,242 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:37,242 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:39,242 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:41,243 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:43,244 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:45,245 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:47,245 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:49,246 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:51,246 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:53,246 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:55,246 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:57,247 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:02:59,248 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:01,248 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:03,248 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:05,248 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:07,249 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:09,249 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:11,250 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:13,251 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:15,252 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:17,252 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:19,252 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:21,253 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:23,254 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:25,254 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:27,254 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:29,254 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:31,255 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:33,255 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:35,256 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:37,256 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:39,256 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:41,256 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:43,258 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:45,257 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:47,258 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:49,259 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:51,261 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:53,260 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:55,261 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:57,262 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:03:59,262 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:01,263 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:03,263 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:05,263 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:07,264 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:09,264 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:11,265 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:13,266 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:15,266 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:17,266 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:19,267 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:21,267 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:23,268 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:25,268 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:27,269 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:29,269 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:31,269 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:33,271 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:35,271 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:37,271 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:39,271 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:41,272 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:43,272 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:45,272 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:47,273 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:49,301 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:51,274 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:53,274 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:55,275 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:57,276 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:04:59,276 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:01,277 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:03,276 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:05,277 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:07,278 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:09,277 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:11,279 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:13,279 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:15,279 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:17,279 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:19,279 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:21,281 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:23,281 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:25,282 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:27,281 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:29,283 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:31,284 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:33,283 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:35,282 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:37,285 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:39,285 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:41,286 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:43,287 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:45,287 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:47,288 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:49,287 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:51,289 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:53,289 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:55,289 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:57,290 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:05:59,291 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:01,291 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:03,291 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:05,291 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:07,292 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:09,293 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:11,293 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:12,210 - __main__ - INFO - 用户中断程序
+2026-01-16 23:06:14,540 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 23:06:17,831 - nrl_client - INFO - 配置加载成功
+2026-01-16 23:06:18,023 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 23:06:18,024 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-16 23:06:18,026 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 23:06:18,041 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:18,042 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:19,701 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 23:06:19,816 - audio_handler - INFO - 开始播放
+2026-01-16 23:06:19,816 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:06:19,876 - audio_handler - INFO - 开始录音
+2026-01-16 23:06:19,877 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:06:20,041 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:21,845 - audio_handler - INFO - 停止录音
+2026-01-16 23:06:21,847 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:06:22,042 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:24,044 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:24,045 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 23:06:26,045 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:28,045 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:30,046 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:31,922 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 23:06:35,279 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 23:06:36,818 - nrl_client - INFO - 配置加载成功
+2026-01-16 23:06:37,037 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 23:06:37,038 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-16 23:06:37,040 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 23:06:37,056 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:37,056 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:39,057 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:39,058 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 23:06:41,058 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:43,057 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:44,197 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 23:06:44,341 - audio_handler - INFO - 开始播放
+2026-01-16 23:06:44,342 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:06:44,399 - audio_handler - INFO - 开始录音
+2026-01-16 23:06:44,399 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:06:45,058 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:47,058 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:47,993 - audio_handler - INFO - 停止录音
+2026-01-16 23:06:47,994 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:06:49,059 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:06:50,510 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-16 23:06:50,511 - audio_handler - WARNING - 没有在录音
+2026-01-16 23:06:50,512 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:06:50,693 - audio_handler - INFO - 停止播放
+2026-01-16 23:06:50,693 - nrl_client - INFO - 已断开服务器连接
+2026-01-16 23:06:50,694 - audio_handler - WARNING - 没有在录音
+2026-01-16 23:06:50,694 - audio_handler - WARNING - 没有在播放
+2026-01-16 23:06:50,695 - audio_handler - INFO - 音频处理已关闭
+2026-01-16 23:06:50,695 - nrl_client - INFO - NRL客户端已关闭
+2026-01-16 23:07:11,533 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-16 23:07:14,050 - nrl_client - INFO - 配置加载成功
+2026-01-16 23:07:14,298 - nrl_client - INFO - 音频处理初始化成功
+2026-01-16 23:07:14,299 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-16 23:07:14,301 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-16 23:07:14,317 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:14,318 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-16 23:07:14,319 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:16,318 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:18,318 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:20,028 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-16 23:07:20,138 - audio_handler - INFO - 开始播放
+2026-01-16 23:07:20,139 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:07:20,195 - audio_handler - INFO - 开始录音
+2026-01-16 23:07:20,197 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:07:20,319 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:22,319 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:22,417 - audio_handler - INFO - 停止录音
+2026-01-16 23:07:22,417 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:07:24,320 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:26,320 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:28,321 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:30,320 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:30,580 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:07:30,628 - audio_handler - INFO - 开始录音
+2026-01-16 23:07:30,629 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:07:32,322 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:33,605 - audio_handler - INFO - 停止录音
+2026-01-16 23:07:33,607 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:07:34,321 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:36,322 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:38,323 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:38,737 - nrl_client - INFO - 文本消息已发送: 23456778 (长度: 8 字节)
+2026-01-16 23:07:40,324 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:42,325 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:44,326 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:46,324 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:48,324 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:50,326 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:52,327 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:54,329 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:56,326 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:07:58,328 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:00,328 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:02,329 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:04,328 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:06,329 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:08,330 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:10,330 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:12,331 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:14,332 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:16,333 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:18,333 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:20,333 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:22,334 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:24,334 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:26,335 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:28,334 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:30,335 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:32,336 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:34,336 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:36,336 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:38,338 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:40,338 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:42,338 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:44,338 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:46,339 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:48,340 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:50,339 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:52,341 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:54,341 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:56,341 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:08:58,341 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:00,342 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:02,343 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:04,343 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:06,344 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:08,344 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:10,344 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:12,346 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:14,346 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:16,347 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:18,347 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:20,348 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:22,347 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:24,347 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:26,348 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:28,349 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:30,349 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:32,350 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:34,351 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:36,351 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:38,351 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:40,351 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:41,892 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-16 23:09:41,936 - audio_handler - INFO - 开始录音
+2026-01-16 23:09:41,937 - nrl_client - INFO - 语音传输已启动
+2026-01-16 23:09:42,352 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:43,969 - audio_handler - INFO - 停止录音
+2026-01-16 23:09:43,969 - nrl_client - INFO - 语音传输已停止
+2026-01-16 23:09:44,352 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:46,353 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:48,353 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:50,354 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:52,356 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:54,354 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:56,357 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:09:58,357 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:00,356 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:02,356 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:04,357 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:06,358 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:08,357 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:10,358 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:12,359 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:14,359 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:16,359 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:18,359 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:20,363 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:22,361 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:24,362 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:26,362 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:28,363 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:30,363 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:32,363 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:34,364 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:36,365 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:38,043 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,119 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,216 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,280 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,341 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,371 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:38,417 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,465 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,524 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,619 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,720 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,730 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,821 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,852 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,923 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:38,994 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:39,049 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
+2026-01-16 23:10:40,366 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:42,366 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:44,366 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:46,367 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:48,367 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:50,373 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:52,368 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:54,368 - nrl_client - INFO - 收到未知类型数据包: type=3
+2026-01-16 23:10:54,625 - __main__ - INFO - 用户中断程序
