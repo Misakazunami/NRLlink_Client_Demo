@@ -1,462 +1,79 @@
-2026-01-17 00:06:54,571 - __main__ - INFO - 启动NRL客户端 (GUI模式)
-2026-01-17 00:06:56,047 - nrl_client - INFO - 配置加载成功
-2026-01-17 00:06:56,304 - nrl_client - INFO - 音频处理初始化成功
-2026-01-17 00:06:56,305 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
-2026-01-17 00:06:56,306 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
-2026-01-17 00:06:56,337 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:06:56,339 - nrl_client - INFO - 收到未知类型数据包: type=11
-2026-01-17 00:06:56,339 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:06:58,324 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:00,325 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:02,325 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:04,326 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:06,326 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:08,326 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:10,328 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:12,328 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:14,328 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:16,330 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:18,177 - nrl_client - INFO - 文本消息已发送: test (长度: 4 字节)
-2026-01-17 00:07:18,329 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:20,330 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:22,330 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:24,331 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:26,331 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:27,402 - audio_handler - INFO - 使用系统默认输出设备
-2026-01-17 00:07:27,561 - audio_handler - INFO - 开始播放
-2026-01-17 00:07:27,562 - audio_handler - INFO - 使用系统默认输入设备
-2026-01-17 00:07:27,616 - audio_handler - INFO - 开始录音
-2026-01-17 00:07:27,616 - nrl_client - INFO - 语音传输已启动
-2026-01-17 00:07:28,332 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:29,709 - audio_handler - INFO - 停止录音
-2026-01-17 00:07:29,710 - nrl_client - INFO - 语音传输已停止
-2026-01-17 00:07:30,332 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:30,897 - audio_handler - INFO - 使用系统默认输入设备
-2026-01-17 00:07:30,940 - audio_handler - INFO - 开始录音
-2026-01-17 00:07:30,940 - nrl_client - INFO - 语音传输已启动
-2026-01-17 00:07:32,332 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:33,533 - audio_handler - INFO - 停止录音
-2026-01-17 00:07:33,533 - nrl_client - INFO - 语音传输已停止
-2026-01-17 00:07:34,332 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:36,332 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:38,333 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:40,333 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:42,129 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,189 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,262 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,334 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:42,348 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,403 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,484 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,532 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,584 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,683 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,744 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,805 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,852 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:42,924 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,003 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,063 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,103 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,163 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,219 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,303 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:43,352 - nrl_client - WARNING - 收到空语音数据包 from BH6ERO-100
-2026-01-17 00:07:44,334 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:46,335 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:47,538 - nrl_client - WARNING - 收到空文本数据包 from BH6ERO-100
-2026-01-17 00:07:48,334 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:50,336 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:52,336 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:54,337 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:56,337 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:07:58,337 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:00,338 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:02,339 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:04,339 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:06,340 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:08,339 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:10,342 - nrl_client - INFO - 收到未知类型数据包: type=3
-2026-01-17 00:08:10,553 - nrl_client - INFO - 正在关闭NRL客户端...
-2026-01-17 00:08:10,554 - audio_handler - WARNING - 没有在录音
-2026-01-17 00:08:10,555 - nrl_client - INFO - 语音传输已停止
-2026-01-17 00:08:10,724 - audio_handler - INFO - 停止播放
-2026-01-17 00:08:10,725 - nrl_client - INFO - 已断开服务器连接
-2026-01-17 00:08:10,725 - audio_handler - WARNING - 没有在录音
-2026-01-17 00:08:10,726 - audio_handler - WARNING - 没有在播放
-2026-01-17 00:08:10,726 - audio_handler - INFO - 音频处理已关闭
-2026-01-17 00:08:10,727 - nrl_client - INFO - NRL客户端已关闭
-2026-01-17 00:12:48,202 - __main__ - INFO - 启动NRL客户端 (GUI模式)
-2026-01-17 00:12:52,186 - nrl_client - INFO - 配置加载成功
-2026-01-17 00:12:52,408 - nrl_client - INFO - 音频处理初始化成功
-2026-01-17 00:12:52,409 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
-2026-01-17 00:12:52,411 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
-2026-01-17 00:12:52,427 - nrl_client - INFO - 收到未知类型数据包: type=11
-2026-01-17 00:12:53,807 - nrl_client - INFO - 调试模式强制解码空包 已启用
-2026-01-17 00:13:07,852 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:07,932 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,019 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,104 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,164 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,223 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,284 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,349 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,424 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,479 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,569 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,609 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,669 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,769 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,823 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,869 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,932 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:08,991 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:09,064 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:09,149 - nrl_client - INFO - [调试模式] 收到空语音数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:12,943 - nrl_client - INFO - 正在关闭NRL客户端...
-2026-01-17 00:13:12,945 - audio_handler - WARNING - 没有在录音
-2026-01-17 00:13:12,946 - nrl_client - INFO - 语音传输已停止
-2026-01-17 00:13:12,947 - audio_handler - WARNING - 没有在播放
-2026-01-17 00:13:12,947 - nrl_client - INFO - 已断开服务器连接
-2026-01-17 00:13:12,948 - audio_handler - WARNING - 没有在录音
-2026-01-17 00:13:12,949 - audio_handler - WARNING - 没有在播放
-2026-01-17 00:13:12,950 - audio_handler - INFO - 音频处理已关闭
-2026-01-17 00:13:12,950 - nrl_client - INFO - NRL客户端已关闭
-2026-01-17 00:13:16,313 - __main__ - INFO - 启动NRL客户端 (GUI模式)
-2026-01-17 00:13:18,397 - nrl_client - INFO - 配置加载成功
-2026-01-17 00:13:18,640 - nrl_client - INFO - 音频处理初始化成功
-2026-01-17 00:13:18,641 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
-2026-01-17 00:13:18,643 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
-2026-01-17 00:13:18,661 - nrl_client - INFO - 收到未知类型数据包: type=11
-2026-01-17 00:13:19,527 - nrl_client - INFO - 调试模式强制解码空包 已启用
-2026-01-17 00:13:28,267 - nrl_client - INFO - [调试模式] 收到空文本数据包，强制解码 from BH6ERO-100
-2026-01-17 00:13:28,269 - nrl_client - INFO - 收到文本消息: [EmptyTXTPak] (长度: 13 字节)
-2026-01-17 00:13:56,867 - __main__ - INFO - 用户中断程序
-2026-01-17 00:14:00,710 - __main__ - INFO - 启动NRL客户端 (GUI模式)
-2026-01-17 00:14:04,255 - nrl_client - INFO - 配置加载成功
-2026-01-17 00:14:04,497 - nrl_client - INFO - 音频处理初始化成功
-2026-01-17 00:14:04,499 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
-2026-01-17 00:14:04,499 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:04,500 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
-2026-01-17 00:14:04,517 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:04,517 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:04,517 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=11, callsign=BH6ERO-1, cpuid=0000000000)
-2026-01-17 00:14:04,517 - nrl_client - INFO - 收到未知类型数据包: type=11
-2026-01-17 00:14:04,518 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:04,519 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:06,010 - nrl_client - INFO - 调试模式强制解码空包 已启用
-2026-01-17 00:14:06,346 - nrl_client - INFO - 调试模式强制解码空包 已禁用
-2026-01-17 00:14:06,500 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:06,517 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:06,517 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:07,042 - nrl_client - INFO - 调试模式强制解码空包 已启用
-2026-01-17 00:14:08,500 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:08,519 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:08,519 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:10,501 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:10,518 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:10,519 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:12,502 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:12,502 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=5, callsign=BH6ERO-100, cpuid=77ecc3d500)
-2026-01-17 00:14:12,502 - nrl_client - INFO - [调试模式] 收到空文本数据包，强制解码 from BH6ERO-100
-2026-01-17 00:14:12,505 - nrl_client - INFO - 收到文本消息: [EmptyTXTPak] (长度: 13 字节)
-2026-01-17 00:14:12,518 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:12,519 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:14,503 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:14,521 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:14,521 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:16,503 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:16,520 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:16,521 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:18,504 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:18,521 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:18,522 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:20,505 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:20,522 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:20,523 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:22,506 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:22,522 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:22,523 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:24,506 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:24,523 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:24,523 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:26,507 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:26,524 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:26,524 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:28,508 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:28,525 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:28,525 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:30,508 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:30,525 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:30,526 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:32,509 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:32,526 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:32,526 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:34,510 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:34,527 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:34,528 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:36,511 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:36,528 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:36,528 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:38,511 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:38,529 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:38,529 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:40,512 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:40,529 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:40,529 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:42,513 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:42,531 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:42,531 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:44,514 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:44,531 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:44,532 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:46,515 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:46,532 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:46,532 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:48,516 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:48,533 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:48,534 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:50,516 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:50,534 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:50,534 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:52,517 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:52,534 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:52,534 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:54,518 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:54,534 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:54,534 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:56,518 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:56,536 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:56,536 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:14:58,519 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:14:58,537 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:14:58,537 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:00,520 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:00,537 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:00,538 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:02,520 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:02,538 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:02,538 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:04,522 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:04,539 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:04,539 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:06,522 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:06,539 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:06,539 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:08,523 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:08,540 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:08,540 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:10,523 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:10,540 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:10,541 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:12,524 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:12,541 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:12,541 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:14,524 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:14,544 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:14,544 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:16,526 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:16,544 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:16,544 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:18,527 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:18,544 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:18,544 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:20,528 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:20,545 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:20,545 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:22,529 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:22,546 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:22,547 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:24,529 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:24,546 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:24,547 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:26,530 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:26,547 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:26,547 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:28,531 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:28,548 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:28,548 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:30,531 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:30,548 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:30,549 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:32,532 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:32,549 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:32,549 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:34,533 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:34,550 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:34,550 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:36,534 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:36,551 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:36,552 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:38,535 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:38,552 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:38,553 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:40,536 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:40,552 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:40,553 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:42,536 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:42,554 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:42,555 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:44,537 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:44,554 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:44,554 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:46,538 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:46,556 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:46,556 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:48,539 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:48,556 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:48,556 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:50,539 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:50,557 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:50,557 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:52,540 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:52,557 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:52,557 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:54,541 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:54,558 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:54,559 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:56,542 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:56,563 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:56,564 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:15:58,543 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:15:58,560 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:15:58,560 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:00,544 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:00,561 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:00,561 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:02,544 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:02,562 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:02,563 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:04,545 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:04,562 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:04,562 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:06,546 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:06,563 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:06,563 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:08,547 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:08,564 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:08,564 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:10,548 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:10,564 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:10,565 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:12,548 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:12,565 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:12,565 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:14,549 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:14,567 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:14,567 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:16,550 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:16,567 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:16,568 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:18,550 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:18,568 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:18,568 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:20,551 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:20,568 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:20,569 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:22,552 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:22,569 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:22,570 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:24,553 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:24,570 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:24,570 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:26,554 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:26,571 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:26,571 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:28,555 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:28,572 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:28,573 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:30,556 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:30,573 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:30,573 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:32,557 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:32,574 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:32,574 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:34,557 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:34,574 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:34,574 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:36,558 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:36,575 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:36,575 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:38,559 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:38,576 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:38,576 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:40,560 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:40,577 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:40,577 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:42,561 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:42,577 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:42,578 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:44,561 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:44,578 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:44,579 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:46,562 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:46,579 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:46,579 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:48,562 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:48,580 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:48,580 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:50,563 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:50,580 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:50,580 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:52,563 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:52,580 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:52,581 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:54,564 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:54,582 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:54,582 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:56,565 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:56,581 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:56,582 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:16:58,565 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:16:58,583 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:16:58,583 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:00,566 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:00,583 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:00,583 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:02,567 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:02,584 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:02,584 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:04,568 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:04,584 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:04,584 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:06,569 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:06,585 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:06,586 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:08,569 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:08,586 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:08,586 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:10,570 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:10,587 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:10,587 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:12,571 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:12,587 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:12,588 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:14,571 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:14,589 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:14,589 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:16,572 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:16,590 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:16,591 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:18,573 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:18,590 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:18,591 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:20,573 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:20,590 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:20,591 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:22,574 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:22,591 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:22,592 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:24,575 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:24,593 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:24,593 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:26,577 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:26,595 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:26,595 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:28,578 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:28,594 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:28,595 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:30,579 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
-2026-01-17 00:17:30,596 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
-2026-01-17 00:17:30,597 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
-2026-01-17 00:17:30,844 - __main__ - INFO - 用户中断程序
+2026-01-17 00:32:38,432 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:32:50,925 - nrl_client - INFO - 配置加载成功
+2026-01-17 00:32:51,214 - nrl_client - INFO - 音频处理初始化成功
+2026-01-17 00:32:51,215 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-17 00:32:51,217 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-17 00:32:51,217 - nrl_client - INFO - NRL_Link Client Beta V1.2
+2026-01-17 00:32:51,217 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:32:51,217 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-17 00:32:51,217 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-17 00:32:51,217 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-17 00:32:51,218 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-17 00:32:51,218 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-17 00:32:51,218 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:32:51,218 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-17 00:32:51,218 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-17 00:32:51,218 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-17 00:32:51,218 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:32:51,234 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-17 00:32:55,838 - nrl_client - INFO - 已断开服务器连接
+2026-01-17 00:35:20,667 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:35:25,401 - nrl_client - INFO - 配置加载成功
+2026-01-17 00:35:25,644 - nrl_client - INFO - 音频处理初始化成功
+2026-01-17 00:35:25,645 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-17 00:35:25,646 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-17 00:35:25,647 - nrl_client - INFO - NRL_Link Client Beta V1.2
+2026-01-17 00:35:25,647 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:35:25,647 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-17 00:35:25,647 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-17 00:35:25,647 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-17 00:35:25,647 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-17 00:35:25,647 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-17 00:35:25,647 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:35:25,647 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-17 00:35:25,647 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-17 00:35:25,648 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-17 00:35:25,648 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:35:25,664 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-17 00:35:32,612 - nrl_client - INFO - 已断开服务器连接
+2026-01-17 00:37:10,504 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:37:13,493 - nrl_client - INFO - 配置加载成功
+2026-01-17 00:37:13,742 - nrl_client - INFO - 音频处理初始化成功
+2026-01-17 00:37:13,743 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-17 00:37:13,745 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-17 00:37:13,746 - nrl_client - INFO - NRL_Link Client Beta V1.2
+2026-01-17 00:37:13,746 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:37:13,746 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-17 00:37:13,746 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-17 00:37:13,746 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-17 00:37:13,747 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-17 00:37:13,747 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-17 00:37:13,747 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:37:13,747 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-17 00:37:13,748 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-17 00:37:13,748 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-17 00:37:13,748 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:37:13,762 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-17 00:37:17,579 - nrl_client - INFO - 已断开服务器连接
+2026-01-17 00:37:33,488 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:37:42,027 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:37:50,113 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:38:04,960 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-17 00:38:06,855 - nrl_client - INFO - 配置加载成功
+2026-01-17 00:38:07,110 - nrl_client - INFO - 音频处理初始化成功
+2026-01-17 00:38:07,111 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-17 00:38:07,113 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-17 00:38:07,113 - nrl_client - INFO - NRL_Link Client Beta V1.2
+2026-01-17 00:38:07,114 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:38:07,114 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-17 00:38:07,114 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-17 00:38:07,114 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-17 00:38:07,114 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-17 00:38:07,114 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-17 00:38:07,114 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:38:07,115 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-17 00:38:07,115 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-17 00:38:07,115 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-17 00:38:07,115 - nrl_client - INFO - ------------------------------------
+2026-01-17 00:38:07,129 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-17 00:38:12,262 - nrl_client - INFO - 已断开服务器连接

@@ -16,8 +16,8 @@ class NRLGUIClient:
     
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("NRL客户端 - 无线电网络互联")
-        self.root.geometry("800x600")
+        self.root.title("NRLLink_Client Beta V1.2 - 无线电网络互联")
+        self.root.geometry("800x700")
         
         # 客户端
         self.client = None
@@ -68,8 +68,9 @@ class NRLGUIClient:
         # 配置网格权重
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
+        self.root.rowconfigure(1, weight=0)  # 底部状态栏
         self.main_frame.columnconfigure(0, weight=1)
-        self.main_frame.rowconfigure(3, weight=1)
+        self.main_frame.rowconfigure(3, weight=1)  # 日志区域占用剩余空间
         
         # 状态栏
         self.create_status_frame()
@@ -82,6 +83,9 @@ class NRLGUIClient:
         
         # 日志区域
         self.create_log_frame()
+        
+        # 底部状态栏
+        self.create_bottom_status_bar()
         
         # 菜单
         self.create_menu()
@@ -227,6 +231,43 @@ class NRLGUIClient:
         ttk.Button(log_control_frame, text="清空日志", 
                   command=self.clear_log).grid(row=0, column=2, padx=(20, 0))
     
+    def create_bottom_status_bar(self):
+        """创建底部状态栏"""
+        # 创建底部状态栏框架
+        bottom_frame = ttk.Frame(self.root, relief=tk.SUNKEN, height=50)
+        bottom_frame.grid(row=1, column=0, sticky=(tk.W, tk.E), padx=10, pady=(5, 0))
+        bottom_frame.columnconfigure(1, weight=1)  # 中间空白可扩展
+        
+        # 呼号和SSID
+        ttk.Label(bottom_frame, text="呼号-SSID:").pack(side=tk.LEFT, padx=(5, 2))
+        self.callsign_ssid_label = ttk.Label(bottom_frame, text="未连接", font=('Arial', 9, 'bold'))
+        self.callsign_ssid_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
+        # 服务器IP
+        ttk.Label(bottom_frame, text="服务器:").pack(side=tk.LEFT, padx=(10, 2))
+        self.server_ip_label = ttk.Label(bottom_frame, text="未连接", font=('Arial', 9))
+        self.server_ip_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
+        # 当前时间
+        ttk.Label(bottom_frame, text="时间:").pack(side=tk.LEFT, padx=(10, 2))
+        self.current_time_label = ttk.Label(bottom_frame, text="--:--:--", font=('Arial', 9))
+        self.current_time_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
+        # 连接状态指示
+        ttk.Label(bottom_frame, text="状态:").pack(side=tk.LEFT, padx=(10, 2))
+        self.bottom_connection_status = ttk.Label(bottom_frame, text="离线", font=('Arial', 9, 'bold'),
+                                                   foreground="red")
+        self.bottom_connection_status.pack(side=tk.LEFT, padx=(0, 10))
+    
     def create_menu(self):
         """创建菜单"""
         menubar = tk.Menu(self.root)
@@ -293,6 +334,9 @@ class NRLGUIClient:
                 self.client = None
             
             self.connection_status.set("未连接")
+            self.callsign_ssid_label.config(text="未连接")
+            self.server_ip_label.config(text="未连接")
+            self.bottom_connection_status.config(text="离线", foreground="red")
             self.connect_button.config(state=tk.NORMAL)
             self.disconnect_button.config(state=tk.DISABLED)
             self.send_message_button.config(state=tk.DISABLED)
@@ -395,6 +439,22 @@ class NRLGUIClient:
                     ssid = device_info.get('ssid', 0)
                     self.device_info.set(f"{callsign}-{ssid}")
                     
+                    # 更新底部状态栏：呼号和SSID
+                    self.callsign_ssid_label.config(text=f"{callsign}-{ssid}")
+                    
+                    # 更新底部状态栏：服务器IP和端口
+                    if status.get('connected'):
+                        server_info = status.get('server', 'N/A')
+                        self.server_ip_label.config(text=server_info)
+                        self.bottom_connection_status.config(text="在线", foreground="green")
+                    else:
+                        self.server_ip_label.config(text="未连接")
+                        self.bottom_connection_status.config(text="离线", foreground="red")
+                    
+                    # 更新当前时间
+                    current_time = time.strftime('%H:%M:%S')
+                    self.current_time_label.config(text=current_time)
+                    
                     # 更新音频级别
                     if self.client.audio_handler:
                         # 这里可以添加实际的音频级别检测
@@ -404,7 +464,7 @@ class NRLGUIClient:
                     self.log_message(f"状态更新错误: {str(e)}")
             
             # 继续定时更新
-            if self.client:
+            if self.client and self.client.running:
                 self.update_timer = self.root.after(1000, update_status)
         
         update_status()
@@ -571,8 +631,8 @@ CPUID: {device_info.get('cpuid', '未知')}
     def show_about(self):
         """显示关于信息"""
         about_text = """
-NRL客户端 Demo
-版本: Beta 1.2
+NRLLink_Client Demo
+版本: Beta V1.2
 
 基于nrllink项目开发的Python客户端
 支持功能:
@@ -583,6 +643,9 @@ NRL客户端 Demo
 - 音频设备管理
 
 作者: BH6ERO
+反馈: 3087040097@qq.com
+本程序为测试版本，不建议在正式环境中使用。
+如有问题，请联系作者。
         """
         messagebox.showinfo("关于", about_text.strip())
     
