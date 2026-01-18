@@ -261,7 +261,7 @@ class AudioHandler:
             
             try:
                 self.is_playing = True
-                self.play_buffer = []
+                self.play_buffer = deque()  # 使用deque而非列表，支持高效的两端操作
                 
                 # 设置输出设备参数
                 output_params = {
@@ -384,11 +384,18 @@ class AudioHandler:
         data_chunks = []
         current_length = 0
         
-        # 从缓冲区收集足够的数据
-        while self.play_buffer and current_length < expected_length:
-            data_chunk = self.play_buffer.popleft()
-            data_chunks.append(data_chunk)
-            current_length += len(data_chunk)
+        with self.lock:
+            # 从缓冲区收集足够的数据
+            while self.play_buffer and current_length < expected_length:
+                try:
+                    data_chunk = self.play_buffer.popleft()
+                    if data_chunk:
+                        data_chunks.append(data_chunk)
+                        current_length += len(data_chunk)
+                except (IndexError, AttributeError) as e:
+                    # 缓冲区可能被修改或格式错误，记录但继续
+                    self.logger.debug(f"播放缓冲获取异常: {e}")
+                    break
         
         if data_chunks:
             # 合并所有数据块
@@ -401,7 +408,8 @@ class AudioHandler:
                 result_data = combined_data[:expected_length]
                 remaining_data = combined_data[expected_length:]
                 if remaining_data:
-                    self.play_buffer.appendleft(remaining_data)
+                    with self.lock:
+                        self.play_buffer.appendleft(remaining_data)
                 return (result_data, pyaudio.paContinue)
             else:
                 # 数据不足，用静音填充
@@ -444,9 +452,11 @@ class AudioHandler:
     
     def add_playback_data_immediate(self, data: bytes):
         """立即添加播放数据（绕过抖动缓冲）"""
+        if not self.is_playing or not data:
+            return
+        
         with self.lock:
-            if self.is_playing:
-                self.play_buffer.append(data)
+            self.play_buffer.append(data)
     
     def get_recorded_audio(self) -> bytes:
         """获取录音数据"""

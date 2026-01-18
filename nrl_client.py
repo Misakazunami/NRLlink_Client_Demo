@@ -444,7 +444,8 @@ class NRLClient:
                 return
                 
             if self.audio_handler and self.audio_handler.is_playback_active():
-                self.audio_handler.add_playback_data(pcm_data)
+                # 立即播放解码的PCM数据，不使用抖动缓冲延迟处理
+                self.audio_handler.add_playback_data_immediate(pcm_data)
             
             # 调用回调函数
             if self.voice_callback:
@@ -547,7 +548,8 @@ class NRLClient:
                 
             # 播放语音
             if self.audio_handler and self.audio_handler.is_playback_active():
-                self.audio_handler.add_playback_data(pcm_data)
+                # 立即播放解码的PCM数据，不使用抖动缓冲延迟处理
+                self.audio_handler.add_playback_data_immediate(pcm_data)
             
             # 调用语音回调，包含原始设备信息
             if self.voice_callback:
