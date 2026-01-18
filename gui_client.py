@@ -3,11 +3,14 @@ NRL客户端GUI界面
 提供图形化界面操作客户端
 """
 import tkinter as tk
-from tkinter import ttk, messagebox, scrolledtext
+from tkinter import ttk, messagebox, scrolledtext, filedialog
 import threading
 import time
 import logging
-from typing import Dict, Any
+import os
+import yaml
+import shutil
+from typing import Dict, Any, Optional
 
 from nrl_client import NRLClient
 
@@ -38,6 +41,10 @@ class NRLGUIClient:
         # 服务器列表
         self.servers_list = []
         self.current_server_var = tk.StringVar(value="")
+        
+        # 配置文件管理
+        self.current_config_file = tk.StringVar(value="config.yaml")
+        self.config_history = []
         
         # 日志
         self.setup_logging()
@@ -124,7 +131,7 @@ class NRLGUIClient:
         # 服务器选择
         ttk.Label(self.control_frame, text="服务器:").grid(row=0, column=0, sticky=tk.W)
         self.server_combo = ttk.Combobox(self.control_frame, textvariable=self.current_server_var,
-                                         state="readonly", width=20)
+                                         state="readonly", width=30)
         self.server_combo.grid(row=0, column=1, padx=(5, 10))
         self.server_combo.bind('<<ComboboxSelected>>', self.on_server_changed)
         
@@ -306,6 +313,12 @@ class NRLGUIClient:
         menubar.add_cascade(label="文件", menu=file_menu)
         file_menu.add_command(label="新建配置", command=self.new_config)
         file_menu.add_command(label="加载配置", command=self.load_config)
+        
+        # 最近使用的配置
+        self.recent_configs_menu = tk.Menu(file_menu, tearoff=0)
+        file_menu.add_cascade(label="最近使用的配置", menu=self.recent_configs_menu)
+        self.update_recent_configs_menu()
+        
         file_menu.add_separator()
         file_menu.add_command(label="退出", command=self.on_closing)
         
@@ -639,11 +652,220 @@ CPUID: {device_info.get('cpuid', '未知')}
     
     def new_config(self):
         """新建配置"""
-        messagebox.showinfo("提示", "新建配置功能开发中...")
+        try:
+            # 创建新配置窗口
+            new_config_window = tk.Toplevel(self.root)
+            new_config_window.title("新建配置")
+            new_config_window.geometry("500x600")
+            new_config_window.transient(self.root)
+            new_config_window.grab_set()
+            
+            # 配置框架
+            config_frame = ttk.LabelFrame(new_config_window, text="配置信息", padding="10")
+            config_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+            
+            # 配置名称
+            ttk.Label(config_frame, text="配置名称:").grid(row=0, column=0, sticky=tk.W, pady=5)
+            config_name_var = tk.StringVar(value="新配置")
+            config_name_entry = ttk.Entry(config_frame, textvariable=config_name_var, width=30)
+            config_name_entry.grid(row=0, column=1, sticky=tk.W, pady=5, padx=(5, 0))
+            
+            # 设备配置
+            device_frame = ttk.LabelFrame(config_frame, text="设备配置", padding="5")
+            device_frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
+            
+            ttk.Label(device_frame, text="呼号:").grid(row=0, column=0, sticky=tk.W, pady=3)
+            callsign_var = tk.StringVar(value="BH6XXX")
+            ttk.Entry(device_frame, textvariable=callsign_var, width=15).grid(row=0, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            
+            ttk.Label(device_frame, text="SSID:").grid(row=1, column=0, sticky=tk.W, pady=3)
+            ssid_var = tk.IntVar(value=1)
+            ttk.Entry(device_frame, textvariable=ssid_var, width=15).grid(row=1, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            
+            ttk.Label(device_frame, text="CPUID:").grid(row=2, column=0, sticky=tk.W, pady=3)
+            cpuid_var = tk.StringVar(value="12345678")
+            ttk.Entry(device_frame, textvariable=cpuid_var, width=15).grid(row=2, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            
+            ttk.Label(device_frame, text="型号:").grid(row=3, column=0, sticky=tk.W, pady=3)
+            model_var = tk.IntVar(value=1)
+            ttk.Entry(device_frame, textvariable=model_var, width=15).grid(row=3, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            
+            # 服务器配置
+            servers_frame = ttk.LabelFrame(config_frame, text="服务器配置", padding="5")
+            servers_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
+            
+            ttk.Label(servers_frame, text="服务器1:").grid(row=0, column=0, sticky=tk.W, pady=3)
+            server1_name_var = tk.StringVar(value="主服务器")
+            server1_host_var = tk.StringVar(value="43.143.14.24")
+            server1_port_var = tk.IntVar(value=60050)
+            
+            ttk.Entry(servers_frame, textvariable=server1_name_var, width=10).grid(row=0, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            ttk.Entry(servers_frame, textvariable=server1_host_var, width=15).grid(row=0, column=2, sticky=tk.W, pady=3, padx=(5, 0))
+            ttk.Entry(servers_frame, textvariable=server1_port_var, width=8).grid(row=0, column=3, sticky=tk.W, pady=3, padx=(5, 0))
+            
+            ttk.Label(servers_frame, text="服务器2:").grid(row=1, column=0, sticky=tk.W, pady=3)
+            server2_name_var = tk.StringVar(value="备用服务器")
+            server2_host_var = tk.StringVar(value="43.143.14.25")
+            server2_port_var = tk.IntVar(value=60050)
+            
+            ttk.Entry(servers_frame, textvariable=server2_name_var, width=10).grid(row=1, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            ttk.Entry(servers_frame, textvariable=server2_host_var, width=15).grid(row=1, column=2, sticky=tk.W, pady=3, padx=(5, 0))
+            ttk.Entry(servers_frame, textvariable=server2_port_var, width=8).grid(row=1, column=3, sticky=tk.W, pady=3, padx=(5, 0))
+            
+            # 按钮区域
+            button_frame = ttk.Frame(new_config_window)
+            button_frame.pack(fill=tk.X, padx=10, pady=10)
+            
+            def create_config():
+                try:
+                    # 构建配置数据
+                    config_data = {
+                        'servers': [
+                            {
+                                'name': server1_name_var.get(),
+                                'host': server1_host_var.get(),
+                                'port': server1_port_var.get()
+                            },
+                            {
+                                'name': server2_name_var.get(),
+                                'host': server2_host_var.get(),
+                                'port': server2_port_var.get()
+                            }
+                        ],
+                        'current_server': 0,
+                        'device': {
+                            'callsign': callsign_var.get(),
+                            'ssid': ssid_var.get(),
+                            'cpuid': cpuid_var.get(),
+                            'password': '',
+                            'model': model_var.get()
+                        },
+                        'audio': {
+                            'sample_rate': 8000,
+                            'channels': 1,
+                            'chunk_size': 500,
+                            'format': 'paInt16'
+                        },
+                        'network': {
+                            'buffer_size': 4096,
+                            'heartbeat_interval': 2
+                        }
+                    }
+                    
+                    # 保存文件对话框
+                    filename = filedialog.asksaveasfilename(
+                        defaultextension=".yaml",
+                        filetypes=[("YAML files", "*.yaml"), ("All files", "*.*")],
+                        initialfile=f"{config_name_var.get()}.yaml"
+                    )
+                    
+                    if filename:
+                        # 保存配置
+                        with open(filename, 'w', encoding='utf-8') as f:
+                            yaml.dump(config_data, f, allow_unicode=True, default_flow_style=False)
+                        
+                        self.log_message(f"配置已保存到: {filename}")
+                        messagebox.showinfo("成功", f"配置已成功保存到:\n{filename}")
+                        new_config_window.destroy()
+                        
+                        # 询问是否加载新配置
+                        if messagebox.askyesno("加载配置", "是否要立即加载新创建的配置？"):
+                            self.load_config_file(filename)
+                    
+                except Exception as e:
+                    messagebox.showerror("错误", f"创建配置失败: {str(e)}")
+                    self.log_message(f"创建配置失败: {str(e)}")
+            
+            def cancel_create():
+                new_config_window.destroy()
+            
+            ttk.Button(button_frame, text="创建", command=create_config).pack(side=tk.RIGHT, padx=(5, 0))
+            ttk.Button(button_frame, text="取消", command=cancel_create).pack(side=tk.RIGHT)
+            
+        except Exception as e:
+            messagebox.showerror("错误", f"新建配置功能出错: {str(e)}")
+            self.log_message(f"新建配置功能出错: {str(e)}")
     
     def load_config(self):
         """加载配置"""
-        messagebox.showinfo("提示", "加载配置功能开发中...")
+        try:
+            # 文件选择对话框
+            filename = filedialog.askopenfilename(
+                title="选择配置文件",
+                filetypes=[("YAML files", "*.yaml"), ("All files", "*.*")],
+                initialdir=os.getcwd()
+            )
+            
+            if filename:
+                self.load_config_file(filename)
+                
+        except Exception as e:
+            messagebox.showerror("错误", f"加载配置失败: {str(e)}")
+            self.log_message(f"加载配置失败: {str(e)}")
+    
+    def load_config_file(self, filename: str):
+        """加载指定的配置文件"""
+        try:
+            # 验证文件存在
+            if not os.path.exists(filename):
+                messagebox.showerror("错误", f"配置文件不存在: {filename}")
+                return False
+            
+            # 备份当前配置
+            current_config = self.current_config_file.get()
+            
+            # 断开当前连接
+            if self.client and self.client.is_connected:
+                if messagebox.askyesno("切换配置", "当前已连接到服务器，是否要断开连接并加载新配置？"):
+                    self.disconnect_from_server()
+                else:
+                    return False
+            
+            # 关闭当前客户端
+            if self.client:
+                self.client.close()
+                self.client = None
+            
+            # 创建新的NRLClient实例，使用新配置文件
+            self.client = NRLClient(config_file=filename)
+            
+            # 更新当前配置文件路径
+            self.current_config_file.set(filename)
+            
+            # 添加到历史记录
+            if filename not in self.config_history:
+                self.config_history.insert(0, filename)
+                # 限制历史记录数量
+                if len(self.config_history) > 10:
+                    self.config_history = self.config_history[:10]
+            
+            # 刷新服务器列表
+            self.refresh_servers_list()
+            
+            # 刷新音频设备列表
+            self.refresh_audio_devices()
+            
+            self.log_message(f"配置加载成功: {filename}")
+            messagebox.showinfo("成功", f"配置已成功加载:\n{filename}")
+            
+            return True
+            
+        except Exception as e:
+            # 恢复之前的配置
+            self.log_message(f"配置加载失败: {str(e)}")
+            messagebox.showerror("错误", f"加载配置失败: {str(e)}\n\n错误详情: {str(e)}")
+            
+            # 尝试恢复之前的配置
+            try:
+                if self.client:
+                    self.client.close()
+                self.client = NRLClient(config_file=current_config)
+                self.refresh_servers_list()
+                self.refresh_audio_devices()
+            except Exception as restore_error:
+                self.log_message(f"配置恢复失败: {str(restore_error)}")
+            
+            return False
     
     def on_log_level_changed(self, event):
         """日志级别改变"""
@@ -675,11 +897,12 @@ CPUID: {device_info.get('cpuid', '未知')}
         """显示关于信息"""
         about_text = """
 NRLLink_Client Demo
-版本: Beta V3
+版本: Beta V1.3
 
 基于nrllink项目开发的Python客户端
 支持功能:
 - 设备上线注册
+- 服务器选择和切换
 - 语音通信 (G.711编解码)
 - 文本消息
 - 心跳维持
@@ -698,6 +921,35 @@ NRLLink_Client Demo
             self.client.close()
         
         self.root.destroy()
+    
+    def update_recent_configs_menu(self):
+        """更新最近使用的配置菜单"""
+        # 清空现有菜单项
+        self.recent_configs_menu.delete(0, tk.END)
+        
+        # 添加历史记录
+        if self.config_history:
+            for i, config_file in enumerate(self.config_history[:5]):  # 只显示最近5个
+                # 获取文件名（不含路径）
+                filename = os.path.basename(config_file)
+                self.recent_configs_menu.add_command(
+                    label=f"{i+1}. {filename}",
+                    command=lambda f=config_file: self.load_config_file(f)
+                )
+        else:
+            self.recent_configs_menu.add_command(label="无最近使用的配置", state=tk.DISABLED)
+        
+        # 添加分隔符和清除历史选项
+        if self.config_history:
+            self.recent_configs_menu.add_separator()
+            self.recent_configs_menu.add_command(label="清除历史记录", command=self.clear_config_history)
+    
+    def clear_config_history(self):
+        """清除配置历史记录"""
+        if messagebox.askyesno("确认", "确定要清除最近使用的配置历史记录吗？"):
+            self.config_history.clear()
+            self.update_recent_configs_menu()
+            self.log_message("已清除配置历史记录")
     
     def run(self):
         """运行GUI应用"""

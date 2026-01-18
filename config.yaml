@@ -7,6 +7,9 @@ servers:
   - name: "江苏NRL服务器"
     host: "43.143.14.25"
     port: 60050
+  - name: "浙江NRL服务器"
+    host: "192.168.1.100"
+    port: 60050
   - name: "本地测试服务器"
     host: "127.0.0.1"
     port: 60050
