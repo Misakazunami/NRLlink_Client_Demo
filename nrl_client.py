@@ -51,7 +51,7 @@ class NetworkConfig:
     heartbeat_interval: int
 
 class NRLClient:
-    """NRL客户端主类"""
+    """NRL客户端的主类"""
     
     def __init__(self, config_file: str = "config.yaml"):
         self.logger = logging.getLogger(__name__)
@@ -204,14 +204,7 @@ class NRLClient:
             raise
     
     def connect(self) -> bool:
-        """连接到服务器
-        
-        参考nrllink的udpServer函数的连接流程：
-        1. 创建UDP套接字
-        2. 发送初始心跳包进行设备注册
-        3. 启动接收线程处理来自服务器的数据
-        4. 启动心跳线程维持连接
-        """
+        """连接到服务器"""
         try:
             # 关闭已有的连接
             if self.socket:
@@ -225,20 +218,20 @@ class NRLClient:
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.socket.settimeout(5.0)  # 5秒超时
             
-            # 设置接收缓冲区大小（参考nrllink配置）
+            # 设置接收缓冲区大小
             try:
                 self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 
                                      self.network_config.buffer_size)
             except:
                 self.logger.warning("设置接收缓冲区失败，使用默认配置")
             
-            # 测试连接 - 发送初始心跳包进行设备注册
-            # 使用设备配置的SSID
+            # 发送初始包进行设备注册
+            # 使用设备配置
             test_packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
-                self.device_config.ssid,  # 使用设备配置的SSID
-                self.device_config.cpuid,  # 使用配置中的CPUID
-                self.device_config.model   # 设备模式
+                self.device_config.ssid, 
+                self.device_config.cpuid, 
+                self.device_config.model   
             )
             
             self.socket.sendto(test_packet.encode(), 
@@ -301,7 +294,7 @@ class NRLClient:
     def _receive_loop(self):
         """接收数据循环
         
-        参考nrllink的udpProcess函数
+        这里我参考nrllink Go代码的udpProcess函数
         主要功能：
         1. 循环接收UDP数据包
         2. 解析NRL协议数据包
@@ -352,7 +345,7 @@ class NRLClient:
             if consecutive_errors >= max_consecutive_errors:
                 self.logger.error(f"连续接收错误达到{max_consecutive_errors}次，尝试重新连接")
                 self.is_connected = False
-                # 可选：自动重新连接
+                # 自动重连
                 time.sleep(2)
                 consecutive_errors = 0
     
@@ -393,7 +386,7 @@ class NRLClient:
         """处理接收到的数据包"""
         self.logger.debug(f"收到数据包: {packet}")
         
-        # 根据协议规范，检查状态位的DCD/PTT标志
+        # 检查状态位的DCD/PTT标志
         if packet.packet_type == NRLPacket.TYPE_VOICE or packet.packet_type == NRLPacket.TYPE_SERVER_VOICE:
             # 如果状态位bit0为0，表示监听/非发送模式，应丢弃包
             if packet.status & 0x01 == 0:
@@ -418,7 +411,10 @@ class NRLClient:
             self.logger.info(f"收到未知类型数据包: type={packet.packet_type}")
     
     def _handle_voice_packet(self, packet: NRLPacket):
-        """处理语音数据包 - 使用抖动缓冲机制"""
+        """
+        处理语音数据包
+        调试功能是直接拿后500位来解码
+        """
         try:
             # 验证语音数据
             if not packet.data or len(packet.data) == 0:
@@ -426,20 +422,19 @@ class NRLClient:
                     self.logger.warning(f"收到空语音数据包 from {packet.get_callsign_ssid()}")
                     return
                 else:
+                    #调试模式，直接解码，但是好像没啥用
                     self.logger.info(f"[调试模式] 收到空语音数据包，强制解码 from {packet.get_callsign_ssid()}")
-                    # 创建空数据包以供解码
                     packet.data = b'\x80' * 500
             elif self.debug_force_decode and len(packet.data) != 500:
-                # 调试模式：忽略长度检查，直接使用最后 500 字节
+                # 直接使用最后 500 字节
                 if len(packet.data) > 500:
                     original_len = len(packet.data)
-                    packet.data = packet.data[-500:]  # 提取最后 500 字节
+                    packet.data = packet.data[-500:]
                     self.logger.info(f"[调试模式] 语音包长度异常 ({original_len} bytes)，提取最后 500 字节解码")
                 elif len(packet.data) < 500:
-                    # 如果小于 500 字节，前面补静音数据
+                    # 如果小于 500 字节，前面补以下静音数据
                     original_len = len(packet.data)
                     packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
-                    self.logger.info(f"[调试模式] 语音包长度不足 ({original_len} bytes)，补充静音数据至 500 字节")
             
             # 解码语音数据
             pcm_data = self.voice_processor.decode_voice(packet.data)
@@ -448,11 +443,10 @@ class NRLClient:
                 self.logger.error(f"语音解码失败，返回空数据 from {packet.get_callsign_ssid()}")
                 return
                 
-            # 播放语音（使用抖动缓冲）
             if self.audio_handler and self.audio_handler.is_playback_active():
                 self.audio_handler.add_playback_data(pcm_data)
             
-            # 调用语音回调
+            # 调用回调函数
             if self.voice_callback:
                 self.voice_callback(pcm_data)
             
@@ -463,7 +457,7 @@ class NRLClient:
             self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
     
     def _handle_heartbeat_packet(self, packet: NRLPacket):
-        """处理心跳数据包 - 根据协议规范，心跳包只有头部，没有数据"""
+        """处理心跳数据包 心跳包只有头部，没有数据"""
         self.device_status['last_heartbeat'] = time.time()
         self.logger.debug(f"收到心跳包: {packet.get_callsign_ssid()}, CPUID: {packet.cpuid.hex()}")
         
@@ -475,7 +469,7 @@ class NRLClient:
             self.logger.warning(f"心跳包CPUID长度异常: {len(packet.cpuid)} 字节")
     
     def _handle_text_packet(self, packet: NRLPacket):
-        """处理文本数据包 - 根据协议规范，文本包长度=48+文本长度"""
+        """处理文本数据包 文本包长度=48+文本长度"""
         try:
             # 验证文本包格式
             if not packet.data:
@@ -530,10 +524,10 @@ class NRLClient:
                 else:
                     packet.data = b'\x80' * 500
             elif self.debug_force_decode and len(packet.data) != 500:
-                # 调试模式：忽略长度检查，直接使用最后 500 字节
+                # 调试模式：直接使用最后 500 字节
                 if len(packet.data) > 500:
                     original_len = len(packet.data)
-                    packet.data = packet.data[-500:]  # 提取最后 500 字节
+                    packet.data = packet.data[-500:]
                     self.logger.info(f"[调试模式] 服务器互联语音包长度异常 ({original_len} bytes)，提取最后 500 字节解码")
                 elif len(packet.data) < 500:
                     # 如果小于 500 字节，前面补静音数据
@@ -573,12 +567,12 @@ class NRLClient:
             self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
     
     def send_voice_data(self, voice_data: bytes) -> bool:
-        """发送语音数据 - 参考nrllink的语音转发机制
+        """发送语音数据
+
         
-        参考nrllink的语音转发特点：
-        1. 每个语音包包含500字节G.711数据
-        2. 使用状态位的bit0作为发送/接收标志
-        3. 计数器用于包排序
+        每个语音包包含500字节G.711数据
+        使用状态位的bit0作为发送/接收标志
+        有一个计数器用于包排序
         """
         try:
             if not self.is_connected:
@@ -636,8 +630,6 @@ class NRLClient:
     
     def send_text_message(self, message: str) -> bool:
         """发送文本消息 - 根据协议规范，文本包长度=48+文本长度
-        
-        参考nrllink的文本消息处理（TYPE_TEXT = 5）
         """
         try:
             if not self.is_connected:
@@ -683,13 +675,13 @@ class NRLClient:
             return False
     
     def send_heartbeat(self) -> bool:
-        """发送心跳包 - 根据协议规范，心跳包只有头部，没有数据
-        
-        参考nrllink的设备心跳机制
-        心跳包参数：
-        - SSID: 200（服务器连接标记）
+        """发送心跳包
+        心跳包48字节
+
+        参数：
+        - SSID: 200（服务器连接标记）这个如果不是服务器不需要设置，还是自己的SSID
         - Type: 2（TYPE_HEARTBEAT）
-        - 无数据部分
+
         """
         try:
             if not self.is_connected or not self.socket:
@@ -888,7 +880,7 @@ class NRLClient:
             self.logger.info(f"服务器已切换: {old_server.name} -> {new_server.name}")
             self.logger.info(f"新服务器地址: {new_server.host}:{new_server.port}")
             
-            # 如果之前是连接状态，尝试重新连接
+            # 如果为连接状态，尝试重连
             if was_connected:
                 self.logger.info("正在重新连接新服务器...")
                 return self.connect()
