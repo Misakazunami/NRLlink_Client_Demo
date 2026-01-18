@@ -443,3 +443,970 @@
 2026-01-18 20:48:11,303 - audio_handler - WARNING - 没有在播放
 2026-01-18 20:48:11,304 - audio_handler - INFO - 音频处理已关闭
 2026-01-18 20:48:11,307 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 23:07:42,135 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:07:42,279 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:07:42,288 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:07:42,691 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:07:53,973 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:07:53,974 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:07:53,974 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:07:53,974 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:07:53,974 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:07:53,974 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:07:53,974 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:07:53,974 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:07:53,975 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:07:53,975 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:07:53,976 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:07:53,977 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:07:53,977 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:07:53,977 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:07:53,990 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:07:57,975 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:07:57,993 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:07:57,995 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:07:59,976 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:07:59,994 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:07:59,994 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:08:00,399 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:08:00,533 - audio_handler - INFO - 开始播放
+2026-01-18 23:08:00,534 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:08:00,582 - audio_handler - INFO - 开始录音
+2026-01-18 23:08:00,582 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:08:00,654 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:00,655 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:00,655 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:00,714 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:00,715 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:00,715 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:00,784 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:00,784 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:00,784 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:00,844 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:00,844 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:00,844 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:00,904 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:00,904 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:00,905 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:00,964 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:00,964 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:00,964 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,035 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,035 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,035 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,094 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,095 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,095 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,154 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,155 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,155 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,214 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,214 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,215 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,284 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,284 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,284 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,344 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,345 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,345 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,404 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,405 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,406 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,464 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,464 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,464 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,534 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,534 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,534 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,594 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,595 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,595 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,654 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,655 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,655 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,714 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,714 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,714 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,784 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,784 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,784 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,843 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,845 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,845 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,903 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,905 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,905 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,964 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:01,964 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:01,964 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:01,977 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:08:01,994 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:08:01,994 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:08:02,034 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,034 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,034 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,094 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,094 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,094 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,154 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,155 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,155 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,214 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,214 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,214 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,284 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,285 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,285 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,344 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,344 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,344 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,404 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,405 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,405 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,464 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,464 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,465 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,534 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,534 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,534 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,594 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,594 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,594 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,654 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,655 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,655 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,714 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,715 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,715 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,784 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,784 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,784 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,844 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,844 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,844 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,904 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,905 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,905 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:02,964 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:02,964 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:02,965 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,034 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,034 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,034 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,094 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,094 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,094 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,155 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,165 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,165 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,214 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,215 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,215 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,284 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,285 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,285 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,344 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,345 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,345 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,405 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,405 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,405 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,464 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,465 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,465 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,534 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,534 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,534 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,594 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,594 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,594 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,655 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,655 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,655 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,714 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,714 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,714 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,784 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,785 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,785 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,844 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,844 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,844 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,905 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,905 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,905 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,964 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:03,965 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:03,965 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:03,978 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:08:03,995 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:08:03,995 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:08:04,034 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,034 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,034 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,094 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,094 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,094 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,154 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,154 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,154 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,215 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,215 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,215 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,283 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,285 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,285 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,344 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,344 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,344 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,404 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,405 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,405 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,464 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,471 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,471 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,534 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,535 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,535 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,594 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,594 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,594 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,654 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,654 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,654 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,714 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,715 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,715 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,784 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,785 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,785 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,844 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,844 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,844 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,904 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,904 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,904 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:04,964 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:04,965 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:04,965 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,034 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,034 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,034 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,094 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,094 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,094 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,154 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,155 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,155 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,214 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,215 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,215 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,284 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,285 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,285 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,344 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,344 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,345 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,405 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,405 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,405 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,464 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,465 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,465 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,534 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,534 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,534 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,594 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,595 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,595 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,654 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,654 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,654 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,714 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,715 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,715 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,784 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,784 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,784 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,844 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,844 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,845 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,904 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,904 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,904 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,964 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:05,964 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:05,964 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:05,978 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:08:05,995 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:08:05,995 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:08:06,034 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:06,034 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:06,034 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:06,094 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:06,094 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:06,094 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:06,154 - audio_handler - DEBUG - 语音编码: 1000 bytes PCM -> 500 bytes G.711
+2026-01-18 23:08:06,154 - nrl_client - DEBUG - 语音包已发送: 500 bytes, 总长度: 548 bytes
+2026-01-18 23:08:06,154 - audio_handler - DEBUG - 发送音频数据: 1000 bytes PCM
+2026-01-18 23:08:06,233 - audio_handler - INFO - 停止录音
+2026-01-18 23:08:06,234 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:08:07,979 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:08:07,997 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:08:07,997 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:08:08,268 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 23:08:08,269 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:08:08,270 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:08:08,417 - audio_handler - INFO - 停止播放
+2026-01-18 23:08:08,417 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:08:08,419 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:08:08,419 - audio_handler - WARNING - 没有在播放
+2026-01-18 23:08:08,419 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 23:08:08,420 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 23:18:39,371 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:18:39,470 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:18:39,479 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:18:39,744 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:18:41,112 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:18:41,113 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:18:41,113 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:18:41,113 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:18:41,113 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:18:41,115 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:18:41,115 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:18:41,115 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:18:41,115 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:18:41,116 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:18:41,116 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:18:41,119 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:18:41,120 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:18:41,121 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:18:41,131 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:18:56,446 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:18:56,587 - audio_handler - INFO - 开始播放
+2026-01-18 23:18:56,589 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:18:56,631 - audio_handler - INFO - 开始录音
+2026-01-18 23:18:56,632 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:18:59,230 - audio_handler - INFO - 停止录音
+2026-01-18 23:18:59,232 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:01,274 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 23:19:01,277 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:19:01,277 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:01,400 - audio_handler - INFO - 停止播放
+2026-01-18 23:19:01,402 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:19:01,403 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:19:01,403 - audio_handler - WARNING - 没有在播放
+2026-01-18 23:19:01,404 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 23:19:01,404 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 23:19:02,806 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:19:02,872 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:19:02,875 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:19:03,027 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:19:06,656 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:19:06,657 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:19:06,657 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:19:06,658 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:19:06,658 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:19:06,658 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:19:06,659 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:19:06,659 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:19:06,659 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:19:06,659 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:19:06,660 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:19:06,660 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:19:06,660 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:19:06,661 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:19:08,677 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:19:08,833 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:19:08,867 - audio_handler - INFO - 开始播放
+2026-01-18 23:19:08,868 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:08,915 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:08,915 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:12,703 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:12,704 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:17,149 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:17,188 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:17,188 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:19,838 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:19,839 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:20,285 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:20,319 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:20,320 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:20,547 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:20,547 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:20,617 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:20,650 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:20,651 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:20,803 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:20,804 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:20,917 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:20,951 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:20,953 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:21,097 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:21,098 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:21,223 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:21,258 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:21,259 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:21,412 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:21,412 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:21,543 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:21,576 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:21,577 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:21,729 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:21,730 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:21,864 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:21,896 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:21,896 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:19:22,868 - audio_handler - INFO - 停止录音
+2026-01-18 23:19:22,869 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:24,706 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 23:19:24,706 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:19:24,707 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:19:24,870 - audio_handler - INFO - 停止播放
+2026-01-18 23:19:24,872 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:19:24,872 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:19:24,873 - audio_handler - WARNING - 没有在播放
+2026-01-18 23:19:24,873 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 23:19:24,874 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 23:19:45,917 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:19:45,982 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:19:45,986 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:19:46,135 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:19:49,023 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:19:49,025 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:19:49,025 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:19:49,025 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:19:49,026 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:19:49,027 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:19:49,027 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:19:49,027 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:19:49,027 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:19:49,027 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:19:49,028 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:19:49,028 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:19:49,029 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:19:49,029 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:19:49,040 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:19:58,931 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:19:59,071 - audio_handler - INFO - 开始播放
+2026-01-18 23:19:59,072 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:19:59,119 - audio_handler - INFO - 开始录音
+2026-01-18 23:19:59,120 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:20:02,275 - audio_handler - INFO - 停止录音
+2026-01-18 23:20:02,276 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:20:10,582 - nrl_client - INFO - 调试模式强制解码空包 已启用
+2026-01-18 23:21:11,045 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:13,046 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:15,047 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:17,048 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:19,049 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:20,977 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:21:21,462 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:21:21,462 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:21:21,464 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:21:21,464 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:21:21,464 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:21,466 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:21:21,466 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:21:21,467 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:21:21,467 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:21:21,468 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:21:21,468 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:21:21,468 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:21:21,470 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:21:21,470 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:21:21,470 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:21:21,471 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:21:21,471 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:21:21,472 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:21:21,484 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:21,484 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:21,484 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:21,485 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:23,466 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:23,484 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:23,485 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:23,485 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=11, callsign=BH6ERO-1, cpuid=0000000000)
+2026-01-18 23:21:23,485 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:21:23,698 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:23,698 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:23,699 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:23,712 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:23,712 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:23,713 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:23,798 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:23,798 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:23,798 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:23,868 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:23,868 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:23,870 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:23,935 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:23,935 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:23,936 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:23,990 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:23,991 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:23,992 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,045 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,045 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,046 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,115 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,116 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,116 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,217 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,218 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,218 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,254 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,254 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,255 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,327 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,327 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,328 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,417 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,417 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,418 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,436 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,436 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,437 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,519 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,519 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,520 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,548 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,549 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,550 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,621 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,621 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,622 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,722 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,722 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,724 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,751 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,752 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,752 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,816 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,817 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,817 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,875 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,875 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,876 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:24,933 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:24,933 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:24,933 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,024 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,024 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,025 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,054 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,054 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,055 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,125 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,125 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,126 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,217 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,217 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,218 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,246 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,246 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,247 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,327 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,327 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,328 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,428 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,428 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,429 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,432 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,433 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,436 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,467 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:25,485 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:25,485 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:25,529 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,529 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,530 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,559 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,559 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,561 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,630 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,630 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,631 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,697 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,697 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,697 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,751 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,751 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,752 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,834 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,834 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,835 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,881 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,881 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,881 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,934 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,936 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,936 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:25,997 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:25,997 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:25,997 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:26,060 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:26,060 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:26,060 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:26,137 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:26,137 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:26,138 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:26,184 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:26,184 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:26,185 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:26,257 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:26,257 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:26,258 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:26,333 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:26,334 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:26,335 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:27,467 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:27,486 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:27,486 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:29,468 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:29,486 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:29,486 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:31,469 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:31,486 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:31,487 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:33,470 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:33,488 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:33,488 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:34,377 - audio_handler - INFO - 输出设备已设置为: 扬声器 (Realtek(R) Audio)
+2026-01-18 23:21:35,407 - audio_handler - INFO - 输入设备已设置为:  (Realtek(R) Audio)
+2026-01-18 23:21:35,470 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:35,488 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:35,488 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:36,976 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:36,976 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:36,979 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:36,980 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:36,980 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:36,980 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,050 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,051 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,051 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,134 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,134 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,135 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,193 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,193 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,194 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,289 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,290 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,292 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,312 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,312 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,313 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,400 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,401 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,401 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,472 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:37,490 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:37,490 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:37,495 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,495 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,498 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,511 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,511 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,512 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,597 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,597 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,598 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,631 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,632 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,633 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,697 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,697 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,699 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,777 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,778 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,779 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,818 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,819 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,820 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,899 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,900 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,900 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:37,934 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:37,934 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:37,935 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,009 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,010 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,012 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,079 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,080 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,080 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,142 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,142 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,144 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,201 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,201 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,202 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,302 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,303 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,304 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,328 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,328 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,329 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,404 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,404 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,405 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,451 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,451 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,451 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,510 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,510 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,510 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,607 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,607 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,608 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,632 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,633 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,633 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,707 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,707 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,708 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,808 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,808 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,809 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,823 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,823 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,824 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:38,888 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:38,888 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:38,889 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,216 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,216 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,217 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,240 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,240 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,241 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,326 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,326 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,328 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,400 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,400 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,402 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,462 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,462 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,463 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,472 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:39,491 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:39,491 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:39,528 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,528 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,531 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,624 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,625 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,625 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,648 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,648 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,650 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,734 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,735 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,736 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,837 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,837 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,838 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,852 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,852 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,853 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,931 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,932 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,933 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:39,972 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:39,972 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:39,973 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,041 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,041 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,042 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,092 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,092 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,093 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,149 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,149 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,150 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,241 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,243 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,244 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,280 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,280 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,280 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,346 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,348 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,348 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,442 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,442 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,443 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,479 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,479 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,480 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,544 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,545 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,547 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,644 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,644 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,645 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,669 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,669 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,670 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,745 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,745 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,747 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,824 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,824 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,825 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,866 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,866 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,867 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,947 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,947 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,948 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:40,994 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:40,994 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:40,995 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,053 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,053 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,055 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,136 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,136 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,138 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,172 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,172 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,173 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,231 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,232 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,233 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,291 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,292 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,292 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,351 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,351 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,352 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,449 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,449 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,450 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,473 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:41,482 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,482 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,483 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,491 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:41,491 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:41,552 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,552 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,553 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,653 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,653 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,655 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,669 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,669 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,669 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,755 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,755 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,756 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,795 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,795 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,795 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,857 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,858 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,859 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,937 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,937 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,938 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:41,976 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:41,976 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:41,977 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:42,059 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:42,059 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:42,059 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:42,099 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:42,100 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:42,101 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:42,164 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:42,164 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:42,165 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:42,255 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:42,255 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:42,256 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:42,295 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:42,295 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:42,296 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:43,473 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:43,492 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:43,492 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:43,777 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:43,777 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:43,778 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:43,826 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:43,826 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:43,828 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:43,903 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:43,903 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:43,903 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:43,983 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:43,983 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:43,984 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,047 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,047 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,047 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,103 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,104 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,105 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,167 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,167 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,168 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,227 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,227 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,228 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,305 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,305 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,307 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,397 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,397 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,398 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,427 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,427 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,428 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,492 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,492 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,493 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,576 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,577 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,578 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,612 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,612 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,613 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,699 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,699 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,700 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,733 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,734 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,735 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,802 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,802 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,803 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,896 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,896 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,897 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:44,933 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=1, callsign=BH6ERO-100, cpuid=77ecc3d500)
+2026-01-18 23:21:44,933 - audio_handler - DEBUG - 语音解码: 500 bytes G.711 -> 1000 bytes PCM
+2026-01-18 23:21:44,935 - nrl_client - DEBUG - 处理语音数据包成功: 500 bytes from BH6ERO-100
+2026-01-18 23:21:45,474 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:45,492 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:45,493 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:47,475 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:47,493 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:47,493 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:49,476 - nrl_client - DEBUG - 心跳包已发送: BH6ERO-1, CPUID: 910e008400, 长度: 48 bytes
+2026-01-18 23:21:49,494 - nrl_client - DEBUG - 收到数据包: NRLPacket(version=b'NRL2', type=2, callsign=BH6ERO-1, cpuid=910e008400)
+2026-01-18 23:21:49,494 - nrl_client - DEBUG - 收到心跳包: BH6ERO-1, CPUID: 910e008400
+2026-01-18 23:21:50,763 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 23:21:50,764 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:21:50,765 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:21:50,765 - audio_handler - WARNING - 没有在播放
+2026-01-18 23:21:50,766 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:21:50,767 - audio_handler - WARNING - 没有在录音
+2026-01-18 23:21:50,767 - audio_handler - WARNING - 没有在播放
+2026-01-18 23:21:50,768 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 23:21:50,768 - nrl_client - INFO - NRL客户端已关闭

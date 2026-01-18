@@ -133,6 +133,7 @@ class NRLPacket:
             
             # 检查数据长度
             if len(data) < self.length:
+                # 报文不完整，无法解析
                 return False
             
             # CPUID (5字节) - 根据协议规范，实际使用4字节
@@ -178,7 +179,14 @@ class NRLPacket:
                 self.original_ip = b"\x00" * 4
             
             # 数据部分
-            self.data = data[48:self.length]
+            # 兼容性处理：部分Go实现（转发/替换头部）可能未正确更新长度字段
+            # 如果长度字段恰好等于头部长度但实际上报文尾部包含数据，则回退使用原始报文尾部数据
+            if self.length == self.HEADER_SIZE and len(data) > self.HEADER_SIZE:
+                # 长度字段标记为仅头部，但实际报文包含数据，使用报文尾部所有数据
+                self.data = data[self.HEADER_SIZE:]
+            else:
+                # 正常使用长度字段指定的数据范围
+                self.data = data[self.HEADER_SIZE:self.length]
             
             return True
             
