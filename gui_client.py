@@ -313,6 +313,7 @@ class NRLGUIClient:
         menubar.add_cascade(label="文件", menu=file_menu)
         file_menu.add_command(label="新建配置", command=self.new_config)
         file_menu.add_command(label="加载配置", command=self.load_config)
+        file_menu.add_command(label="配置管理器", command=self.show_config_manager)
         
         # 最近使用的配置
         self.recent_configs_menu = tk.Menu(file_menu, tearoff=0)
@@ -766,6 +767,21 @@ CPUID: {device_info.get('cpuid', '未知')}
                         
                         self.log_message(f"配置已保存到: {filename}")
                         messagebox.showinfo("成功", f"配置已成功保存到:\n{filename}")
+                        
+                        # 更新配置历史记录
+                        if filename not in self.config_history:
+                            self.config_history.insert(0, filename)
+                            # 限制历史记录数量
+                            if len(self.config_history) > 10:
+                                self.config_history = self.config_history[:10]
+                        else:
+                            # 如果已存在，移到最前面
+                            self.config_history.remove(filename)
+                            self.config_history.insert(0, filename)
+                        
+                        # 更新最近使用菜单
+                        self.update_recent_configs_menu()
+                        
                         new_config_window.destroy()
                         
                         # 询问是否加载新配置
@@ -832,12 +848,22 @@ CPUID: {device_info.get('cpuid', '未知')}
             # 更新当前配置文件路径
             self.current_config_file.set(filename)
             
+            # 备份当前配置
+            current_config = self.current_config_file.get()
+            
             # 添加到历史记录
             if filename not in self.config_history:
                 self.config_history.insert(0, filename)
                 # 限制历史记录数量
                 if len(self.config_history) > 10:
                     self.config_history = self.config_history[:10]
+            else:
+                # 如果已存在，移到最前面
+                self.config_history.remove(filename)
+                self.config_history.insert(0, filename)
+            
+            # 更新最近使用菜单
+            self.update_recent_configs_menu()
             
             # 刷新服务器列表
             self.refresh_servers_list()
@@ -950,6 +976,178 @@ NRLLink_Client Demo
             self.config_history.clear()
             self.update_recent_configs_menu()
             self.log_message("已清除配置历史记录")
+    
+    def show_config_manager(self):
+        """显示配置管理器"""
+        manager_window = tk.Toplevel(self.root)
+        manager_window.title("配置管理器")
+        manager_window.geometry("600x400")
+        manager_window.transient(self.root)
+        
+        # 创建主框架
+        main_frame = ttk.Frame(manager_window, padding="10")
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # 标题
+        title_label = ttk.Label(main_frame, text="配置文件管理", font=('Arial', 14, 'bold'))
+        title_label.pack(pady=(0, 10))
+        
+        # 配置列表框架
+        list_frame = ttk.LabelFrame(main_frame, text="配置文件列表", padding="5")
+        list_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
+        
+        # 创建Treeview显示配置信息
+        columns = ('文件名', '呼号', '当前服务器', '修改时间')
+        self.config_tree = ttk.Treeview(list_frame, columns=columns, show='tree headings', height=8)
+        
+        # 设置列
+        self.config_tree.heading('#0', text='')
+        self.config_tree.heading('文件名', text='配置文件')
+        self.config_tree.heading('呼号', text='呼号')
+        self.config_tree.heading('当前服务器', text='当前服务器')
+        self.config_tree.heading('修改时间', text='修改时间')
+        
+        # 设置列宽和对齐
+        self.config_tree.column('#0', width=0, stretch=tk.NO)
+        self.config_tree.column('文件名', width=150, anchor=tk.W)
+        self.config_tree.column('呼号', width=80, anchor=tk.CENTER)
+        self.config_tree.column('当前服务器', width=150, anchor=tk.W)
+        self.config_tree.column('修改时间', width=120, anchor=tk.CENTER)
+        
+        # 添加滚动条
+        scrollbar = ttk.Scrollbar(list_frame, orient=tk.VERTICAL, command=self.config_tree.yview)
+        self.config_tree.configure(yscrollcommand=scrollbar.set)
+        
+        self.config_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        # 按钮框架
+        button_frame = ttk.Frame(main_frame)
+        button_frame.pack(fill=tk.X)
+        
+        # 功能按钮
+        ttk.Button(button_frame, text="加载配置", command=self.load_selected_config).pack(side=tk.LEFT, padx=(0, 5))
+        ttk.Button(button_frame, text="新建配置", command=self.new_config).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="删除配置", command=self.delete_selected_config).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="刷新列表", command=self.refresh_config_list).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="关闭", command=manager_window.destroy).pack(side=tk.RIGHT, padx=(5, 0))
+        
+        # 绑定双击事件
+        self.config_tree.bind('<Double-Button-1>', lambda e: self.load_selected_config())
+        
+        # 刷新配置列表
+        self.refresh_config_list()
+    
+    def refresh_config_list(self):
+        """刷新配置列表"""
+        # 清空现有项目
+        for item in self.config_tree.get_children():
+            self.config_tree.delete(item)
+        
+        # 获取配置文件列表
+        config_files = []
+        
+        # 添加当前目录的yaml文件
+        for file in os.listdir('.'):
+            if file.endswith(('.yaml', '.yml')):
+                config_files.append(os.path.abspath(file))
+        
+        # 添加历史记录中的文件
+        for config_file in self.config_history:
+            if os.path.exists(config_file) and config_file not in config_files:
+                config_files.append(config_file)
+        
+        # 添加每个配置到列表
+        for config_file in config_files:
+            try:
+                with open(config_file, 'r', encoding='utf-8') as f:
+                    config = yaml.safe_load(f)
+                
+                # 获取配置信息
+                filename = os.path.basename(config_file)
+                callsign = config.get('device', {}).get('callsign', 'N/A')
+                current_server_idx = config.get('current_server', 0)
+                servers = config.get('servers', [])
+                
+                if 0 <= current_server_idx < len(servers):
+                    current_server = servers[current_server_idx].get('name', '未知服务器')
+                else:
+                    current_server = '未知服务器'
+                
+                # 获取文件修改时间
+                mod_time = os.path.getmtime(config_file)
+                mod_time_str = time.strftime('%Y-%m-%d %H:%M', time.localtime(mod_time))
+                
+                # 添加到Treeview
+                self.config_tree.insert('', tk.END, values=(filename, callsign, current_server, mod_time_str))
+                
+            except Exception as e:
+                self.log_message(f"读取配置文件 {config_file} 失败: {str(e)}")
+    
+    def load_selected_config(self):
+        """加载选中的配置"""
+        selection = self.config_tree.selection()
+        if not selection:
+            messagebox.showwarning("警告", "请先选择一个配置文件")
+            return
+        
+        # 获取选中的文件名
+        item = self.config_tree.item(selection[0])
+        filename = item['values'][0]
+        
+        # 查找完整路径
+        config_file = None
+        for file in os.listdir('.'):
+            if file == filename:
+                config_file = os.path.abspath(file)
+                break
+        
+        if not config_file:
+            messagebox.showerror("错误", f"找不到配置文件: {filename}")
+            return
+        
+        # 加载配置
+        self.load_config_file(config_file)
+    
+    def delete_selected_config(self):
+        """删除选中的配置"""
+        selection = self.config_tree.selection()
+        if not selection:
+            messagebox.showwarning("警告", "请先选择一个配置文件")
+            return
+        
+        # 获取选中的文件名
+        item = self.config_tree.item(selection[0])
+        filename = item['values'][0]
+        
+        # 确认删除
+        if not messagebox.askyesno("确认删除", f"确定要删除配置文件 {filename} 吗？"):
+            return
+        
+        try:
+            # 查找完整路径
+            config_file = None
+            for file in os.listdir('.'):
+                if file == filename:
+                    config_file = os.path.abspath(file)
+                    break
+            
+            if config_file:
+                os.remove(config_file)
+                self.log_message(f"已删除配置文件: {filename}")
+                
+                # 从历史记录中移除
+                if config_file in self.config_history:
+                    self.config_history.remove(config_file)
+                    self.update_recent_configs_menu()
+                
+                # 刷新列表
+                self.refresh_config_list()
+            else:
+                messagebox.showerror("错误", f"找不到配置文件: {filename}")
+                
+        except Exception as e:
+            messagebox.showerror("错误", f"删除配置文件失败: {str(e)}")
     
     def run(self):
         """运行GUI应用"""
