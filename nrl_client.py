@@ -98,6 +98,12 @@ class NRLClient:
         # 调试选项：绕过空包检查，强制解码所有包
         self.debug_force_decode = False
         
+        # 语音自动播放控制
+        self.last_voice_packet_time = 0.0  # 最后收到语音包的时间
+        self.voice_playback_timeout = 0.5  # 语音播放超时时间（秒）
+        self.playback_check_thread = None  # 播放超时检查线程
+        self.is_recording_local = False  # 本地正在录音标志，录音期间禁用自动播放
+        
         # 加载配置
         self.load_config(config_file)
         
@@ -250,6 +256,10 @@ class NRLClient:
             self.heartbeat_thread = threading.Thread(target=self._heartbeat_loop, daemon=True)
             self.heartbeat_thread.start()
             
+            # 启动播放超时检查线程
+            self.playback_check_thread = threading.Thread(target=self._playback_timeout_loop, daemon=True)
+            self.playback_check_thread.start()
+            
             self._update_status('connected', True)
             self.logger.info(f"连接到服务器成功: {self.server_config.host}:{self.server_config.port}")
             self.logger.info(f"NRL_Link Client Beta V1.3")
@@ -382,6 +392,29 @@ class NRLClient:
                     self.is_connected = False
                     heartbeat_failures = 0
     
+    def _playback_timeout_loop(self):
+        """播放超时检查循环 - 定期检查是否需要关闭播放
+        
+        使用标志而非直接调用stop_playback()以避免与播放回调的死锁
+        """
+        while self.running:
+            try:
+                if self.audio_handler and self.audio_handler.is_playback_active():
+                    current_time = time.time()
+                    time_since_last_voice = current_time - self.last_voice_packet_time
+                    
+                    # 如果超过超时时间未收到语音包，则设置停止标志
+                    if time_since_last_voice > self.voice_playback_timeout:
+                        # 仅在首次超时时设置标志，避免重复日志
+                        if not self.audio_handler.playback_stop_flag:
+                            self.logger.info(f"语音播放超时（{time_since_last_voice:.1f}秒），标记停止播放")
+                            self.audio_handler.playback_stop_flag = True
+                
+                time.sleep(0.5)  # 每500毫秒检查一次
+                
+            except Exception as e:
+                self.logger.error(f"播放超时检查错误: {e}")
+    
     def _handle_packet(self, packet: NRLPacket, addr: tuple):
         """处理接收到的数据包"""
         self.logger.debug(f"收到数据包: {packet}")
@@ -442,10 +475,28 @@ class NRLClient:
             if not pcm_data:
                 self.logger.error(f"语音解码失败，返回空数据 from {packet.get_callsign_ssid()}")
                 return
+            
+            # 更新最后语音包时间
+            self.last_voice_packet_time = time.time()
+            
+            # 如果播放未启动且本地未录音，自动启动播放
+            if self.audio_handler and not self.is_recording_local:
+                # 重置播放停止标志（表示收到新语音）
+                self.audio_handler.playback_stop_flag = False
                 
-            if self.audio_handler and self.audio_handler.is_playback_active():
+                if not self.audio_handler.is_playback_active():
+                    try:
+                        self.audio_handler.start_playback()
+                        self.logger.info("自动启动播放模式")
+                    except Exception as e:
+                        self.logger.error(f"启动播放失败: {e}")
+                        return
+                
                 # 立即播放解码的PCM数据，不使用抖动缓冲延迟处理
                 self.audio_handler.add_playback_data_immediate(pcm_data)
+            elif self.is_recording_local:
+                # 本地正在录音，不自动启动播放，只更新时间戳用于超时判断
+                self.logger.debug(f"本地正在录音，忽略远端语音包播放 from {packet.get_callsign_ssid()}")
             
             # 调用回调函数
             if self.voice_callback:
@@ -545,11 +596,28 @@ class NRLClient:
             if not pcm_data:
                 self.logger.error(f"服务器互联语音解码失败，返回空数据 from {packet.get_callsign_ssid()}")
                 return
+            
+            # 更新最后语音包时间
+            self.last_voice_packet_time = time.time()
+            
+            # 如果播放未启动且本地未录音，自动启动播放
+            if self.audio_handler and not self.is_recording_local:
+                # 重置播放停止标志（表示收到新语音）
+                self.audio_handler.playback_stop_flag = False
                 
-            # 播放语音
-            if self.audio_handler and self.audio_handler.is_playback_active():
+                if not self.audio_handler.is_playback_active():
+                    try:
+                        self.audio_handler.start_playback()
+                        self.logger.info("自动启动播放模式（服务器互联语音）")
+                    except Exception as e:
+                        self.logger.error(f"启动播放失败: {e}")
+                        return
+                
                 # 立即播放解码的PCM数据，不使用抖动缓冲延迟处理
                 self.audio_handler.add_playback_data_immediate(pcm_data)
+            elif self.is_recording_local:
+                # 本地正在录音，不自动启动播放，只更新时间戳用于超时判断
+                self.logger.debug(f"本地正在录音，忽略服务器互联语音播放 from {packet.get_callsign_ssid()}")
             
             # 调用语音回调，包含原始设备信息
             if self.voice_callback:
@@ -734,9 +802,8 @@ class NRLClient:
                 self.logger.error("音频处理器未初始化")
                 return False
             
-            # 开始播放（接收语音）
-            if not self.audio_handler.is_playback_active():
-                self.audio_handler.start_playback()
+            # 标记本地正在录音，禁用自动播放
+            self.is_recording_local = True
             
             # 开始录音并设置回调
             def audio_callback(pcm_data):
@@ -754,11 +821,15 @@ class NRLClient:
             
         except Exception as e:
             self.logger.error(f"启动语音传输失败: {e}")
+            self.is_recording_local = False  # 失败时重置标志
             return False
     
     def stop_voice_transmission(self):
         """停止语音传输"""
         try:
+            # 取消本地录音标志，恢复自动播放
+            self.is_recording_local = False
+            
             if self.audio_handler:
                 self.audio_handler.stop_recording()
                 # 保持播放开启以接收其他设备的语音

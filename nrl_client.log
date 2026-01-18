@@ -1515,3 +1515,448 @@
 2026-01-18 23:27:08,389 - audio_handler - WARNING - 没有在播放
 2026-01-18 23:27:08,389 - audio_handler - INFO - 音频处理已关闭
 2026-01-18 23:27:08,390 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 23:30:18,973 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:30:19,048 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:30:19,051 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:30:19,298 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:30:23,767 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:30:23,769 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:30:23,769 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:30:23,770 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:30:23,770 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:30:23,770 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:30:23,771 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:30:23,771 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:30:23,771 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:30:23,771 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:30:23,772 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:30:23,772 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:30:23,773 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:30:23,773 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:30:23,786 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:30:25,405 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:30:25,445 - audio_handler - INFO - 开始播放
+2026-01-18 23:30:25,446 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:30:31,275 - nrl_client - INFO - 语音播放超时（2.0秒），关闭播放
+2026-01-18 23:30:31,448 - audio_handler - INFO - 停止播放
+2026-01-18 23:30:57,893 - __main__ - INFO - 用户中断程序
+2026-01-18 23:31:00,445 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:31:00,510 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:31:00,514 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:31:00,750 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:31:02,716 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:31:02,716 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:31:02,717 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:31:02,717 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:31:02,717 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:31:02,717 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:31:02,719 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:31:02,719 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:31:02,719 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:31:02,719 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:31:02,720 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:31:02,721 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:31:02,721 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:31:02,722 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:31:04,855 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:31:04,887 - audio_handler - INFO - 开始播放
+2026-01-18 23:31:04,890 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:31:07,721 - nrl_client - INFO - 语音播放超时（0.6秒），关闭播放
+2026-01-18 23:31:07,891 - audio_handler - INFO - 停止播放
+2026-01-18 23:31:08,735 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:31:40,389 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:31:40,478 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:31:40,482 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:31:40,734 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:31:41,902 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:31:41,903 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:31:41,903 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:31:41,903 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:31:41,904 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:31:41,904 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:31:41,904 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:31:41,904 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:31:41,904 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:31:41,904 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:31:41,905 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:31:41,905 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:31:41,907 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:31:41,907 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:31:41,921 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:31:44,536 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:31:44,573 - audio_handler - INFO - 开始播放
+2026-01-18 23:31:44,573 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:31:44,624 - audio_handler - INFO - 开始录音
+2026-01-18 23:31:44,625 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:31:44,906 - nrl_client - INFO - 语音播放超时（1768750304.9秒），关闭播放
+2026-01-18 23:31:45,027 - audio_handler - INFO - 停止播放
+2026-01-18 23:33:59,806 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:33:59,873 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:33:59,877 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:34:00,136 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:34:03,365 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:34:03,365 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:34:03,366 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:34:03,366 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:34:03,366 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:34:03,366 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:34:03,366 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:34:03,366 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:34:03,366 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:34:03,367 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:34:03,367 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:34:03,368 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:34:03,368 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:34:03,369 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:34:03,384 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:34:06,883 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:06,885 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:06,943 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:06,944 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,015 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,016 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,096 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,097 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,158 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,159 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,219 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,220 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,277 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,278 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,336 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,338 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,443 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,443 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,484 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,486 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,542 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,543 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,623 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,625 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,703 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,705 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,742 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,743 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,802 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,803 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,864 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,865 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,927 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,928 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:07,982 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:07,984 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,044 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,046 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,104 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,104 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,169 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,170 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,231 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,233 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,286 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,286 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,348 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,349 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,401 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,403 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,483 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,484 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,545 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,546 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,623 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,624 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,672 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,673 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,763 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,764 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,803 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,804 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,864 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,865 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,933 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,934 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:08,990 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:08,991 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,083 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,083 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,127 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,128 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,202 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,204 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,252 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,254 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,343 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,344 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,382 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,383 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,448 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,449 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:09,515 - nrl_client - ERROR - 处理语音数据包失败: 'NRLClient' object has no attribute 'is_recording'
+2026-01-18 23:34:09,515 - nrl_client - ERROR - 数据包信息: type=1, callsign=BH6ERO-100, data_len=500
+2026-01-18 23:34:20,363 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:34:20,505 - audio_handler - INFO - 开始录音
+2026-01-18 23:34:20,506 - nrl_client - INFO - 语音传输已启动（PTT按下）
+2026-01-18 23:34:22,482 - audio_handler - INFO - 停止录音
+2026-01-18 23:34:22,483 - nrl_client - INFO - 语音传输已停止（PTT释放）
+2026-01-18 23:37:50,230 - __main__ - INFO - 用户中断程序
+2026-01-18 23:37:52,643 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:37:52,708 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:37:52,711 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:37:52,948 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:37:57,748 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:37:57,749 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:37:57,750 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:37:57,750 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:37:57,750 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:37:57,750 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:37:57,750 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:37:57,751 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:37:57,751 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:37:57,751 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:37:57,751 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:37:57,752 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:37:57,752 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:37:57,753 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:37:57,765 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:38:00,057 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:38:00,091 - audio_handler - INFO - 开始播放
+2026-01-18 23:38:00,092 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:38:03,754 - nrl_client - INFO - 语音播放超时（1.0秒），关闭播放
+2026-01-18 23:38:03,905 - audio_handler - INFO - 停止播放
+2026-01-18 23:38:17,422 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:38:17,484 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:38:17,487 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:38:17,744 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:38:19,519 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:38:19,520 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:38:19,521 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:38:19,521 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:38:19,521 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:38:19,521 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:38:19,522 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:38:19,522 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:38:19,522 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:38:19,522 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:38:19,523 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:38:19,524 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:38:19,525 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:38:19,525 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:38:21,307 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:38:21,353 - audio_handler - INFO - 开始录音
+2026-01-18 23:38:21,353 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:38:23,073 - audio_handler - INFO - 停止录音
+2026-01-18 23:38:23,074 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:38:23,542 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:38:25,353 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:38:25,386 - audio_handler - INFO - 开始播放
+2026-01-18 23:38:25,576 - nrl_client - INFO - 语音播放超时（1768750705.6秒），关闭播放
+2026-01-18 23:38:25,698 - audio_handler - INFO - 停止播放
+2026-01-18 23:38:28,781 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:38:28,814 - audio_handler - INFO - 开始播放
+2026-01-18 23:38:28,815 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:38:31,705 - nrl_client - INFO - 语音播放超时（0.7秒），关闭播放
+2026-01-18 23:38:31,877 - audio_handler - INFO - 停止播放
+2026-01-18 23:38:34,796 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:38:34,832 - audio_handler - INFO - 开始录音
+2026-01-18 23:38:34,833 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:38:35,930 - audio_handler - INFO - 停止录音
+2026-01-18 23:38:35,930 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:38:37,092 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:39:39,433 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:39:39,532 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:39:39,536 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:39:39,783 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:39:41,844 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:39:41,845 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:39:41,845 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:39:41,845 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:39:41,845 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:39:41,845 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:39:41,845 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:39:41,845 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:39:41,845 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:39:41,846 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:39:41,846 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:39:41,847 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:39:41,848 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:39:41,848 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:39:41,863 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:39:46,804 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:39:46,841 - audio_handler - INFO - 开始播放
+2026-01-18 23:39:46,843 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:39:51,352 - nrl_client - INFO - 语音播放超时（0.5秒），关闭播放
+2026-01-18 23:39:51,475 - audio_handler - INFO - 停止播放
+2026-01-18 23:39:54,729 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:39:54,778 - audio_handler - INFO - 开始录音
+2026-01-18 23:39:54,779 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:39:58,812 - audio_handler - INFO - 停止录音
+2026-01-18 23:39:58,812 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:39:59,404 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:39:59,444 - audio_handler - INFO - 开始录音
+2026-01-18 23:39:59,445 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:00,291 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:00,292 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:00,656 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:00,690 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:00,691 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:01,165 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:01,166 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:01,437 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:01,471 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:01,475 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:01,876 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:01,877 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:02,120 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:02,156 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:02,158 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:02,559 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:02,561 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:02,814 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:02,849 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:02,850 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:07,137 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:07,137 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:08,847 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:08,883 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:08,884 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:10,115 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:10,116 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:10,915 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:40:11,611 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:40:11,613 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:40:11,614 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:40:11,614 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:40:11,616 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:40:11,618 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:40:11,618 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:40:11,619 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:40:11,619 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:40:11,619 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:40:11,620 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:40:11,621 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:40:11,622 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:40:11,622 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:40:11,623 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:40:11,623 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:40:11,624 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:40:13,636 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:40:14,106 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:14,142 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:14,143 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:16,366 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:16,368 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:18,449 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:18,488 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:18,488 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:23,711 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:23,713 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:31,175 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:31,288 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:31,289 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:33,190 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:33,190 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:38,110 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:38,142 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:38,143 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:40,363 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:40,365 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:41,493 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:40:42,044 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:40:42,044 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:40:42,045 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:40:42,046 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:40:42,049 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:40:42,049 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:40:42,050 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:40:42,051 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:40:42,051 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:40:42,052 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:40:42,052 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:40:42,053 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:40:42,053 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:40:42,054 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:40:42,054 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:40:42,055 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:40:42,055 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:40:42,706 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:42,739 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:42,740 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:44,065 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:40:45,140 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:45,140 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:40:53,528 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:40:53,643 - audio_handler - INFO - 开始录音
+2026-01-18 23:40:53,643 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:40:58,178 - audio_handler - INFO - 停止录音
+2026-01-18 23:40:58,178 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:41:02,256 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 23:41:02,575 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:41:02,576 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:41:02,576 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:41:02,578 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:41:02,579 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:41:02,579 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:41:02,581 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:41:02,581 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:41:02,582 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:41:02,582 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:41:02,583 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:41:02,584 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:41:02,584 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:41:02,586 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:41:02,587 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:41:02,587 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:41:02,588 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:41:03,527 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:41:03,561 - audio_handler - INFO - 开始录音
+2026-01-18 23:41:03,561 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:41:07,967 - audio_handler - INFO - 停止录音
+2026-01-18 23:41:07,968 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:41:08,598 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:41:10,636 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:41:10,669 - audio_handler - INFO - 开始播放
+2026-01-18 23:41:10,670 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:41:12,588 - nrl_client - INFO - 语音播放超时（0.7秒），关闭播放
+2026-01-18 23:41:12,732 - audio_handler - INFO - 停止播放
+2026-01-18 23:43:24,092 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 23:43:24,158 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 23:43:24,161 - nrl_client - INFO - 配置加载成功
+2026-01-18 23:43:24,405 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 23:43:26,563 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 23:43:26,565 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 23:43:26,565 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 23:43:26,565 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:43:26,566 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 23:43:26,566 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 23:43:26,566 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 23:43:26,566 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 23:43:26,566 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 23:43:26,567 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:43:26,568 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 23:43:26,569 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 23:43:26,569 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 23:43:26,570 - nrl_client - INFO - ------------------------------------
+2026-01-18 23:43:26,582 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 23:43:28,811 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:43:28,861 - audio_handler - INFO - 开始录音
+2026-01-18 23:43:28,862 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:43:30,082 - audio_handler - INFO - 停止录音
+2026-01-18 23:43:30,083 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:43:35,662 - nrl_client - INFO - 文本消息已发送: 7788 (长度: 4 字节)
+2026-01-18 23:43:39,546 - nrl_client - INFO - 收到文本消息: 1122 (长度: 4 字节)
+2026-01-18 23:43:44,386 - nrl_client - INFO - 收到文本消息: 22553666 (长度: 8 字节)
+2026-01-18 23:43:47,584 - nrl_client - INFO - 收到文本消息: 晚上好 (长度: 9 字节)
+2026-01-18 23:43:50,965 - audio_handler - INFO - 使用系统默认输出设备
+2026-01-18 23:43:51,096 - audio_handler - INFO - 开始播放
+2026-01-18 23:43:51,097 - nrl_client - INFO - 自动启动播放模式
+2026-01-18 23:43:54,111 - nrl_client - INFO - 语音播放超时（0.6秒），标记停止播放
+2026-01-18 23:44:00,619 - nrl_client - INFO - 语音播放超时（0.6秒），标记停止播放
+2026-01-18 23:44:06,123 - nrl_client - INFO - 语音播放超时（0.6秒），标记停止播放
+2026-01-18 23:44:08,125 - nrl_client - INFO - 语音播放超时（0.7秒），标记停止播放
+2026-01-18 23:44:09,417 - audio_handler - INFO - 使用系统默认输入设备
+2026-01-18 23:44:09,451 - audio_handler - INFO - 开始录音
+2026-01-18 23:44:09,452 - nrl_client - INFO - 语音传输已启动
+2026-01-18 23:44:10,603 - audio_handler - INFO - 停止录音
+2026-01-18 23:44:10,605 - nrl_client - INFO - 语音传输已停止
+2026-01-18 23:44:25,019 - nrl_client - INFO - 文本消息已发送: 8899 (长度: 4 字节)
+2026-01-18 23:44:32,858 - __main__ - INFO - 用户中断程序

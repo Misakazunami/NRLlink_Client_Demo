@@ -57,6 +57,9 @@ class AudioHandler:
         self.jitter_buffer = deque(maxlen=self.jitter_buffer_size)
         self.jitter_buffer_lock = threading.Lock()
         
+        # 播放停止标志 - 用于避免超时检查线程与播放回调的死锁
+        self.playback_stop_flag = False
+        
     def _get_format(self, format_str: str) -> int:
         """获取PyAudio格式"""
         format_map = {
@@ -261,6 +264,7 @@ class AudioHandler:
             
             try:
                 self.is_playing = True
+                self.playback_stop_flag = False  # 重置停止标志
                 self.play_buffer = deque()  # 使用deque而非列表，支持高效的两端操作
                 
                 # 设置输出设备参数
@@ -301,13 +305,14 @@ class AudioHandler:
             
             try:
                 self.is_playing = False
+                self.playback_stop_flag = False  # 重置停止标志
                 
                 if self.output_stream:
                     self.output_stream.stop_stream()
                     self.output_stream.close()
                     self.output_stream = None
                 
-                self.play_buffer = []
+                self.play_buffer = deque()
                 self.logger.info("停止播放")
                 
             except Exception as e:
@@ -374,7 +379,8 @@ class AudioHandler:
     
     def _play_callback(self, in_data, frame_count, time_info, status):
         """播放回调函数 - 改进数据长度匹配和缓冲区管理"""
-        if not self.is_playing:
+        # 检查停止标志，如果已标记停止则立即返回
+        if not self.is_playing or self.playback_stop_flag:
             return (b'\x00' * frame_count * self.channels * 2, pyaudio.paContinue)
         
         # 计算期望的数据长度（16-bit音频，每个样本2字节）
