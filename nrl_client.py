@@ -212,7 +212,7 @@ class NRLClient:
             
             self._update_status('connected', True)
             self.logger.info(f"连接到服务器成功: {self.server_config.host}:{self.server_config.port}")
-            self.logger.info(f"NRL_Link Client Beta V1.2")
+            self.logger.info(f"NRL_Link Client Beta V1.3")
             self.logger.info(f"------------------------------------")
             self.logger.info(f"N     N  RRRRRR   L      ")
             self.logger.info(f"N N   N  R     R  L      ")

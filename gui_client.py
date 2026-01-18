@@ -16,8 +16,8 @@ class NRLGUIClient:
     
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("NRLLink_Client Beta V1.2 - 无线电网络互联")
-        self.root.geometry("800x700")
+        self.root.title("NRLLink_Client Beta V1.3 - 无线电网络互联")
+        self.root.geometry("850x650")
         
         # 客户端
         self.client = None
@@ -254,10 +254,27 @@ class NRLGUIClient:
         # 分隔符
         ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
         
+        # 数据包统计
+        ttk.Label(bottom_frame, text="包数:").pack(side=tk.LEFT, padx=(10, 2))
+        self.packet_count_label = ttk.Label(bottom_frame, text="↑0 ↓0", font=('Arial', 9))
+        self.packet_count_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
         # 当前时间
         ttk.Label(bottom_frame, text="时间:").pack(side=tk.LEFT, padx=(10, 2))
         self.current_time_label = ttk.Label(bottom_frame, text="--:--:--", font=('Arial', 9))
         self.current_time_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
+        # 调试模式状态
+        ttk.Label(bottom_frame, text="调试:").pack(side=tk.LEFT, padx=(10, 2))
+        self.debug_status_label = ttk.Label(bottom_frame, text="关闭", font=('Arial', 9),
+                                            foreground="gray")
+        self.debug_status_label.pack(side=tk.LEFT, padx=(0, 20))
         
         # 分隔符
         ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
@@ -336,6 +353,8 @@ class NRLGUIClient:
             self.connection_status.set("未连接")
             self.callsign_ssid_label.config(text="未连接")
             self.server_ip_label.config(text="未连接")
+            self.packet_count_label.config(text="↑0 ↓0")
+            self.debug_status_label.config(text="关闭", foreground="gray")
             self.bottom_connection_status.config(text="离线", foreground="red")
             self.connect_button.config(state=tk.NORMAL)
             self.disconnect_button.config(state=tk.DISABLED)
@@ -450,6 +469,16 @@ class NRLGUIClient:
                     else:
                         self.server_ip_label.config(text="未连接")
                         self.bottom_connection_status.config(text="离线", foreground="red")
+                    
+                    # 更新数据包统计（发送↑ 接收↓）
+                    packets_sent = device_info.get('status', {}).get('packets_sent', 0)
+                    packets_received = device_info.get('status', {}).get('packets_received', 0)
+                    self.packet_count_label.config(text=f"↑{packets_sent} ↓{packets_received}")
+                    
+                    # 更新调试模式状态
+                    debug_status = "启用" if self.client.debug_force_decode else "关闭"
+                    debug_color = "green" if self.client.debug_force_decode else "gray"
+                    self.debug_status_label.config(text=debug_status, foreground=debug_color)
                     
                     # 更新当前时间
                     current_time = time.strftime('%H:%M:%S')
@@ -590,6 +619,9 @@ SSID: {device_info.get('ssid', '未知')}
 CPUID: {device_info.get('cpuid', '未知')}
 型号: {device_info.get('model', '未知')}
 在线状态: {'在线' if device_info.get('online') else '离线'}
+注意：设备配置从本地配置文件加载
+如要修改请编辑config.yaml文件
+请务必保持语法正确
         """
         
         messagebox.showinfo("设备配置", config_text.strip())
@@ -632,7 +664,7 @@ CPUID: {device_info.get('cpuid', '未知')}
         """显示关于信息"""
         about_text = """
 NRLLink_Client Demo
-版本: Beta V1.2
+版本: Beta V3
 
 基于nrllink项目开发的Python客户端
 支持功能:
