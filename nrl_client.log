@@ -280,3 +280,166 @@
 2026-01-18 20:24:24,596 - audio_handler - WARNING - 没有在播放
 2026-01-18 20:24:24,596 - audio_handler - INFO - 音频处理已关闭
 2026-01-18 20:24:24,596 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:25:28,946 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:25:29,007 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:25:29,011 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:25:29,219 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:26:03,491 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:26:03,492 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:26:03,492 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:26:03,492 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:26:03,492 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:26:03,492 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:26:03,492 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:26:03,493 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:26:03,493 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:26:03,494 - nrl_client - INFO - 已加载 2 个服务器配置，当前使用: 主服务器
+2026-01-18 20:26:03,494 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:26:03,617 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:26:08,398 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:26:08,399 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:26:08,399 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:26:08,400 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:26:08,400 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:26:08,402 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:26:08,402 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:26:08,403 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:26:08,403 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:26:08,406 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:26:08,406 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:26:08,500 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:26:18,073 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:26:18,075 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:26:18,075 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:26:18,076 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:26:18,077 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:26:18,077 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:26:18,078 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:26:18,079 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:26:18,080 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:33:52,475 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:33:52,544 - nrl_client - ERROR - 加载配置失败: [Errno 2] No such file or directory: 'config.yaml'
+2026-01-18 20:34:09,508 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:34:09,573 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:34:09,576 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:34:09,767 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:34:23,745 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:34:23,746 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:34:23,746 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:34:23,746 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:34:23,747 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:34:23,747 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:34:23,747 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:34:23,747 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:34:23,747 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:37:46,469 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:37:46,534 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:37:46,537 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:37:46,726 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:37:54,999 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:37:54,999 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:37:54,999 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:37:54,999 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:37:55,000 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:37:55,001 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:37:55,001 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:37:55,001 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:37:55,001 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:38:57,104 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:38:57,292 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:38:57,303 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:38:57,518 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:39:09,334 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 20:39:09,335 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 20:39:09,336 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 20:39:09,336 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:39:09,336 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 20:39:09,337 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 20:39:09,337 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 20:39:09,337 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 20:39:09,337 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 20:39:09,337 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:39:09,337 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 20:39:09,340 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 20:39:09,341 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 20:39:09,341 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:39:09,352 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 20:39:34,767 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:39:34,769 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:39:34,771 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:39:34,772 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:39:34,773 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:39:34,774 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:39:34,775 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:39:34,775 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:39:34,777 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:39:36,577 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:39:36,642 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:39:36,645 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:39:36,872 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:39:38,648 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 20:39:38,649 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 20:39:38,650 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 20:39:38,650 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:39:38,650 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 20:39:38,650 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 20:39:38,650 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 20:39:38,650 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 20:39:38,651 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 20:39:38,653 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:39:38,653 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 20:39:38,654 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 20:39:38,654 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 20:39:38,655 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:39:40,668 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 20:39:45,870 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:39:45,871 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:39:45,872 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:39:45,872 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:39:45,873 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:39:45,874 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:39:45,874 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:39:45,875 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:39:45,875 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:39:58,361 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:39:58,430 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:39:58,433 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:39:58,591 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:40:06,967 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:40:06,968 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:40:06,968 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:40:06,969 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:40:06,969 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:40:06,969 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:40:06,969 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:40:06,970 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:40:06,970 - nrl_client - INFO - NRL客户端已关闭
+2026-01-18 20:46:14,519 - __main__ - INFO - 启动NRL客户端 (GUI模式)
+2026-01-18 20:46:14,586 - nrl_client - INFO - 已加载 4 个服务器配置，当前使用: 安徽NRL服务器
+2026-01-18 20:46:14,589 - nrl_client - INFO - 配置加载成功
+2026-01-18 20:46:14,735 - nrl_client - INFO - 音频处理初始化成功
+2026-01-18 20:46:17,492 - nrl_client - INFO - 已发送初始连接包到 43.143.14.24:60050
+2026-01-18 20:46:17,494 - nrl_client - INFO - 连接到服务器成功: 43.143.14.24:60050
+2026-01-18 20:46:17,494 - nrl_client - INFO - NRL_Link Client Beta V1.3
+2026-01-18 20:46:17,494 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:46:17,494 - nrl_client - INFO - N     N  RRRRRR   L      
+2026-01-18 20:46:17,495 - nrl_client - INFO - N N   N  R     R  L      
+2026-01-18 20:46:17,495 - nrl_client - INFO - N  N  N  RRRRRR   L      
+2026-01-18 20:46:17,495 - nrl_client - INFO - N   N N  R   R    L      
+2026-01-18 20:46:17,495 - nrl_client - INFO - N     N  R     R  LLLLLL 
+2026-01-18 20:46:17,496 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:46:17,496 - nrl_client - INFO - 欢迎使用NRL客户端,本客户端目前为测试版本
+2026-01-18 20:46:17,497 - nrl_client - INFO - 当前连接到服务器的设备呼号: BH6ERO
+2026-01-18 20:46:17,497 - nrl_client - INFO - 当前连接到服务器的设备SSID: 1
+2026-01-18 20:46:17,498 - nrl_client - INFO - ------------------------------------
+2026-01-18 20:46:17,509 - nrl_client - INFO - 收到未知类型数据包: type=11
+2026-01-18 20:47:54,014 - audio_handler - INFO - 输入设备已设置为:  (Realtek(R) Audio)
+2026-01-18 20:48:11,298 - nrl_client - INFO - 正在关闭NRL客户端...
+2026-01-18 20:48:11,299 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:48:11,300 - nrl_client - INFO - 语音传输已停止
+2026-01-18 20:48:11,300 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:48:11,302 - nrl_client - INFO - 已断开服务器连接
+2026-01-18 20:48:11,302 - audio_handler - WARNING - 没有在录音
+2026-01-18 20:48:11,303 - audio_handler - WARNING - 没有在播放
+2026-01-18 20:48:11,304 - audio_handler - INFO - 音频处理已关闭
+2026-01-18 20:48:11,307 - nrl_client - INFO - NRL客户端已关闭

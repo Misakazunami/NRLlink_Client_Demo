@@ -264,10 +264,10 @@ class NRLGUIClient:
         # 分隔符
         ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
         
-        # 服务器IP
+        # 服务器名称
         ttk.Label(bottom_frame, text="服务器:").pack(side=tk.LEFT, padx=(10, 2))
-        self.server_ip_label = ttk.Label(bottom_frame, text="未连接", font=('Arial', 9))
-        self.server_ip_label.pack(side=tk.LEFT, padx=(0, 20))
+        self.server_name_label = ttk.Label(bottom_frame, text="未连接", font=('Arial', 9))
+        self.server_name_label.pack(side=tk.LEFT, padx=(0, 20))
         
         # 分隔符
         ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
@@ -293,6 +293,14 @@ class NRLGUIClient:
         self.debug_status_label = ttk.Label(bottom_frame, text="关闭", font=('Arial', 9),
                                             foreground="gray")
         self.debug_status_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
+        # 当前配置文件
+        ttk.Label(bottom_frame, text="配置:").pack(side=tk.LEFT, padx=(10, 2))
+        self.config_file_label = ttk.Label(bottom_frame, text="config.yaml", font=('Arial', 9))
+        self.config_file_label.pack(side=tk.LEFT, padx=(0, 20))
         
         # 分隔符
         ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
@@ -377,7 +385,7 @@ class NRLGUIClient:
             
             self.connection_status.set("未连接")
             self.callsign_ssid_label.config(text="未连接")
-            self.server_ip_label.config(text="未连接")
+            self.server_name_label.config(text="未连接")
             self.packet_count_label.config(text="↑0 ↓0")
             self.debug_status_label.config(text="关闭", foreground="gray")
             self.bottom_connection_status.config(text="离线", foreground="red")
@@ -486,13 +494,19 @@ class NRLGUIClient:
                     # 更新底部状态栏：呼号和SSID
                     self.callsign_ssid_label.config(text=f"{callsign}-{ssid}")
                     
-                    # 更新底部状态栏：服务器IP和端口
+                    # 更新底部状态栏：服务器名称
                     if status.get('connected'):
-                        server_info = status.get('server', 'N/A')
-                        self.server_ip_label.config(text=server_info)
+                        # 获取当前选择的服务器名称
+                        current_server_name = "未知服务器"
+                        selected_server = self.current_server_var.get()
+                        if selected_server and '(' in selected_server:
+                            # 从 "服务器名称 (IP:端口)" 格式中提取服务器名称
+                            current_server_name = selected_server.split('(')[0].strip()
+                        
+                        self.server_name_label.config(text=current_server_name)
                         self.bottom_connection_status.config(text="在线", foreground="green")
                     else:
-                        self.server_ip_label.config(text="未连接")
+                        self.server_name_label.config(text="未连接")
                         self.bottom_connection_status.config(text="离线", foreground="red")
                     
                     # 更新数据包统计（发送↑ 接收↓）
@@ -782,6 +796,9 @@ CPUID: {device_info.get('cpuid', '未知')}
                         # 更新最近使用菜单
                         self.update_recent_configs_menu()
                         
+                        # 更新配置显示
+                        self.update_config_display()
+                        
                         new_config_window.destroy()
                         
                         # 询问是否加载新配置
@@ -870,6 +887,9 @@ CPUID: {device_info.get('cpuid', '未知')}
             
             # 刷新音频设备列表
             self.refresh_audio_devices()
+            
+            # 更新配置显示
+            self.update_config_display()
             
             self.log_message(f"配置加载成功: {filename}")
             messagebox.showinfo("成功", f"配置已成功加载:\n{filename}")
@@ -969,6 +989,13 @@ NRLLink_Client Demo
         if self.config_history:
             self.recent_configs_menu.add_separator()
             self.recent_configs_menu.add_command(label="清除历史记录", command=self.clear_config_history)
+    
+    def update_config_display(self):
+        """更新配置信息显示"""
+        config_file = self.current_config_file.get()
+        filename = os.path.basename(config_file)
+        self.config_file_label.config(text=filename)
+        self.log_message(f"当前配置文件: {filename}")
     
     def clear_config_history(self):
         """清除配置历史记录"""
@@ -1167,6 +1194,9 @@ NRLLink_Client Demo
         
         self.log_message("NRL客户端已启动")
         self.log_message("请先连接到服务器开始使用")
+        
+        # 初始化配置显示
+        self.update_config_display()
         
         self.root.mainloop()
     
