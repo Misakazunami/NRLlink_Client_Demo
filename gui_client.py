@@ -35,6 +35,10 @@ class NRLGUIClient:
         self.audio_level = tk.DoubleVar(value=0.0)
         self.ptt_active = tk.BooleanVar(value=False)
         
+        # 服务器列表
+        self.servers_list = []
+        self.current_server_var = tk.StringVar(value="")
+        
         # 日志
         self.setup_logging()
         
@@ -117,39 +121,46 @@ class NRLGUIClient:
         self.control_frame = ttk.LabelFrame(self.main_frame, text="控制", padding="5")
         self.control_frame.grid(row=1, column=0, sticky=(tk.W, tk.E), pady=(0, 10))
         
+        # 服务器选择
+        ttk.Label(self.control_frame, text="服务器:").grid(row=0, column=0, sticky=tk.W)
+        self.server_combo = ttk.Combobox(self.control_frame, textvariable=self.current_server_var,
+                                         state="readonly", width=20)
+        self.server_combo.grid(row=0, column=1, padx=(5, 10))
+        self.server_combo.bind('<<ComboboxSelected>>', self.on_server_changed)
+        
         # 连接控制
         self.connect_button = ttk.Button(self.control_frame, text="连接", 
                                        command=self.connect_to_server)
-        self.connect_button.grid(row=0, column=0, padx=(0, 10))
+        self.connect_button.grid(row=0, column=2, padx=(0, 10))
         
         self.disconnect_button = ttk.Button(self.control_frame, text="断开", 
                                             command=self.disconnect_from_server,
                                             state=tk.DISABLED)
-        self.disconnect_button.grid(row=0, column=1, padx=(0, 10))
+        self.disconnect_button.grid(row=0, column=3, padx=(0, 10))
         
         # 设备配置
         ttk.Button(self.control_frame, text="设备配置", 
-                  command=self.show_device_config).grid(row=0, column=2, padx=(0, 10))
+                  command=self.show_device_config).grid(row=0, column=4, padx=(0, 10))
         
         # 测试功能
         ttk.Button(self.control_frame, text="测试音频设备", 
-                  command=self.test_audio_devices).grid(row=0, column=3, padx=(0, 10))
+                  command=self.test_audio_devices).grid(row=0, column=5, padx=(0, 10))
         
         # 调试模式：强制解码空包
         self.debug_force_decode_var = tk.BooleanVar(value=False)
         self.debug_button = ttk.Button(self.control_frame, text="[调试]强制解码空包", 
                                        command=self.toggle_debug_force_decode)
-        self.debug_button.grid(row=0, column=4, padx=(0, 10))
+        self.debug_button.grid(row=0, column=6, padx=(0, 10))
         
         # 发送文本消息
         ttk.Label(self.control_frame, text="消息:").grid(row=1, column=0, sticky=tk.W, pady=(10, 0))
         self.message_entry = ttk.Entry(self.control_frame, width=40)
-        self.message_entry.grid(row=1, column=1, columnspan=2, sticky=(tk.W, tk.E), pady=(10, 0))
+        self.message_entry.grid(row=1, column=1, columnspan=4, sticky=(tk.W, tk.E), pady=(10, 0))
         
         self.send_message_button = ttk.Button(self.control_frame, text="发送", 
                                             command=self.send_text_message,
                                             state=tk.DISABLED)
-        self.send_message_button.grid(row=1, column=3, padx=(10, 0), pady=(10, 0))
+        self.send_message_button.grid(row=1, column=5, padx=(10, 0), pady=(10, 0))
     
     def create_audio_frame(self):
         """创建音频控制面板"""
@@ -696,10 +707,92 @@ NRLLink_Client Demo
         style = ttk.Style()
         style.configure("PTT.TButton", font=('Arial', 12, 'bold'))
         
+        # 初始化客户端并加载服务器列表
+        try:
+            self.client = NRLClient()
+            self.refresh_servers_list()
+        except Exception as e:
+            messagebox.showerror("初始化错误", f"客户端初始化失败: {str(e)}")
+            self.log_message(f"客户端初始化失败: {str(e)}")
+        
         self.log_message("NRL客户端已启动")
         self.log_message("请先连接到服务器开始使用")
         
         self.root.mainloop()
+    
+    def refresh_servers_list(self):
+        """刷新服务器列表"""
+        try:
+            if not self.client:
+                self.client = NRLClient()
+            
+            # 获取服务器列表
+            servers = self.client.get_servers_list()
+            self.servers_list = servers
+            
+            # 更新下拉框
+            server_names = [f"{server.name} ({server.host}:{server.port})" for server in servers]
+            self.server_combo['values'] = server_names
+            
+            # 设置当前选择的服务器
+            current_server = self.client.get_current_server_info()
+            if current_server:
+                current_name = f"{current_server.name} ({current_server.host}:{current_server.port})"
+                if current_name in server_names:
+                    self.current_server_var.set(current_name)
+                else:
+                    self.current_server_var.set(server_names[0] if server_names else "")
+            else:
+                self.current_server_var.set(server_names[0] if server_names else "")
+                
+            self.log_message(f"已加载 {len(servers)} 个服务器")
+            
+        except Exception as e:
+            self.log_message(f"刷新服务器列表失败: {str(e)}")
+            messagebox.showerror("错误", f"刷新服务器列表失败: {str(e)}")
+    
+    def on_server_changed(self, event):
+        """服务器选择改变事件"""
+        try:
+            if not self.client:
+                return
+            
+            # 获取选中的服务器索引
+            selected_name = self.current_server_var.get()
+            selected_index = -1
+            
+            for i, server in enumerate(self.servers_list):
+                server_name = f"{server.name} ({server.host}:{server.port})"
+                if server_name == selected_name:
+                    selected_index = i
+                    break
+            
+            if selected_index >= 0:
+                # 检查是否已连接
+                if self.client.is_connected:
+                    # 询问用户是否断开当前连接并切换服务器
+                    server = self.servers_list[selected_index]
+                    result = messagebox.askyesno(
+                        "切换服务器",
+                        f"当前已连接到服务器，是否要断开当前连接并切换到 {server.name}？"
+                    )
+                    if not result:
+                        # 用户取消，恢复原选择
+                        self.refresh_servers_list()
+                        return
+                
+                # 切换服务器
+                if self.client.switch_server(selected_index):
+                    server = self.servers_list[selected_index]
+                    self.log_message(f"已切换到服务器: {server.name} ({server.host}:{server.port})")
+                else:
+                    messagebox.showerror("切换失败", "服务器切换失败")
+                    self.refresh_servers_list()
+            
+        except Exception as e:
+            self.log_message(f"服务器切换失败: {str(e)}")
+            messagebox.showerror("错误", f"服务器切换失败: {str(e)}")
+            self.refresh_servers_list()
 
 
 class GUILogHandler(logging.Handler):

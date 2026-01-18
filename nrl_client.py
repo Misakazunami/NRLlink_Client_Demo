@@ -30,6 +30,13 @@ class ServerConfig:
     port: int
 
 @dataclass
+class ServerInfo:
+    """服务器信息"""
+    name: str
+    host: str
+    port: int
+
+@dataclass
 class AudioConfig:
     """音频配置"""
     sample_rate: int
@@ -54,6 +61,10 @@ class NRLClient:
         self.server_config: Optional[ServerConfig] = None
         self.audio_config: Optional[AudioConfig] = None
         self.network_config: Optional[NetworkConfig] = None
+        
+        # 服务器列表
+        self.servers_list: list[ServerInfo] = []
+        self.current_server_index: int = 0
         
         # 网络
         self.socket = None
@@ -115,6 +126,42 @@ class NRLClient:
                 host=server_cfg.get('host', '43.143.14.24'),
                 port=server_cfg.get('port', 60050)
             )
+            
+            # 加载服务器列表
+            servers_cfg = config_data.get('servers', [])
+            current_server_idx = config_data.get('current_server', 0)
+            
+            if servers_cfg:
+                self.servers_list = []
+                for server in servers_cfg:
+                    server_info = ServerInfo(
+                        name=server.get('name', f"服务器{len(self.servers_list) + 1}"),
+                        host=server.get('host', '127.0.0.1'),
+                        port=server.get('port', 60050)
+                    )
+                    self.servers_list.append(server_info)
+                
+                # 设置当前服务器索引
+                if 0 <= current_server_idx < len(self.servers_list):
+                    self.current_server_index = current_server_idx
+                else:
+                    self.current_server_index = 0
+                
+                # 使用当前选择的服务器配置
+                if self.servers_list:
+                    current_server = self.servers_list[self.current_server_index]
+                    self.server_config.host = current_server.host
+                    self.server_config.port = current_server.port
+                    
+                self.logger.info(f"已加载 {len(self.servers_list)} 个服务器配置，当前使用: {self.servers_list[self.current_server_index].name if self.servers_list else '无'}")
+            else:
+                # 如果没有服务器列表，使用单个服务器配置
+                self.servers_list = [ServerInfo(
+                    name="默认服务器",
+                    host=self.server_config.host,
+                    port=self.server_config.port
+                )]
+                self.current_server_index = 0
             
             # 音频配置
             audio_cfg = config_data.get('audio', {})
@@ -797,3 +844,57 @@ class NRLClient:
             self.audio_handler.close()
         
         self.logger.info("NRL客户端已关闭")
+    
+    def get_servers_list(self) -> list[ServerInfo]:
+        """获取服务器列表"""
+        return self.servers_list.copy()
+    
+    def get_current_server_info(self) -> Optional[ServerInfo]:
+        """获取当前服务器信息"""
+        if 0 <= self.current_server_index < len(self.servers_list):
+            return self.servers_list[self.current_server_index]
+        return None
+    
+    def switch_server(self, server_index: int) -> bool:
+        """切换服务器
+        
+        Args:
+            server_index: 服务器索引
+            
+        Returns:
+            True: 切换成功，False: 切换失败
+        """
+        try:
+            if not (0 <= server_index < len(self.servers_list)):
+                self.logger.error(f"无效的服务器索引: {server_index}")
+                return False
+            
+            # 如果正在连接，先断开
+            was_connected = self.is_connected
+            if was_connected:
+                self.logger.info("正在断开当前连接...")
+                self.disconnect()
+                time.sleep(0.5)  # 等待断开完成
+            
+            # 切换服务器
+            old_server = self.servers_list[self.current_server_index]
+            self.current_server_index = server_index
+            new_server = self.servers_list[self.current_server_index]
+            
+            # 更新服务器配置
+            self.server_config.host = new_server.host
+            self.server_config.port = new_server.port
+            
+            self.logger.info(f"服务器已切换: {old_server.name} -> {new_server.name}")
+            self.logger.info(f"新服务器地址: {new_server.host}:{new_server.port}")
+            
+            # 如果之前是连接状态，尝试重新连接
+            if was_connected:
+                self.logger.info("正在重新连接新服务器...")
+                return self.connect()
+            
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"切换服务器失败: {e}")
+            return False
