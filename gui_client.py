@@ -8,7 +8,7 @@ import threading
 import time
 import logging
 import os
-import yaml
+import yaml #type: ignore
 import shutil
 from typing import Dict, Any, Optional
 
