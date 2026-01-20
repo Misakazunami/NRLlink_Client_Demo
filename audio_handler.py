@@ -3,10 +3,10 @@
 处理麦克风输入和扬声器输出，以及G.711编解码
 """
 import threading
-import numpy as np
+import numpy as np #type:ignore
 import logging
 import time
-import pyaudio
+import pyaudio #type:ignore
 from typing import Optional, Callable, Dict
 from collections import deque
 from nrl_protocol import G711Codec
