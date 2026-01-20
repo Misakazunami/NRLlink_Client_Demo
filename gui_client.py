@@ -141,14 +141,6 @@ class NRLGUIClient:
                                             state=tk.DISABLED)
         self.disconnect_button.grid(row=0, column=3, padx=(0, 10))
         
-        # 设备配置
-        ttk.Button(self.control_frame, text="设备配置", 
-                  command=self.show_device_config).grid(row=0, column=4, padx=(0, 10))
-        
-        # 测试功能
-        ttk.Button(self.control_frame, text="测试音频设备", 
-                  command=self.test_audio_devices).grid(row=0, column=5, padx=(0, 10))
-        
         # 调试模式变量（菜单中控制）
         self.debug_force_decode_var = tk.BooleanVar(value=False)
         
@@ -324,10 +316,14 @@ class NRLGUIClient:
         self.tools_menu.add_command(label="网络测试", command=self.test_network)
         self.tools_menu.add_separator()
         # 调试开关：强制解码空包（在菜单中控制）
-        self.tools_menu.add_checkbutton(label="强制解码空包", 
+        self.tools_menu.add_checkbutton(label="[调试]强制解码空包", 
                         variable=self.debug_force_decode_var,
                         onvalue=True, offvalue=False,
                         command=self.menu_toggle_debug)
+        #配置菜单
+        self.config_menu = tk.Menu(self.tools_menu, tearoff=0)
+        menubar.add_cascade(label="配置", menu=self.config_menu)
+        self.config_menu.add_command(label="配置总览", command=self.show_device_config)
         
         # 帮助菜单
         help_menu = tk.Menu(menubar, tearoff=0)
