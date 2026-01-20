@@ -19,7 +19,7 @@ class NRLGUIClient:
     
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("NRLLink_Client Beta V1.3 - 无线电网络互联")
+        self.root.title("NRLLink_Client Beta V1.3.3 - 无线电网络互联")
         self.root.geometry("850x650")
         
         # 客户端
@@ -117,13 +117,7 @@ class NRLGUIClient:
         # 设备信息
         ttk.Label(self.status_frame, text="设备信息:").grid(row=0, column=2, sticky=tk.W)
         device_label = ttk.Label(self.status_frame, textvariable=self.device_info)
-        device_label.grid(row=0, column=3, sticky=tk.W, padx=(5, 20))
-        
-        # 音频级别
-        ttk.Label(self.status_frame, text="音频级别:").grid(row=0, column=4, sticky=tk.W)
-        self.audio_level_bar = ttk.Progressbar(self.status_frame, variable=self.audio_level, 
-                                             maximum=1.0, length=100)
-        self.audio_level_bar.grid(row=0, column=5, sticky=tk.W, padx=(5, 0))
+        device_label.grid(row=0, column=3, sticky=tk.W, padx=(5, 0))
     
     def create_control_frame(self):
         """创建控制面板"""
@@ -212,11 +206,6 @@ class NRLGUIClient:
         self.play_toggle_button = ttk.Button(self.audio_frame, text="开始播放", 
                             command=self.toggle_playback)
         self.play_toggle_button.grid(row=1, column=2, padx=(0, 10))
-        
-        # 音频级别显示
-        ttk.Label(self.audio_frame, text="录音级别:").grid(row=2, column=0, sticky=tk.W, pady=(10, 0))
-        self.record_level_bar = ttk.Progressbar(self.audio_frame, maximum=1.0, length=200)
-        self.record_level_bar.grid(row=2, column=1, columnspan=2, sticky=(tk.W, tk.E), pady=(10, 0))
     
     def create_log_frame(self):
         """创建日志区域"""
@@ -370,6 +359,14 @@ class NRLGUIClient:
                 
                 # 开始状态更新
                 self.start_status_update()
+                
+                # 连接成功后刷新音频设备
+                if self.client and self.client.audio_handler:
+                    try:
+                        self.refresh_audio_devices()
+                        self.log_message("音频设备已刷新")
+                    except Exception as e:
+                        self.log_message(f"刷新音频设备失败: {str(e)}")
                 
                 self.log_message("连接到服务器成功")
             else:
@@ -999,7 +996,7 @@ CPUID: {device_info.get('cpuid', '未知')}
         """显示关于信息"""
         about_text = """
 NRLLink_Client Demo
-版本: Beta V1.3
+版本: Beta V1.3.3
 
 基于nrllink项目开发的Python客户端
 支持功能:
