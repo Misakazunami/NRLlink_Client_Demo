@@ -37,6 +37,8 @@ class NRLGUIClient:
         self.device_info = tk.StringVar(value="设备信息")
         self.audio_level = tk.DoubleVar(value=0.0)
         self.ptt_active = tk.BooleanVar(value=False)
+        # 播放状态
+        self.is_playing = False
         
         # 服务器列表
         self.servers_list = []
@@ -153,11 +155,8 @@ class NRLGUIClient:
         ttk.Button(self.control_frame, text="测试音频设备", 
                   command=self.test_audio_devices).grid(row=0, column=5, padx=(0, 10))
         
-        # 调试模式：强制解码空包
+        # 调试模式变量（菜单中控制）
         self.debug_force_decode_var = tk.BooleanVar(value=False)
-        self.debug_button = ttk.Button(self.control_frame, text="[调试]强制解码空包", 
-                                       command=self.toggle_debug_force_decode)
-        self.debug_button.grid(row=0, column=6, padx=(0, 10))
         
         # 发送文本消息
         ttk.Label(self.control_frame, text="消息:").grid(row=1, column=0, sticky=tk.W, pady=(10, 0))
@@ -209,12 +208,10 @@ class NRLGUIClient:
                                         font=('Arial', 10, 'bold'))
         self.ptt_status_label.grid(row=1, column=1, padx=(0, 20))
         
-        # 音频控制按钮
-        ttk.Button(self.audio_frame, text="开始播放", 
-                  command=self.start_playback).grid(row=1, column=2, padx=(0, 10))
-        
-        ttk.Button(self.audio_frame, text="停止播放", 
-                  command=self.stop_playback).grid(row=1, column=3, padx=(0, 10))
+        # 音频控制按钮（单个切换按钮）
+        self.play_toggle_button = ttk.Button(self.audio_frame, text="开始播放", 
+                            command=self.toggle_playback)
+        self.play_toggle_button.grid(row=1, column=2, padx=(0, 10))
         
         # 音频级别显示
         ttk.Label(self.audio_frame, text="录音级别:").grid(row=2, column=0, sticky=tk.W, pady=(10, 0))
@@ -331,11 +328,17 @@ class NRLGUIClient:
         file_menu.add_separator()
         file_menu.add_command(label="退出", command=self.on_closing)
         
-        # 工具菜单
-        tools_menu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="工具", menu=tools_menu)
-        tools_menu.add_command(label="音频设备测试", command=self.test_audio_devices)
-        tools_menu.add_command(label="网络测试", command=self.test_network)
+        # 工具菜单（包含调试开关）
+        self.tools_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="工具", menu=self.tools_menu)
+        self.tools_menu.add_command(label="音频设备测试", command=self.test_audio_devices)
+        self.tools_menu.add_command(label="网络测试", command=self.test_network)
+        self.tools_menu.add_separator()
+        # 调试开关：强制解码空包（在菜单中控制）
+        self.tools_menu.add_checkbutton(label="强制解码空包", 
+                        variable=self.debug_force_decode_var,
+                        onvalue=True, offvalue=False,
+                        command=self.menu_toggle_debug)
         
         # 帮助菜单
         help_menu = tk.Menu(menubar, tearoff=0)
@@ -518,6 +521,11 @@ class NRLGUIClient:
                     debug_status = "启用" if self.client.debug_force_decode else "关闭"
                     debug_color = "green" if self.client.debug_force_decode else "gray"
                     self.debug_status_label.config(text=debug_status, foreground=debug_color)
+                    # 同步菜单中的调试变量
+                    try:
+                        self.debug_force_decode_var.set(bool(self.client.debug_force_decode))
+                    except Exception:
+                        pass
                     
                     # 更新当前时间
                     current_time = time.strftime('%H:%M:%S')
@@ -929,15 +937,63 @@ CPUID: {device_info.get('cpuid', '未知')}
         if not self.client:
             messagebox.showwarning("未连接", "请先连接到服务器")
             return
-        
-        current_state = self.client.debug_force_decode
+        current_state = getattr(self.client, 'debug_force_decode', False)
         new_state = not current_state
-        
+
         self.client.enable_debug_force_decode(new_state)
-        
+
         status = "已启用" if new_state else "已禁用"
         self.log_message(f"[调试] 强制解码空包 {status}")
-        self.debug_button.config(text=f"[调试]强制解码空包 ({status})")
+        # 同步菜单变量（如果存在）
+        try:
+            self.debug_force_decode_var.set(bool(new_state))
+        except Exception:
+            pass
+
+    def menu_toggle_debug(self):
+        """由菜单触发的调试切换（使用菜单变量为准）"""
+        if not self.client:
+            messagebox.showwarning("未连接", "请先连接到服务器")
+            # 恢复菜单变量为False以防误导
+            try:
+                self.debug_force_decode_var.set(False)
+            except Exception:
+                pass
+            return
+
+        new_state = bool(self.debug_force_decode_var.get())
+        try:
+            self.client.enable_debug_force_decode(new_state)
+            status = "已启用" if new_state else "已禁用"
+            self.log_message(f"[调试] 强制解码空包 {status}")
+        except Exception as e:
+            messagebox.showerror("调试切换错误", f"设置调试模式失败: {str(e)}")
+            # 恢复变量到真实状态
+            try:
+                self.debug_force_decode_var.set(bool(getattr(self.client, 'debug_force_decode', False)))
+            except Exception:
+                pass
+
+    def toggle_playback(self):
+        """切换播放状态：开始或停止播放"""
+        if not self.client or not getattr(self.client, 'audio_handler', None):
+            messagebox.showwarning("未初始化", "音频处理器未初始化")
+            return
+
+        if not self.is_playing:
+            try:
+                self.start_playback()
+                self.is_playing = True
+                self.play_toggle_button.config(text="停止播放")
+            except Exception as e:
+                messagebox.showerror("播放错误", f"开始播放失败: {str(e)}")
+        else:
+            try:
+                self.stop_playback()
+                self.is_playing = False
+                self.play_toggle_button.config(text="开始播放")
+            except Exception as e:
+                messagebox.showerror("播放错误", f"停止播放失败: {str(e)}")
     
     def show_about(self):
         """显示关于信息"""
