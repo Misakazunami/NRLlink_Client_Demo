@@ -59,6 +59,8 @@ def main():
                        help='测试音频设备并退出')
     parser.add_argument('--list-audio', action='store_true',
                        help='列出音频设备并退出')
+    parser.add_argument('--enable-cpuid-calc', action='store_true',
+                       help='启用CPUID计算（默认关闭，直接使用配置文件中的CPUID）')
     
     args = parser.parse_args()
     
@@ -90,7 +92,7 @@ def main():
                 from gui_client import NRLGUIClient
                 
                 logger.info("启动NRL客户端 (GUI模式)")
-                app = NRLGUIClient()
+                app = NRLGUIClient(enable_cpuid_calc=args.enable_cpuid_calc)
                 app.run()
                 
             except ImportError as e:
@@ -105,7 +107,7 @@ def main():
             logger.info("启动NRL客户端 (命令行模式)")
             
             # 创建客户端
-            client = NRLClient(args.config)
+            client = NRLClient(args.config, enable_cpuid_calc=args.enable_cpuid_calc)
             
             # 简单的命令行界面
             print("\nNRL客户端命令行界面")

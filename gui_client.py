@@ -17,10 +17,13 @@ from nrl_client import NRLClient
 class NRLGUIClient:
     """NRL客户端GUI类"""
     
-    def __init__(self):
+    def __init__(self, enable_cpuid_calc: bool = False):
         self.root = tk.Tk()
-        self.root.title("NRLLink_Client Beta V1.3.3 - 无线电网络互联")
+        self.root.title("NRLLink_Client Beta V1.3.4 - 无线电网络互联客户端")
         self.root.geometry("850x650")
+        
+        # CPUID计算开关
+        self.enable_cpuid_calc = tk.BooleanVar(value=enable_cpuid_calc)
         
         # 客户端
         self.client = None
@@ -315,6 +318,12 @@ class NRLGUIClient:
         self.tools_menu.add_command(label="音频设备测试", command=self.test_audio_devices)
         self.tools_menu.add_command(label="网络测试", command=self.test_network)
         self.tools_menu.add_separator()
+        # CPUID计算开关
+        self.tools_menu.add_checkbutton(label="启用CPUID计算", 
+                        variable=self.enable_cpuid_calc,
+                        onvalue=True, offvalue=False,
+                        command=self.menu_toggle_cpuid_calc)
+        self.tools_menu.add_separator()
         # 调试开关：强制解码空包（在菜单中控制）
         self.tools_menu.add_checkbutton(label="[调试]强制解码空包", 
                         variable=self.debug_force_decode_var,
@@ -340,7 +349,7 @@ class NRLGUIClient:
         """连接到服务器"""
         try:
             if not self.client:
-                self.client = NRLClient()
+                self.client = NRLClient(enable_cpuid_calc=self.enable_cpuid_calc.get())
                 
                 # 设置回调
                 self.client.set_message_callback(self.on_message_received)
@@ -860,8 +869,8 @@ CPUID: {device_info.get('cpuid', '未知')}
                 self.client.close()
                 self.client = None
             
-            # 创建新的NRLClient实例，使用新配置文件
-            self.client = NRLClient(config_file=filename)
+            # 创建新的NRLClient实例，使用新配置文件和当前的CPUID计算设置
+            self.client = NRLClient(config_file=filename, enable_cpuid_calc=self.enable_cpuid_calc.get())
             
             # 更新当前配置文件路径
             self.current_config_file.set(filename)
@@ -966,6 +975,19 @@ CPUID: {device_info.get('cpuid', '未知')}
                 self.debug_force_decode_var.set(bool(getattr(self.client, 'debug_force_decode', False)))
             except Exception:
                 pass
+    
+    def menu_toggle_cpuid_calc(self):
+        """菜单切换CPUID计算开关"""
+        enabled = self.enable_cpuid_calc.get()
+        if self.client:
+            self.client.enable_cpuid_calc = enabled
+            self.log_message(f"CPUID计算: {'启用' if enabled else '禁用'}")
+            if enabled:
+                self.log_message("注意：启用CPUID计算会增加计算量，但提高安全性")
+            else:
+                self.log_message("注意：禁用CPUID计算将直接使用配置文件中的CPUID值")
+        else:
+            self.log_message(f"CPUID计算: {'启用' if enabled else '禁用'} (将在下次连接时生效)")
 
     def toggle_playback(self):
         """切换播放状态：开始或停止播放"""
@@ -992,7 +1014,7 @@ CPUID: {device_info.get('cpuid', '未知')}
         """显示关于信息"""
         about_text = """
 NRLLink_Client Demo
-版本: Beta V1.3.3
+版本: Beta V1.3.4
 
 基于nrllink项目开发的Python客户端
 支持功能:
@@ -1001,10 +1023,11 @@ NRLLink_Client Demo
 - 语音通信 (G.711编解码)
 - 文本消息
 - 心跳维持
-- 音频设备管理
+- 音频设备选择
 
 作者: BH6ERO
 反馈: 3087040097@qq.com
+
 本程序为测试版本，不建议在正式环境中使用。
 如有问题，请联系作者。
         """

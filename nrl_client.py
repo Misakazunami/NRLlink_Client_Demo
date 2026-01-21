@@ -53,8 +53,11 @@ class NetworkConfig:
 class NRLClient:
     """NRL客户端的主类"""
     
-    def __init__(self, config_file: str = "config.yaml"):
+    def __init__(self, config_file: str = "config.yaml", enable_cpuid_calc: bool = False):
         self.logger = logging.getLogger(__name__)
+        
+        # CPUID计算开关
+        self.enable_cpuid_calc = enable_cpuid_calc
         
         # 配置
         self.device_config: Optional[DeviceConfig] = None
@@ -232,11 +235,16 @@ class NRLClient:
                 self.logger.warning("设置接收缓冲区失败，使用默认配置")
             
             # 发送初始包进行设备注册
-            # 使用设备配置
+            # 使用设备配置，根据CPUID计算开关决定是否计算CPUID
+            cpuid_to_use = self.device_config.cpuid
+            if self.enable_cpuid_calc:
+                # 如果启用CPUID计算，使用呼号+SSID计算CPUID
+                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
+            
             test_packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
                 self.device_config.ssid, 
-                self.device_config.cpuid, 
+                cpuid_to_use, 
                 self.device_config.model   
             )
             
@@ -262,13 +270,13 @@ class NRLClient:
             
             self._update_status('connected', True)
             self.logger.info(f"连接到服务器成功: {self.server_config.host}:{self.server_config.port}")
-            self.logger.info(f"NRL_Link Client Beta V1.3.3")
+            self.logger.info(f"NRL_Link Client Beta V1.3.4")
             self.logger.info(f"------------------------------------")
-            self.logger.info(f"N     N  RRRRRR   L      ")
-            self.logger.info(f"N N   N  R     R  L      ")
-            self.logger.info(f"N  N  N  RRRRRR   L      ")
-            self.logger.info(f"N   N N  R   R    L      ")
-            self.logger.info(f"N     N  R     R  LLLLLL ")
+            self.logger.info(f"N     N  RRRRRR   L           ")
+            self.logger.info(f"N N   N  R     R  L           ")
+            self.logger.info(f"N  N  N  RRRRRR   L           ")
+            self.logger.info(f"N   N N  R   R    L           ")
+            self.logger.info(f"N     N  R     R  LLLLLL  BETA")
             self.logger.info(f"------------------------------------")
             self.logger.info(f"欢迎使用NRL客户端,本客户端目前为测试版本")
             self.logger.info(f"当前连接到服务器的设备呼号: {self.device_config.callsign}")
@@ -662,11 +670,16 @@ class NRLClient:
                 self.logger.warning(f"语音数据超长（{len(voice_data)}字节），截断为500字节")
                 voice_data = voice_data[:500]
             
+            # 根据CPUID计算开关决定使用哪个CPUID
+            cpuid_to_use = self.device_config.cpuid
+            if self.enable_cpuid_calc:
+                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
+            
             # 创建语音数据包
             packet = self.protocol.create_voice_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,
-                self.device_config.cpuid,
+                cpuid_to_use,
                 voice_data,
                 self.device_config.model
             )
@@ -710,6 +723,11 @@ class NRLClient:
                 self.logger.warning("文本消息为空")
                 return False
             
+            # 根据CPUID计算开关决定使用哪个CPUID
+            cpuid_to_use = self.device_config.cpuid
+            if self.enable_cpuid_calc:
+                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
+            
             # 编码文本消息（UTF-8）
             text_bytes = message.encode('utf-8')
             
@@ -723,7 +741,7 @@ class NRLClient:
             packet = self.protocol.create_text_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,
-                self.device_config.cpuid,
+                cpuid_to_use,
                 text_bytes,
                 self.device_config.model
             )
@@ -757,11 +775,16 @@ class NRLClient:
             if not self.is_connected or not self.socket:
                 return False
             
-            # 创建心跳包
+            # 创建心跳包，根据CPUID计算开关决定是否计算CPUID
+            cpuid_to_use = self.device_config.cpuid
+            if self.enable_cpuid_calc:
+                # 如果启用CPUID计算，使用呼号+SSID计算CPUID
+                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
+            
             packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,  # 使用设备配置的SSID
-                self.device_config.cpuid,  # 使用配置的CPUID
+                cpuid_to_use,  # 使用配置的CPUID或计算值
                 self.device_config.model   # 设备模式
             )
             

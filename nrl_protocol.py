@@ -227,8 +227,16 @@ class NRLProtocol:
         
         # 根据协议规范，使用4字节CPUID哈希值
         if cpuid and isinstance(cpuid, str):
-            # 如果提供的是字符串，计算哈希值
-            cpuid_bytes = calculate_cpuid(cpuid)
+            # 如果提供的是字符串，检查是否需要计算哈希值
+            if len(cpuid) == 8 and all(c in '0123456789abcdefABCDEF' for c in cpuid):
+                # 8位十六进制字符串，直接转换为字节
+                cpuid_bytes = bytes.fromhex(cpuid)
+            elif '-' in cpuid:
+                # 呼号-SSID格式，计算哈希值
+                cpuid_bytes = calculate_cpuid(cpuid)
+            else:
+                # 其他字符串，计算哈希值
+                cpuid_bytes = calculate_cpuid(cpuid)
         else:
             # 否则假设已经是字节
             cpuid_bytes = cpuid.encode('utf-8').ljust(4, b'\x00')[:4] if isinstance(cpuid, str) else cpuid[:4]
@@ -272,9 +280,19 @@ class NRLProtocol:
             # 使用callsign-SSID生成哈希值（与Go版本一致）
             cpuid_bytes = calculate_cpuid(f"{callsign}-{ssid}")
         else:
-            # 如果提供了CPUID，计算其哈希值
+            # 如果提供了CPUID，检查是否需要计算哈希值
+            # 如果cpuid是8位十六进制字符串（如配置文件中的CPUID），直接使用
+            # 如果cpuid是呼号-SSID格式，计算哈希值
             if isinstance(cpuid, str):
-                cpuid_bytes = calculate_cpuid(cpuid)
+                if len(cpuid) == 8 and all(c in '0123456789abcdefABCDEF' for c in cpuid):
+                    # 8位十六进制字符串，直接转换为字节
+                    cpuid_bytes = bytes.fromhex(cpuid)
+                elif '-' in cpuid:
+                    # 呼号-SSID格式，计算哈希值
+                    cpuid_bytes = calculate_cpuid(cpuid)
+                else:
+                    # 其他字符串，计算哈希值
+                    cpuid_bytes = calculate_cpuid(cpuid)
             else:
                 cpuid_bytes = cpuid[:4]
             
@@ -307,7 +325,18 @@ class NRLProtocol:
         packet.ssid = ssid
         
         # 根据协议规范，使用4字节CPUID哈希值
-        cpuid_bytes = cpuid.encode('utf-8').ljust(4, b'\x00')[:4]
+        if isinstance(cpuid, str):
+            if len(cpuid) == 8 and all(c in '0123456789abcdefABCDEF' for c in cpuid):
+                # 8位十六进制字符串，直接转换为字节
+                cpuid_bytes = bytes.fromhex(cpuid)
+            elif '-' in cpuid:
+                # 呼号-SSID格式，计算哈希值
+                cpuid_bytes = calculate_cpuid(cpuid)
+            else:
+                # 其他字符串，计算哈希值
+                cpuid_bytes = calculate_cpuid(cpuid)
+        else:
+            cpuid_bytes = cpuid[:4]
         packet.cpuid = cpuid_bytes.ljust(5, b'\x00')  # 扩展到5字节，第5字节为0
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
