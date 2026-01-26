@@ -1,17 +1,17 @@
 # NRL客户端Demo
 
-基于nrllink项目开发的Python客户端，实现无线电网络互联功能。
+基于nrllink项目开发的Python客户端，实现业余无线电网络互联功能。
 
 ## 功能特性
 
 **基本功能**
-- 设备上线注册（CPUID哈希同步）
-- 心跳维持连接（SSID=200规范）
+- 设备上线注册
+- 心跳维持连接
 - 配置管理
 
 **语音通信**
 - G.711 A-law语音编解码
-- 实时语音传输（500字节数据包）
+- 实时语音传输
 - PTT按键说话功能
 - 音频设备管理
 
@@ -44,6 +44,9 @@ nrl_client_demo/
 ```bash
 pip install -r requirements.txt
 ```
+
+需要注意的是，如果出现无法安装pyaudio依赖是正常的，请参照此文章：
+https://blog.csdn.net/weixin_43682905/article/details/148874411
 
 ### 运行程序
 ```bash
@@ -153,7 +156,7 @@ client.disconnect()
 1. 确保系统有可用的麦克风和扬声器
 2. 防火墙需要开放UDP端口60050
 3. 某些系统可能需要管理员权限访问音频设备
-4. 需要与nrllink服务器版本兼容
+4. 需要与您需要连接的nrllink服务器版本兼容
 
 ## 联系方式
 

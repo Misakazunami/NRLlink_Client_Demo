@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-NRL客户端Demo主程序
+NRL客户端Demo
 
-基于nrllink项目开发的Python客户端，实现基本的无线电网络互联功能
+基于nrllink项目开发的Python客户端，实现基本的业余无线电网络互联功能
 
 功能特性:
 - 设备上线注册

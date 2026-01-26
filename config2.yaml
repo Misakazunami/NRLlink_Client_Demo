@@ -5,7 +5,7 @@ audio:
   sample_rate: 8000
 current_server: 0
 device:
-  callsign: BH6ERO
+  callsign: BH6XXX
   cpuid: '12345678'
   model: 1
   password: ''
