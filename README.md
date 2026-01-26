@@ -59,25 +59,35 @@ nrl_client_demo/
 pip install -r requirements.txt
 ```
 
-需要注意的是，如果出现无法安装pyaudio依赖是正常的，遇到此类问题请参以下文章：
+在依赖安装过程中，出现无法编译/安装pyaudio依赖是常见的，遇到此类问题请参阅以下文章：
+
 [3步解决PyAudio安装失败问题_pyaudio wheel-CSDN博客](https://blog.csdn.net/weixin_43682905/article/details/148874411)
 
 ### 运行程序
+在绝大多数情况下，用户可以直接运行 `main.py` 来启动图形化界面。
+如果用户需要在命令行模式下运行程序，或者进行音频设备测试，需要添加相应的参数。
+建议在运行程序前，先检查并配置好 `config.yaml` 文件中的服务器地址、端口、呼号、CPUID等参数。
 
 ```bash
-# GUI模式
+# GUI模式 （默认）
 python main.py
 
-# 命令行模式
+# 命令行模式 （可选）
 python main.py --no-gui
 
-# 音频设备测试
+# 音频设备测试 （可选）
 python main.py --test-audio
 ```
 
 ## 配置说明
 
 编辑 `config.yaml` 文件：
+
+**注意**：
+- 配置文件 `config.yaml` 中的参数需要根据实际情况进行修改。
+- 服务器地址、端口、呼号、CPUID等参数需要与服务器端配置保持一致。
+- 密码参数如果为空字符串，则表示不使用密码认证。
+- 建议在修改配置文件后，重新启动程序生效。
 
 ```yaml
 server:
@@ -100,23 +110,6 @@ network:
   buffer_size: 1460        # 网络缓冲区大小
   heartbeat_interval: 30   # 心跳间隔（秒）
 ```
-
-## 协议规范
-
-**NRL2协议**
-
-- 传输协议：UDP
-- 默认端口：60050
-- 包格式：48字节头部 + 可变长度数据
-- 语音编码：G.711编码
-
-**数据包类型**
-
-- TYPE_VOICE (1)：语音数据
-- TYPE_HEARTBEAT (2)：心跳包
-- TYPE_TEXT (5)：文本消息（UTF-8）
-- TYPE_SERVER_VOICE (9)：服务器互联语音
-
 ## API使用
 
 ```python
@@ -182,10 +175,10 @@ client.disconnect()
 
 ## 联系方式
 
-如有问题或建议，请发送邮件至：misakazunami@qq.com
+如有问题或建议，请发送邮件至：misakazunami@qq.com。
 
 ## 开源协议
 
-本项目基于MIT协议，详情参照LICENSE
+本项目基于MIT协议，详情参照LICENSE文件描述。
 
 
