@@ -1,4 +1,5 @@
 /nrl_client.log
 /assets/
+/__pycache__/
 /config.yaml
 /config2.yaml
