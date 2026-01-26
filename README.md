@@ -1,25 +1,31 @@
 # NRL客户端Demo
 
-基于nrllink项目开发的Python客户端，实现业余无线电网络互联功能。
+基于nrllink开源项目开发的Python客户端，实现业余无线电网络互联功能。
+
+基于项目链接：[hicaoc/nrllink: A radio over network forward server , 通过网络转发无线电信号的程序，支持调度分组](https://github.com/hicaoc/nrllink)
 
 ## 功能特性
 
 **基本功能**
+
 - 设备上线注册
 - 心跳维持连接
 - 配置管理
 
 **语音通信**
+
 - G.711 A-law语音编解码
 - 实时语音传输
 - PTT按键说话功能
 - 音频设备管理
 
 **消息功能**
+
 - 文本消息发送/接收（UTF-8，最大1412字节）
 - 消息日志记录
 
 **用户界面**
+
 - 图形化界面（GUI模式）
 - 命令行界面（CLI模式）
 - 实时状态显示
@@ -41,14 +47,16 @@ nrl_client_demo/
 ## 快速开始
 
 ### 安装依赖
+
 ```bash
 pip install -r requirements.txt
 ```
 
-需要注意的是，如果出现无法安装pyaudio依赖是正常的，请参照此文章：
-https://blog.csdn.net/weixin_43682905/article/details/148874411
+需要注意的是，如果出现无法安装pyaudio依赖是正常的，遇到此类问题请参以下文章：
+[3步解决PyAudio安装失败问题_pyaudio wheel-CSDN博客](https://blog.csdn.net/weixin_43682905/article/details/148874411)
 
 ### 运行程序
+
 ```bash
 # GUI模式
 python main.py
@@ -89,13 +97,15 @@ network:
 ## 协议规范
 
 **NRL2协议**
+
 - 传输协议：UDP
 - 默认端口：60050
 - 包格式：48字节头部 + 可变长度数据
-- 语音编码：G.711 A-law（8000Hz，单声道）
+- 语音编码：G.711编码
 
 **数据包类型**
-- TYPE_VOICE (1)：语音数据（500字节G.711）
+
+- TYPE_VOICE (1)：语音数据
 - TYPE_HEARTBEAT (2)：心跳包
 - TYPE_TEXT (5)：文本消息（UTF-8）
 - TYPE_SERVER_VOICE (9)：服务器互联语音
@@ -125,11 +135,13 @@ client.disconnect()
 ## 开发说明
 
 **核心模块**
+
 - NRLProtocol：协议编解码
 - NRLClient：客户端核心功能
 - AudioHandler：音频设备管理
 
 **扩展开发**
+
 1. 在 `nrl_protocol.py` 中添加新消息类型
 2. 在 `audio_handler.py` 中自定义音频处理
 3. 在 `gui_client.py` 中定制界面
@@ -137,16 +149,19 @@ client.disconnect()
 ## 故障排查
 
 **连接失败**
+
 - 检查服务器地址和端口配置
 - 确认网络连接正常
 - 检查防火墙设置（开放UDP 60050端口）
 
 **音频问题**
+
 - 运行音频设备测试
 - 检查系统音频设置
 - 确认音频设备权限
 
 **语音传输问题**
+
 - 检查G.711编解码是否正常
 - 确认网络延迟和丢包率
 - 查看日志获取详细信息
@@ -161,3 +176,9 @@ client.disconnect()
 ## 联系方式
 
 如有问题或建议，请发送邮件至：misakazunami@qq.com
+
+## 开源协议
+
+本项目基于MIT协议，详情参照LICENSE
+
+
