@@ -2,7 +2,7 @@
 音频处理模块
 处理麦克风输入和扬声器输出，以及G.711编解码
 """
-import threading
+import threading # 用于线程安全
 import numpy as np #type:ignore
 import logging
 import time
@@ -70,7 +70,16 @@ class AudioHandler:
         return format_map.get(format_str, pyaudio.paInt16)
     
     def list_audio_devices(self):
-        """列出所有音频设备"""
+        """
+        列出所有音频设备
+        这个方法会列出所有音频设备，包括输入设备和输出设备。
+        每个设备会包含以下信息：
+        - 索引 (index)
+        - 名称 (name)
+        - 最大输入通道数 (max_input_channels)
+        - 最大输出通道数 (max_output_channels)
+        - 默认采样率 (default_sample_rate)
+        """
         device_count = self.pyaudio.get_device_count()
         devices = []
         
@@ -321,8 +330,8 @@ class AudioHandler:
     
     def _record_callback(self, in_data, frame_count, time_info, status):
         """改进的录音回调函数
-        
-        关键改进：
+        这个函数是录音回调函数，用于处理麦克风输入数据。
+
         1. 严格按照1000字节PCM（=500字节G.711）管理缓冲区
         2. 避免不规则的填充导致的失真
         3. 确保每个语音包时间长度固定（62.5ms）

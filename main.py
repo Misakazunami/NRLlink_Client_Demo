@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 NRL客户端Demo
 
