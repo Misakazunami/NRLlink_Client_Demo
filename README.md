@@ -1,4 +1,4 @@
-# NRL客户端Demo
+# NRLLink客户端Demo
 
 基于nrllink开源项目开发的Python客户端，实现业余无线电网络互联功能。
 
