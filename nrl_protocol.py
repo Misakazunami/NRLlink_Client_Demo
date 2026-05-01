@@ -21,15 +21,17 @@ class NRLPacket:
     TYPE_TEXT = 5       # 文本消息
     TYPE_CONTROL = 6    # 设备控制
     TYPE_JOIN_GROUP = 7 # 加入群组
-    TYPE_SERVER_VOICE = 9 # 服务器互联语音
+    TYPE_OPUS = 8       # Opus 16K语音 (服务端新增)
+    TYPE_SERVER_VOICE = 9 # 服务器互联语音 (后续版本废弃)
+    TYPE_AT = 11        # AT命令透传 (服务端新增)
     
     def __init__(self):
         self.timestamp = time.time()
         self.udp_addr = None
         self.version = self.PROTOCOL_VERSION
         self.length = 0
-        self.cpuid = b"\x00" * 5  # CPUID (5字节)
-        self.password = b"\x00" * 3
+        self.dmr_id = b"\x00" * 3  # DMRID (3字节)
+        self.password = b"\x00" * 11  # 密码 (11字节)
         self.packet_type = 0
         self.status = 0x01  # 状态 (0x01表示在线)
         self.count = 0
@@ -56,15 +58,11 @@ class NRLPacket:
         # 总长度（2字节，大端序）
         struct.pack_into(">H", header, 4, total_length)
         
-        # CPUID（5字节）- 根据协议规范，使用4字节哈希值，第5字节为0
-        if len(self.cpuid) >= 4:
-            header[6:10] = self.cpuid[:4]  # 只使用前4字节
-            header[10] = 0  # 第5字节固定为0
-        else:
-            header[6:11] = self.cpuid.ljust(5, b'\x00')[:5]
+        # DMRID（3字节）- 设备唯一标识
+        header[6:9] = self.dmr_id.ljust(3, b'\x00')[:3]
         
-        # 密码（3字节） - 默认填充为0
-        header[10:13] = b'\x00' * 3  # 根据协议规范，密码在偏移10-12
+        # 密码（11字节）
+        header[9:20] = self.password.ljust(11, b'\x00')[:11]
         
         # 数据包类型（1字节）
         header[20] = self.packet_type
@@ -72,8 +70,8 @@ class NRLPacket:
         # 状态（1字节）- 根据协议规范，bit0用作DCD/PTT标志
         header[21] = self.status if self.status else 0x01
         
-        # 计数器（2字节，大端序）- 根据协议规范，计数器在偏移21-22（与Go版本一致）
-        struct.pack_into(">H", header, 21, self.count)
+        # 计数器（2字节，大端序）- 根据协议规范，计数器在偏移22-23
+        struct.pack_into(">H", header, 22, self.count)
         
         # 呼号（6字节）
         if isinstance(self.callsign, str):
@@ -88,8 +86,9 @@ class NRLPacket:
         # 设备模式（1字节）
         header[31] = self.dev_mode if self.dev_mode else 0x10
         
-        # 服务器互联语音包（Type=9）的额外字段
-        if self.packet_type == NRLPacket.TYPE_SERVER_VOICE:
+        # 服务器互联语音包（Type=9）或特殊设备（DevModel=200/255）的额外字段
+        if (self.packet_type == NRLPacket.TYPE_SERVER_VOICE or 
+            self.dev_mode == 200 or self.dev_mode == 255):
             # 原始呼号（6字节）
             if isinstance(self.original_callsign, str):
                 orig_callsign_bytes = self.original_callsign.encode('utf-8').ljust(6, b'\x00')[:6]
@@ -136,11 +135,11 @@ class NRLPacket:
                 # 报文不完整，无法解析
                 return False
             
-            # CPUID (5字节) - 根据协议规范，实际使用4字节
-            self.cpuid = data[6:11]
+            # DMRID (3字节) - 设备唯一标识
+            self.dmr_id = data[6:9]
             
-            # 密码 (3字节) - 根据协议规范，密码在偏移10-12
-            self.password = data[10:13]
+            # 密码 (11字节)
+            self.password = data[9:20]
             
             # 类型
             self.packet_type = data[20]
@@ -148,12 +147,16 @@ class NRLPacket:
             # 状态 - 根据协议规范，bit0用作DCD/PTT标志
             self.status = data[21]
             
-            # 计数器 - 根据协议规范，计数器在偏移21-22（与Go版本一致）
-            self.count = struct.unpack(">H", data[21:23])[0]
+            # 计数器 - 根据协议规范，计数器在偏移22-23
+            self.count = struct.unpack(">H", data[22:24])[0]
             
             # 呼号
             callsign_bytes = data[24:30]
             self.callsign = callsign_bytes.rstrip(b'\x00').rstrip(b'\r')
+            
+            # 呼号有效性验证，与服务端 IsCallSign 保持一致
+            if not self.is_valid_callsign(self.callsign):
+                return False
             
             # SSID
             self.ssid = data[30]
@@ -161,8 +164,9 @@ class NRLPacket:
             # 设备模式
             self.dev_mode = data[31]
             
-            # 服务器互联语音包（Type=9）的额外字段
-            if self.packet_type == NRLPacket.TYPE_SERVER_VOICE:
+            # 服务器互联语音包（Type=9）或特殊设备（DevModel=200/255）的额外字段
+            if (self.packet_type == NRLPacket.TYPE_SERVER_VOICE or 
+                self.dev_mode == 200 or self.dev_mode == 255):
                 # 原始呼号
                 orig_callsign_bytes = data[32:38]
                 self.original_callsign = orig_callsign_bytes.rstrip(b'\x00').rstrip(b'\r')
@@ -179,20 +183,28 @@ class NRLPacket:
                 self.original_ip = b"\x00" * 4
             
             # 数据部分
-            # 兼容性处理：部分Go实现（转发/替换头部）可能未正确更新长度字段
-            # 如果长度字段恰好等于头部长度但实际上报文尾部包含数据，则回退使用原始报文尾部数据
-            if self.length == self.HEADER_SIZE and len(data) > self.HEADER_SIZE:
-                # 长度字段标记为仅头部，但实际报文包含数据，使用报文尾部所有数据
-                self.data = data[self.HEADER_SIZE:]
-            else:
-                # 正常使用长度字段指定的数据范围
-                self.data = data[self.HEADER_SIZE:self.length]
+            # 与服务端 decodeNRL21 保持一致：直接取头部后所有字节，不使用 Length 字段切片
+            self.data = data[self.HEADER_SIZE:]
             
             return True
             
         except (struct.error, IndexError) as e:
             print(f"解码错误: {e}")
             return False
+    
+    @staticmethod
+    def is_valid_callsign(callsign: bytes) -> bool:
+        """验证呼号格式，与服务端 IsCallSign 保持一致
+        
+        呼号只能包含大写字母 A-Z 和数字 0-9
+        """
+        if not callsign:
+            return False
+        for b in callsign:
+            # 大写字母 A-Z 或数字 0-9
+            if not ((b >= ord('A') and b <= ord('Z')) or (b >= ord('0') and b <= ord('9'))):
+                return False
+        return True
     
     def get_callsign_ssid(self) -> str:
         """获取呼号和SSID组合字符串"""
@@ -213,7 +225,24 @@ class NRLProtocol:
     def __init__(self):
         self.packet_count = 0
     
-    def create_voice_packet(self, callsign: str, ssid: int, cpuid: str, 
+    @staticmethod
+    def _calculate_dmr_id_bytes(dmr_id: str) -> bytes:
+        """计算3字节DMRID，统一所有包类型的DMRID生成逻辑
+        
+        如果dmr_id是6位十六进制字符串，直接转换；
+        否则使用字符串哈希值的前3字节。
+        """
+        if not dmr_id:
+            return b'\x00' * 3
+        if len(dmr_id) >= 6 and all(c in '0123456789abcdefABCDEF' for c in dmr_id):
+            return bytes.fromhex(dmr_id[:6])
+        # 使用字符串的哈希值的前3字节
+        hash_val = 0
+        for char in dmr_id:
+            hash_val = (hash_val * 31 + ord(char)) & 0xFFFFFFFF
+        return struct.pack(">I", hash_val)[:3]
+    
+    def create_voice_packet(self, callsign: str, ssid: int, dmr_id: str, 
                           voice_data: bytes, dev_mode: int = 1) -> NRLPacket:
         """创建语音数据包 - 根据协议规范，语音包包含500字节G.711数据
         
@@ -225,23 +254,7 @@ class NRLProtocol:
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid
         
-        # 根据协议规范，使用4字节CPUID哈希值
-        if cpuid and isinstance(cpuid, str):
-            # 如果提供的是字符串，检查是否需要计算哈希值
-            if len(cpuid) == 8 and all(c in '0123456789abcdefABCDEF' for c in cpuid):
-                # 8位十六进制字符串，直接转换为字节
-                cpuid_bytes = bytes.fromhex(cpuid)
-            elif '-' in cpuid:
-                # 呼号-SSID格式，计算哈希值
-                cpuid_bytes = calculate_cpuid(cpuid)
-            else:
-                # 其他字符串，计算哈希值
-                cpuid_bytes = calculate_cpuid(cpuid)
-        else:
-            # 否则假设已经是字节
-            cpuid_bytes = cpuid.encode('utf-8').ljust(4, b'\x00')[:4] if isinstance(cpuid, str) else cpuid[:4]
-        
-        packet.cpuid = cpuid_bytes.ljust(5, b'\x00')  # 扩展到5字节，第5字节为0
+        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，bit0用作DCD/PTT标志
@@ -259,7 +272,7 @@ class NRLProtocol:
         self.packet_count = (self.packet_count + 1) & 0xFFFF  # 确保16位计数器
         return packet
     
-    def create_heartbeat_packet(self, callsign: str, ssid: int, cpuid: str = None, 
+    def create_heartbeat_packet(self, callsign: str, ssid: int, dmr_id: str = None, 
                                dev_mode: int = 0x10) -> NRLPacket:
         """创建心跳包 - 根据协议规范，心跳包只有头部，没有数据部分
         
@@ -275,69 +288,44 @@ class NRLProtocol:
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid  # 通常为200
         
-        # 根据协议规范，心跳包使用4字节CPUID哈希值
-        if cpuid is None:
-            # 使用callsign-SSID生成哈希值（与Go版本一致）
-            cpuid_bytes = calculate_cpuid(f"{callsign}-{ssid}")
+        # 根据协议规范，心跳包使用3字节DMRID
+        if dmr_id is None:
+            # 使用callsign-SSID生成哈希值的前3字节（与Go版本一致）
+            dmr_id_bytes = self._calculate_dmr_id_bytes(f"{callsign}-{ssid}")
         else:
-            # 如果提供了CPUID，检查是否需要计算哈希值
-            # 如果cpuid是8位十六进制字符串（如配置文件中的CPUID），直接使用
-            # 如果cpuid是呼号-SSID格式，计算哈希值
-            if isinstance(cpuid, str):
-                if len(cpuid) == 8 and all(c in '0123456789abcdefABCDEF' for c in cpuid):
-                    # 8位十六进制字符串，直接转换为字节
-                    cpuid_bytes = bytes.fromhex(cpuid)
-                elif '-' in cpuid:
-                    # 呼号-SSID格式，计算哈希值
-                    cpuid_bytes = calculate_cpuid(cpuid)
-                else:
-                    # 其他字符串，计算哈希值
-                    cpuid_bytes = calculate_cpuid(cpuid)
-            else:
-                cpuid_bytes = cpuid[:4]
+            dmr_id_bytes = self._calculate_dmr_id_bytes(dmr_id)
             
-        packet.cpuid = cpuid_bytes.ljust(5, b'\x00')  # 扩展到5字节，第5字节为0
+        packet.dmr_id = dmr_id_bytes
         packet.dev_mode = dev_mode if dev_mode else 0x10  # 默认0x10表示正常模式
         packet.status = 0x01  # 根据协议规范，状态为0x01
         packet.count = 1  # 心跳包计数器通常为1（与Go版本一致）
         packet.data = b""  # 心跳包没有数据部分
         return packet
     
-    def create_config_packet(self, callsign: str, ssid: int, cpuid: str, 
+    def create_config_packet(self, callsign: str, ssid: int, dmr_id: str, 
                            config_data: bytes, dev_mode: int = 1) -> NRLPacket:
         """创建配置数据包"""
         packet = NRLPacket()
         packet.packet_type = NRLPacket.TYPE_CONFIG
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid
-        packet.cpuid = cpuid.encode('utf-8').ljust(4, b'\x00')[:4]
+        # 使用3字节DMRID
+        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
         packet.dev_mode = dev_mode
         packet.data = config_data
         packet.count = self.packet_count
         self.packet_count = (self.packet_count + 1) & 0xFFFF  # 确保16位计数器
         return packet
 
-    def create_text_packet(self, callsign: str, ssid: int, cpuid: str, text_data: bytes, dev_mode: int = 1) -> NRLPacket:
+    def create_text_packet(self, callsign: str, ssid: int, dmr_id: str, text_data: bytes, dev_mode: int = 1) -> NRLPacket:
         """创建文本数据包 - 根据协议规范，文本包长度=48+文本长度"""
         packet = NRLPacket()
         packet.packet_type = NRLPacket.TYPE_TEXT
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid
         
-        # 根据协议规范，使用4字节CPUID哈希值
-        if isinstance(cpuid, str):
-            if len(cpuid) == 8 and all(c in '0123456789abcdefABCDEF' for c in cpuid):
-                # 8位十六进制字符串，直接转换为字节
-                cpuid_bytes = bytes.fromhex(cpuid)
-            elif '-' in cpuid:
-                # 呼号-SSID格式，计算哈希值
-                cpuid_bytes = calculate_cpuid(cpuid)
-            else:
-                # 其他字符串，计算哈希值
-                cpuid_bytes = calculate_cpuid(cpuid)
-        else:
-            cpuid_bytes = cpuid[:4]
-        packet.cpuid = cpuid_bytes.ljust(5, b'\x00')  # 扩展到5字节，第5字节为0
+        # 根据协议规范，使用3字节DMRID
+        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，状态为0x01
@@ -346,7 +334,7 @@ class NRLProtocol:
         self.packet_count = (self.packet_count + 1) & 0xFFFF  # 确保16位计数器
         return packet
     
-    def create_server_voice_packet(self, callsign: str, ssid: int, cpuid: str, 
+    def create_server_voice_packet(self, callsign: str, ssid: int, dmr_id: str, 
                                  voice_data: bytes, original_callsign: str, 
                                  original_ssid: int, original_ip: bytes, 
                                  dev_mode: int = 1) -> NRLPacket:
@@ -356,9 +344,8 @@ class NRLProtocol:
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid
         
-        # 根据协议规范，使用4字节CPUID哈希值
-        cpuid_bytes = cpuid.encode('utf-8').ljust(4, b'\x00')[:4]
-        packet.cpuid = cpuid_bytes.ljust(5, b'\x00')  # 扩展到5字节，第5字节为0
+        # 根据协议规范，使用3字节DMRID
+        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，bit0用作DCD/PTT标志
@@ -384,20 +371,14 @@ class NRLProtocol:
 
 
 
-def calculate_cpuid(callsign: str) -> bytes:
-    """计算CPUID，与Go服务器保持一致
+def calculate_dmr_id(callsign: str) -> bytes:
+    """计算DMRID，与Go服务器保持一致
     
     参考nrllink的calculateCpuId函数：
     将字符串生成32位哈希值，哈希算法为: hash = (hash*31 + char) & 0xFFFFFFFF
-    返回4字节大端序的二进制数据
+    返回3字节用于DMRID的二进制数据
     """
-    # 将字符串生成32位哈希值，与Go版本的calculateCpuId函数一致
-    hash_val = 0
-    for char in callsign:
-        hash_val = (hash_val * 31 + ord(char)) & 0xFFFFFFFF  # 确保32位
-    
-    # 转换为4字节大端序
-    return struct.pack(">I", hash_val)
+    return NRLProtocol._calculate_dmr_id_bytes(callsign)
 
 # G.711编解码相关常量（与Go版本保持一致）
 SEG_MASK = 0x70

@@ -8,11 +8,24 @@ import time
 import logging
 import yaml #type: ignore
 import json
+import os
 from typing import Optional, Dict, Any, Callable
 from dataclasses import dataclass
 
-from nrl_protocol import NRLProtocol, NRLPacket, calculate_cpuid
+from nrl_protocol import NRLProtocol, NRLPacket, calculate_dmr_id
 from audio_handler import AudioHandler, VoiceProcessor
+
+# 操作系统名称映射
+OS_NAME_MAP = {
+    "nt": "Windows",
+    "posix": "Linux/Unix",
+    "darwin": "macOS",
+}
+
+
+def get_os_display_name() -> str:
+    """获取人类可读的操作系统名称"""
+    return OS_NAME_MAP.get(os.name, "未知")
 
 @dataclass
 class DeviceConfig:
@@ -35,6 +48,27 @@ class ServerInfo:
     name: str
     host: str
     port: int
+    password: str = ""
+    online: int = 0
+    total: int = 0
+    
+    @classmethod
+    def from_config(cls, cfg: dict) -> "ServerInfo":
+        """从配置字典创建，兼容新旧格式"""
+        port_val = cfg.get('port', 60050)
+        if isinstance(port_val, str):
+            try:
+                port_val = int(port_val)
+            except (ValueError, TypeError):
+                port_val = 60050
+        return cls(
+            name=cfg.get('name', '服务器'),
+            host=cfg.get('host', '127.0.0.1'),
+            port=port_val,
+            password=cfg.get('password', ''),
+            online=cfg.get('online', 0),
+            total=cfg.get('total', 0),
+        )
 
 @dataclass
 class AudioConfig:
@@ -56,7 +90,7 @@ class NRLClient:
     def __init__(self, config_file: str = "config.yaml", enable_cpuid_calc: bool = False):
         self.logger = logging.getLogger(__name__)
         
-        # CPUID计算开关
+        # DMRID计算开关
         self.enable_cpuid_calc = enable_cpuid_calc
         
         # 配置
@@ -140,14 +174,14 @@ class NRLClient:
             servers_cfg = config_data.get('servers', [])
             current_server_idx = config_data.get('current_server', 0)
             
+            # 兼容新版服务器 PlatformList 格式
+            if not servers_cfg:
+                servers_cfg = config_data.get('PlatformList', [])
+            
             if servers_cfg:
                 self.servers_list = []
                 for server in servers_cfg:
-                    server_info = ServerInfo(
-                        name=server.get('name', f"服务器{len(self.servers_list) + 1}"),
-                        host=server.get('host', '127.0.0.1'),
-                        port=server.get('port', 60050)
-                    )
+                    server_info = ServerInfo.from_config(server)
                     self.servers_list.append(server_info)
                 
                 # 设置当前服务器索引
@@ -235,17 +269,17 @@ class NRLClient:
                 self.logger.warning("设置接收缓冲区失败，使用默认配置")
             
             # 发送初始包进行设备注册
-            # 使用设备配置，根据CPUID计算开关决定是否计算CPUID
+            # 使用设备配置，根据DMRID计算开关决定是否计算DMRID
             cpuid_to_use = self.device_config.cpuid
             if self.enable_cpuid_calc:
-                # 如果启用CPUID计算，使用呼号+SSID计算CPUID
+                # 如果启用DMRID计算，使用呼号+SSID计算DMRID
                 cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
             
             test_packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
                 self.device_config.ssid, 
-                cpuid_to_use, 
-                self.device_config.model   
+                dmr_id=cpuid_to_use, 
+                dev_mode=self.device_config.model   
             )
             
             self.socket.sendto(test_packet.encode(), 
@@ -270,7 +304,7 @@ class NRLClient:
             
             self._update_status('connected', True)
             self.logger.info(f"连接到服务器成功: {self.server_config.host}:{self.server_config.port}")
-            self.logger.info(f"NRL_Link Client Beta V1.3.4")
+            self.logger.info(f"NRL_Link Client Beta V1.4.2")
             self.logger.info(f"------------------------------------")
             self.logger.info(f"N     N  RRRRRR   L           ")
             self.logger.info(f"N N   N  R     R  L           ")
@@ -279,6 +313,7 @@ class NRLClient:
             self.logger.info(f"N     N  R     R  LLLLLL  BETA")
             self.logger.info(f"------------------------------------")
             self.logger.info(f"欢迎使用NRL客户端,本客户端目前为测试版本")
+            self.logger.info(f"当前的操作系统为：{get_os_display_name()}")
             self.logger.info(f"当前连接到服务器的设备呼号: {self.device_config.callsign}")
             self.logger.info(f"当前连接到服务器的设备SSID: {self.device_config.ssid}")
             self.logger.info(f"------------------------------------")
@@ -451,67 +486,64 @@ class NRLClient:
         else:
             self.logger.info(f"收到未知类型数据包: type={packet.packet_type}")
     
-    def _handle_voice_packet(self, packet: NRLPacket):
-        """
-        处理语音数据包
-        调试功能是直接拿后500位来解码
-        """
-        try:
-            # 验证语音数据
-            if not packet.data or len(packet.data) == 0:
-                if not self.debug_force_decode:
-                    self.logger.warning(f"收到空语音数据包 from {packet.get_callsign_ssid()}")
+    def _normalize_voice_data(self, packet: NRLPacket, context: str = "语音") -> bool:
+        """统一处理语音包数据：验证、调试模式填充、返回是否有效"""
+        if not packet.data or len(packet.data) == 0:
+            if not self.debug_force_decode:
+                self.logger.warning(f"收到空{context}数据包 from {packet.get_callsign_ssid()}")
+                return False
+            self.logger.info(f"[调试模式] 收到空{context}数据包，强制解码 from {packet.get_callsign_ssid()}")
+            packet.data = b'\x80' * 500
+        elif self.debug_force_decode and len(packet.data) != 500:
+            if len(packet.data) > 500:
+                original_len = len(packet.data)
+                packet.data = packet.data[-500:]
+                self.logger.info(f"[调试模式] {context}包长度异常 ({original_len} bytes)，提取最后500字节")
+            elif len(packet.data) < 500:
+                original_len = len(packet.data)
+                packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
+                self.logger.info(f"[调试模式] {context}包长度不足 ({original_len} bytes)，补充静音至500字节")
+        elif not self.debug_force_decode and len(packet.data) != 500:
+            self.logger.warning(f"{context}数据包长度不是500字节: {len(packet.data)} from {packet.get_callsign_ssid()}")
+        return True
+    
+    def _play_voice_pcm(self, pcm_data: bytes, packet: NRLPacket, extra_info: dict = None):
+        """统一的语音播放处理逻辑"""
+        if not pcm_data:
+            self.logger.error(f"语音解码失败，返回空数据 from {packet.get_callsign_ssid()}")
+            return
+        
+        # 更新最后语音包时间
+        self.last_voice_packet_time = time.time()
+        
+        # 如果播放未启动且本地未录音，自动启动播放
+        if self.audio_handler and not self.is_recording_local:
+            self.audio_handler.playback_stop_flag = False
+            if not self.audio_handler.is_playback_active():
+                try:
+                    self.audio_handler.start_playback()
+                except Exception as e:
+                    self.logger.error(f"启动播放失败: {e}")
                     return
-                else:
-                    #调试模式，直接解码，但是好像没啥用
-                    self.logger.info(f"[调试模式] 收到空语音数据包，强制解码 from {packet.get_callsign_ssid()}")
-                    packet.data = b'\x80' * 500
-            elif self.debug_force_decode and len(packet.data) != 500:
-                # 直接使用最后 500 字节
-                if len(packet.data) > 500:
-                    original_len = len(packet.data)
-                    packet.data = packet.data[-500:]
-                    self.logger.info(f"[调试模式] 语音包长度异常 ({original_len} bytes)，提取最后 500 字节解码")
-                elif len(packet.data) < 500:
-                    # 如果小于 500 字节，前面补以下静音数据
-                    original_len = len(packet.data)
-                    packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
+            self.audio_handler.add_playback_data_immediate(pcm_data)
+        elif self.is_recording_local:
+            self.logger.debug(f"本地正在录音，忽略远端语音包播放 from {packet.get_callsign_ssid()}")
+        
+        # 调用回调函数
+        if self.voice_callback:
+            self.voice_callback(pcm_data, extra_info) if extra_info else self.voice_callback(pcm_data)
+    
+    def _handle_voice_packet(self, packet: NRLPacket):
+        """处理语音数据包"""
+        try:
+            if not self._normalize_voice_data(packet, "语音"):
+                return
             
             # 解码语音数据
             pcm_data = self.voice_processor.decode_voice(packet.data)
-            
-            if not pcm_data:
-                self.logger.error(f"语音解码失败，返回空数据 from {packet.get_callsign_ssid()}")
-                return
-            
-            # 更新最后语音包时间
-            self.last_voice_packet_time = time.time()
-            
-            # 如果播放未启动且本地未录音，自动启动播放
-            if self.audio_handler and not self.is_recording_local:
-                # 重置播放停止标志（表示收到新语音）
-                self.audio_handler.playback_stop_flag = False
-                
-                if not self.audio_handler.is_playback_active():
-                    try:
-                        self.audio_handler.start_playback()
-                        self.logger.info("自动启动播放模式")
-                    except Exception as e:
-                        self.logger.error(f"启动播放失败: {e}")
-                        return
-                
-                # 立即播放解码的PCM数据，不使用抖动缓冲延迟处理
-                self.audio_handler.add_playback_data_immediate(pcm_data)
-            elif self.is_recording_local:
-                # 本地正在录音，不自动启动播放，只更新时间戳用于超时判断
-                self.logger.debug(f"本地正在录音，忽略远端语音包播放 from {packet.get_callsign_ssid()}")
-            
-            # 调用回调函数
-            if self.voice_callback:
-                self.voice_callback(pcm_data)
+            self._play_voice_pcm(pcm_data, packet)
             
             self.logger.debug(f"处理语音数据包成功: {len(packet.data)} bytes from {packet.get_callsign_ssid()}")
-            
         except Exception as e:
             self.logger.error(f"处理语音数据包失败: {e}")
             self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
@@ -519,14 +551,14 @@ class NRLClient:
     def _handle_heartbeat_packet(self, packet: NRLPacket):
         """处理心跳数据包 心跳包只有头部，没有数据"""
         self.device_status['last_heartbeat'] = time.time()
-        self.logger.debug(f"收到心跳包: {packet.get_callsign_ssid()}, CPUID: {packet.cpuid.hex()}")
+        self.logger.debug(f"收到心跳包: {packet.get_callsign_ssid()}, DMRID: {packet.dmr_id.hex()}")
         
         # 验证心跳包格式
         if packet.data:
             self.logger.warning(f"心跳包包含数据: {len(packet.data)} 字节，不符合协议规范")
         
-        if len(packet.cpuid) != 5:
-            self.logger.warning(f"心跳包CPUID长度异常: {len(packet.cpuid)} 字节")
+        if len(packet.dmr_id) != 3:
+            self.logger.warning(f"心跳包DMRID长度异常: {len(packet.dmr_id)} 字节")
     
     def _handle_text_packet(self, packet: NRLPacket):
         """处理文本数据包 文本包长度=48+文本长度"""
@@ -564,82 +596,26 @@ class NRLClient:
     def _handle_server_voice_packet(self, packet: NRLPacket):
         """处理服务器互联语音包 - Type=9，包含原始呼号/IP信息"""
         try:
-            self.logger.debug(f"收到服务器互联语音包: {packet.get_callsign_ssid()}")
-            self.logger.debug(f"原始设备: {packet.original_callsign.decode('utf-8', errors='ignore')}-{packet.original_ssid}")
-            self.logger.debug(f"原始IP: {'.'.join(str(b) for b in packet.original_ip)}")
+            self.logger.debug(f"收到服务器互联语音包: {packet.get_callsign_ssid()}, "
+                           f"原始设备: {packet.original_callsign.decode('utf-8', errors='ignore')}-{packet.original_ssid}, "
+                           f"原始IP: {'.'.join(str(b) for b in packet.original_ip)}")
             
-            # 检查语音数据包长度
-            if not packet.data:
-                if not self.debug_force_decode:
-                    self.logger.warning(f"收到空服务器互联语音数据包 from {packet.get_callsign_ssid()}")
-                    return
-                else:
-                    self.logger.info(f"[调试模式] 收到空服务器互联语音数据包，强制解码 from {packet.get_callsign_ssid()}")
-                    packet.data = b'\x80' * 500
-            
-            if len(packet.data) == 0:
-                if not self.debug_force_decode:
-                    self.logger.warning(f"服务器互联语音数据包长度为0 from {packet.get_callsign_ssid()}")
-                    return
-                else:
-                    packet.data = b'\x80' * 500
-            elif self.debug_force_decode and len(packet.data) != 500:
-                # 调试模式：直接使用最后 500 字节
-                if len(packet.data) > 500:
-                    original_len = len(packet.data)
-                    packet.data = packet.data[-500:]
-                    self.logger.info(f"[调试模式] 服务器互联语音包长度异常 ({original_len} bytes)，提取最后 500 字节解码")
-                elif len(packet.data) < 500:
-                    # 如果小于 500 字节，前面补静音数据
-                    original_len = len(packet.data)
-                    packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
-                    self.logger.info(f"[调试模式] 服务器互联语音包长度不足 ({original_len} bytes)，补充静音数据至 500 字节")
-            elif not self.debug_force_decode and len(packet.data) != 500:
-                self.logger.warning(f"服务器互联语音数据包长度不是500字节: {len(packet.data)} from {packet.get_callsign_ssid()}")
-                # 仍然尝试处理非标准长度的数据
+            if not self._normalize_voice_data(packet, "服务器互联语音"):
+                return
             
             # 解码G.711语音数据
             pcm_data = self.voice_processor.decode_voice(packet.data)
             
-            if not pcm_data:
-                self.logger.error(f"服务器互联语音解码失败，返回空数据 from {packet.get_callsign_ssid()}")
-                return
-            
-            # 更新最后语音包时间
-            self.last_voice_packet_time = time.time()
-            
-            # 如果播放未启动且本地未录音，自动启动播放
-            if self.audio_handler and not self.is_recording_local:
-                # 重置播放停止标志（表示收到新语音）
-                self.audio_handler.playback_stop_flag = False
-                
-                if not self.audio_handler.is_playback_active():
-                    try:
-                        self.audio_handler.start_playback()
-                        self.logger.info("自动启动播放模式（服务器互联语音）")
-                    except Exception as e:
-                        self.logger.error(f"启动播放失败: {e}")
-                        return
-                
-                # 立即播放解码的PCM数据，不使用抖动缓冲延迟处理
-                self.audio_handler.add_playback_data_immediate(pcm_data)
-            elif self.is_recording_local:
-                # 本地正在录音，不自动启动播放，只更新时间戳用于超时判断
-                self.logger.debug(f"本地正在录音，忽略服务器互联语音播放 from {packet.get_callsign_ssid()}")
-            
-            # 调用语音回调，包含原始设备信息
-            if self.voice_callback:
-                # 添加原始设备信息到回调数据
-                original_info = {
-                    'original_callsign': packet.original_callsign.decode('utf-8', errors='ignore').strip(),
-                    'original_ssid': packet.original_ssid,
-                    'original_ip': '.'.join(str(b) for b in packet.original_ip),
-                    'relay_callsign': packet.get_callsign_ssid()
-                }
-                self.voice_callback(pcm_data, original_info)
+            # 携带原始设备信息播放
+            original_info = {
+                'original_callsign': packet.original_callsign.decode('utf-8', errors='ignore').strip(),
+                'original_ssid': packet.original_ssid,
+                'original_ip': '.'.join(str(b) for b in packet.original_ip),
+                'relay_callsign': packet.get_callsign_ssid()
+            }
+            self._play_voice_pcm(pcm_data, packet, original_info)
             
             self.logger.debug(f"处理服务器互联语音数据包成功: {len(packet.data)} bytes from {packet.get_callsign_ssid()}")
-            
         except Exception as e:
             self.logger.error(f"处理服务器互联语音数据包失败: {e}")
             self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
@@ -670,7 +646,7 @@ class NRLClient:
                 self.logger.warning(f"语音数据超长（{len(voice_data)}字节），截断为500字节")
                 voice_data = voice_data[:500]
             
-            # 根据CPUID计算开关决定使用哪个CPUID
+            # 根据DMRID计算开关决定使用哪个DMRID
             cpuid_to_use = self.device_config.cpuid
             if self.enable_cpuid_calc:
                 cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
@@ -679,9 +655,9 @@ class NRLClient:
             packet = self.protocol.create_voice_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,
-                cpuid_to_use,
-                voice_data,
-                self.device_config.model
+                dmr_id=cpuid_to_use,
+                voice_data=voice_data,
+                dev_mode=self.device_config.model
             )
             
             if not packet:
@@ -723,7 +699,7 @@ class NRLClient:
                 self.logger.warning("文本消息为空")
                 return False
             
-            # 根据CPUID计算开关决定使用哪个CPUID
+            # 根据DMRID计算开关决定使用哪个DMRID
             cpuid_to_use = self.device_config.cpuid
             if self.enable_cpuid_calc:
                 cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
@@ -741,9 +717,9 @@ class NRLClient:
             packet = self.protocol.create_text_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,
-                cpuid_to_use,
-                text_bytes,
-                self.device_config.model
+                dmr_id=cpuid_to_use,
+                text_data=text_bytes,
+                dev_mode=self.device_config.model
             )
             
             # 发送数据包
@@ -775,17 +751,17 @@ class NRLClient:
             if not self.is_connected or not self.socket:
                 return False
             
-            # 创建心跳包，根据CPUID计算开关决定是否计算CPUID
+            # 创建心跳包，根据DMRID计算开关决定是否计算DMRID
             cpuid_to_use = self.device_config.cpuid
             if self.enable_cpuid_calc:
-                # 如果启用CPUID计算，使用呼号+SSID计算CPUID
+                # 如果启用DMRID计算，使用呼号+SSID计算DMRID
                 cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
             
             packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,  # 使用设备配置的SSID
-                cpuid_to_use,  # 使用配置的CPUID或计算值
-                self.device_config.model   # 设备模式
+                dmr_id=cpuid_to_use,  # 使用配置的CPUID或计算值
+                dev_mode=self.device_config.model   # 设备模式
             )
             
             if not packet:
@@ -804,7 +780,7 @@ class NRLClient:
             
             self.device_status['packets_sent'] += 1
             self.logger.debug(f"心跳包已发送: {packet.get_callsign_ssid()}, "
-                            f"CPUID: {packet.cpuid.hex()}, 长度: {len(packet_data)} bytes")
+                            f"DMRID: {packet.dmr_id.hex()}, 长度: {len(packet_data)} bytes")
             return True
             
         except socket.error as e:
