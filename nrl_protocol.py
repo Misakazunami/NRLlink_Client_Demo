@@ -37,7 +37,7 @@ class NRLPacket:
         self.count = 0
         self.callsign = b"" * 6
         self.ssid = 0
-        self.dev_mode = 0x10  # 设备模式 (0x10表示正常模式)
+        self.dev_mode = 0x10  # 设备模式 (0保留，1-99硬件，100-199软件，200-255服务器特殊用途)
         self.original_callsign = b"" * 6
         self.original_ssid = 0
         self.original_ip = b"\x00" * 4

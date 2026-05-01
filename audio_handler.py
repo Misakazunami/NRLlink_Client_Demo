@@ -22,7 +22,7 @@ class AudioHandler:
         self.format = self._get_format(format_str)
         self.format_str = format_str
         
-        self.pyaudio = pyaudio.PyAudio()
+        self.pyaudio = None  # 延迟初始化，避免阻塞GUI线程
         self.input_stream = None
         self.output_stream = None
         
@@ -69,6 +69,11 @@ class AudioHandler:
         }
         return format_map.get(format_str, pyaudio.paInt16)
     
+    def _ensure_pyaudio(self):
+        """延迟初始化PyAudio，在首次使用时调用，避免__init__中阻塞GUI线程"""
+        if self.pyaudio is None:
+            self.pyaudio = pyaudio.PyAudio()
+    
     def list_audio_devices(self):
         """
         列出所有音频设备
@@ -80,6 +85,7 @@ class AudioHandler:
         - 最大输出通道数 (max_output_channels)
         - 默认采样率 (default_sample_rate)
         """
+        self._ensure_pyaudio()
         device_count = self.pyaudio.get_device_count()
         devices = []
         
@@ -102,6 +108,7 @@ class AudioHandler:
     
     def get_input_devices(self):
         """获取所有可用的输入设备"""
+        self._ensure_pyaudio()
         devices = []
         device_count = self.pyaudio.get_device_count()
         
@@ -119,6 +126,7 @@ class AudioHandler:
     
     def get_output_devices(self):
         """获取所有可用的输出设备"""
+        self._ensure_pyaudio()
         devices = []
         device_count = self.pyaudio.get_device_count()
         
@@ -136,6 +144,7 @@ class AudioHandler:
     
     def set_input_device(self, device_index: int):
         """设置输入设备"""
+        self._ensure_pyaudio()
         try:
             device_info = self.pyaudio.get_device_info_by_index(device_index)
             if device_info['maxInputChannels'] == 0:
@@ -150,6 +159,7 @@ class AudioHandler:
     
     def set_output_device(self, device_index: int):
         """设置输出设备"""
+        self._ensure_pyaudio()
         try:
             device_info = self.pyaudio.get_device_info_by_index(device_index)
             if device_info['maxOutputChannels'] == 0:
@@ -165,6 +175,7 @@ class AudioHandler:
     def get_current_input_device(self):
         """获取当前输入设备信息"""
         if self.input_device_index is not None:
+            self._ensure_pyaudio()
             try:
                 device_info = self.pyaudio.get_device_info_by_index(self.input_device_index)
                 return {
@@ -180,6 +191,7 @@ class AudioHandler:
     def get_current_output_device(self):
         """获取当前输出设备信息"""
         if self.output_device_index is not None:
+            self._ensure_pyaudio()
             try:
                 device_info = self.pyaudio.get_device_info_by_index(self.output_device_index)
                 return {
@@ -194,6 +206,7 @@ class AudioHandler:
     
     def start_recording(self, callback: Optional[Callable[[bytes], None]] = None):
         """开始录音"""
+        self._ensure_pyaudio()
         with self.lock:
             if self.is_recording:
                 self.logger.warning("已经在录音中")
@@ -266,6 +279,7 @@ class AudioHandler:
     
     def start_playback(self):
         """开始播放"""
+        self._ensure_pyaudio()
         with self.lock:
             if self.is_playing:
                 self.logger.warning("已经在播放中")
@@ -525,8 +539,9 @@ class AudioHandler:
             self.stop_recording()
             self.stop_playback()
             
-            if self.pyaudio:
+            if self.pyaudio is not None:
                 self.pyaudio.terminate()
+                self.pyaudio = None
                 
             self.logger.info("音频处理已关闭")
             
