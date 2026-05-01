@@ -67,7 +67,7 @@ class NRLGUIClient:
         )
         
         # 创建日志处理器用于GUI显示
-        self.log_handler = GUILogHandler(self.log_message)
+        self.log_handler = GUILogHandler(self.log_message, self.root)
         self.log_handler.setLevel(logging.INFO)
         
         # 获取根日志记录器
@@ -1553,19 +1553,23 @@ NRLLink_Client Demo
 
 
 class GUILogHandler(logging.Handler):
-    """GUI日志处理器"""
+    """GUI日志处理器 - 线程安全，使用after()调度GUI更新"""
     
-    def __init__(self, callback):
+    def __init__(self, callback, root=None):
         super().__init__()
         self.callback = callback
+        self.root = root
     
     def emit(self, record):
         """发送日志记录"""
         try:
             msg = self.format(record)
             if self.callback:
-                # 使用线程安全的方式调用
-                self.callback(msg)
+                # 使用 after() 确保在主线程更新GUI，避免 RuntimeError
+                if self.root:
+                    self.root.after(0, self.callback, msg)
+                else:
+                    self.callback(msg)
         except Exception:
             self.handleError(record)
 

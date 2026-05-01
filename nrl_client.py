@@ -9,6 +9,7 @@ import logging
 import yaml #type: ignore
 import json
 import os
+from io import BlockingIOError
 from typing import Optional, Dict, Any, Callable
 from dataclasses import dataclass
 
@@ -257,6 +258,7 @@ class NRLClient:
             # 创建UDP套接字
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.socket.settimeout(5.0)  # 5秒超时
+            self.socket.setblocking(False)  # 非阻塞模式，防止sendto阻塞音频回调
             
             # 设置接收缓冲区大小
             try:
@@ -376,6 +378,10 @@ class NRLClient:
                 
             except socket.timeout:
                 # 超时是正常的，不计为错误
+                continue
+            except BlockingIOError:
+                # 非阻塞模式下暂无数据，正常等待
+                time.sleep(0.01)
                 continue
             except ConnectionError as e:
                 self.logger.error(f"连接错误: {e}")
@@ -666,6 +672,10 @@ class NRLClient:
             self.logger.debug(f"语音包已发送: {len(voice_data)} bytes, 总长度: {len(packet_data)} bytes")
             return True
             
+        except BlockingIOError:
+            # 非阻塞模式下发缓冲区满，丢弃当前包（实时音频可接受丢包）
+            self.logger.debug("语音包发送缓冲区满，丢弃当前包")
+            return False
         except socket.error as e:
             self.logger.error(f"语音数据发送失败（套接字错误）: {e}")
             return False
@@ -712,6 +722,9 @@ class NRLClient:
             self.logger.info(f"文本消息已发送: {message} (长度: {len(text_bytes)} 字节)")
             return True
             
+        except BlockingIOError:
+            self.logger.warning("文本消息发送缓冲区满，发送失败")
+            return False
         except socket.error as e:
             self.logger.error(f"文本消息发送失败（套接字错误）: {e}")
             return False
@@ -759,6 +772,9 @@ class NRLClient:
                             f"DMRID: {packet.dmr_id.hex()}, 长度: {len(packet_data)} bytes")
             return True
             
+        except BlockingIOError:
+            self.logger.debug("心跳包发送缓冲区满，跳过本次心跳")
+            return False
         except socket.error as e:
             self.logger.error(f"心跳包发送失败（套接字错误）: {e}")
             return False
@@ -869,19 +885,34 @@ class NRLClient:
         """关闭客户端"""
         self.logger.info("正在关闭NRL客户端...")
         
-        # 停止语音传输
-        self.stop_voice_transmission()
+        # 先停止运行标志，让所有循环线程尽快退出
+        self.running = False
+        
+        # 停止语音传输（录音）
+        try:
+            self.stop_voice_transmission()
+        except Exception as e:
+            self.logger.error(f"停止语音传输异常: {e}")
         
         # 停止播放
-        if self.audio_handler:
-            self.audio_handler.stop_playback()
+        try:
+            if self.audio_handler:
+                self.audio_handler.stop_playback()
+        except Exception as e:
+            self.logger.error(f"停止播放异常: {e}")
         
         # 断开连接
-        self.disconnect()
+        try:
+            self.disconnect()
+        except Exception as e:
+            self.logger.error(f"断开连接异常: {e}")
         
         # 关闭音频
-        if self.audio_handler:
-            self.audio_handler.close()
+        try:
+            if self.audio_handler:
+                self.audio_handler.close()
+        except Exception as e:
+            self.logger.error(f"关闭音频异常: {e}")
         
         self.logger.info("NRL客户端已关闭")
     

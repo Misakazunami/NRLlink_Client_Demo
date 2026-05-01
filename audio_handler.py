@@ -70,9 +70,11 @@ class AudioHandler:
         return format_map.get(format_str, pyaudio.paInt16)
     
     def _ensure_pyaudio(self):
-        """延迟初始化PyAudio，在首次使用时调用，避免__init__中阻塞GUI线程"""
+        """延迟初始化PyAudio，线程安全，避免多线程同时初始化PortAudio"""
         if self.pyaudio is None:
-            self.pyaudio = pyaudio.PyAudio()
+            with self.lock:
+                if self.pyaudio is None:
+                    self.pyaudio = pyaudio.PyAudio()
     
     def list_audio_devices(self):
         """
@@ -247,7 +249,8 @@ class AudioHandler:
                 raise
     
     def stop_recording(self) -> bytes:
-        """停止录音并返回录音数据"""
+        """停止录音并返回录音数据 - 修复：不在持有self.lock时调用stop_stream()"""
+        stream_to_stop = None
         with self.lock:
             if not self.is_recording:
                 self.logger.warning("没有在录音")
@@ -261,21 +264,27 @@ class AudioHandler:
                     self.voice_data_cache.clear()
                     self.last_voice_send_time = 0.0
                 
-                if self.input_stream:
-                    self.input_stream.stop_stream()
-                    self.input_stream.close()
-                    self.input_stream = None
+                stream_to_stop = self.input_stream
+                self.input_stream = None
                 
                 # 合并录音数据
                 recorded_data = b''.join(self.record_buffer)
                 self.record_buffer = []
                 
-                self.logger.info("停止录音")
-                return recorded_data
-                
             except Exception as e:
                 self.logger.error(f"停止录音失败: {e}")
                 raise
+        
+        # 在锁外停止流，避免潜在阻塞
+        if stream_to_stop:
+            try:
+                stream_to_stop.stop_stream()
+                stream_to_stop.close()
+            except Exception as e:
+                self.logger.error(f"关闭录音流失败: {e}")
+        
+        self.logger.info("停止录音")
+        return recorded_data
     
     def start_playback(self):
         """开始播放"""
@@ -320,7 +329,8 @@ class AudioHandler:
                 raise
     
     def stop_playback(self):
-        """停止播放"""
+        """停止播放 - 修复死锁：不在持有self.lock时调用stop_stream()"""
+        stream_to_stop = None
         with self.lock:
             if not self.is_playing:
                 self.logger.warning("没有在播放")
@@ -328,19 +338,26 @@ class AudioHandler:
             
             try:
                 self.is_playing = False
-                self.playback_stop_flag = False  # 重置停止标志
+                self.playback_stop_flag = True  # 设置停止标志，通知回调立即退出
                 
-                if self.output_stream:
-                    self.output_stream.stop_stream()
-                    self.output_stream.close()
-                    self.output_stream = None
+                stream_to_stop = self.output_stream
+                self.output_stream = None
                 
                 self.play_buffer = deque()
-                self.logger.info("停止播放")
                 
             except Exception as e:
                 self.logger.error(f"停止播放失败: {e}")
                 raise
+        
+        # 在锁外停止流，避免与_play_callback死锁
+        if stream_to_stop:
+            try:
+                stream_to_stop.stop_stream()
+                stream_to_stop.close()
+            except Exception as e:
+                self.logger.error(f"关闭播放流失败: {e}")
+        
+        self.logger.info("停止播放")
     
     def _record_callback(self, in_data, frame_count, time_info, status):
         """改进的录音回调函数
@@ -536,11 +553,22 @@ class AudioHandler:
     def close(self):
         """关闭音频处理"""
         try:
-            self.stop_recording()
-            self.stop_playback()
+            # 安全停止录音和播放
+            try:
+                self.stop_recording()
+            except Exception as e:
+                self.logger.error(f"关闭时停止录音失败: {e}")
+            
+            try:
+                self.stop_playback()
+            except Exception as e:
+                self.logger.error(f"关闭时停止播放失败: {e}")
             
             if self.pyaudio is not None:
-                self.pyaudio.terminate()
+                try:
+                    self.pyaudio.terminate()
+                except Exception as e:
+                    self.logger.error(f"终止PyAudio失败: {e}")
                 self.pyaudio = None
                 
             self.logger.info("音频处理已关闭")
