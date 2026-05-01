@@ -12,7 +12,7 @@ import os
 from typing import Optional, Dict, Any, Callable
 from dataclasses import dataclass
 
-from nrl_protocol import NRLProtocol, NRLPacket, calculate_dmr_id
+from nrl_protocol import NRLProtocol, NRLPacket
 from audio_handler import AudioHandler, VoiceProcessor
 
 # 操作系统名称映射
@@ -32,7 +32,7 @@ class DeviceConfig:
     """设备配置"""
     callsign: str
     ssid: int
-    cpuid: str
+    dmr_id: str
     password: str
     model: int
 
@@ -87,11 +87,8 @@ class NetworkConfig:
 class NRLClient:
     """NRL客户端的主类"""
     
-    def __init__(self, config_file: str = "config.yaml", enable_cpuid_calc: bool = False):
+    def __init__(self, config_file: str = "config.yaml"):
         self.logger = logging.getLogger(__name__)
-        
-        # DMRID计算开关
-        self.enable_cpuid_calc = enable_cpuid_calc
         
         # 配置
         self.device_config: Optional[DeviceConfig] = None
@@ -158,7 +155,7 @@ class NRLClient:
             self.device_config = DeviceConfig(
                 callsign=device_cfg.get('callsign', 'BH6ERO'),
                 ssid=device_cfg.get('ssid', 1),
-                cpuid=device_cfg.get('cpuid', '12345678'),
+                dmr_id=device_cfg.get('dmr_id', '123456'),
                 password=device_cfg.get('password', '000000'),
                 model=device_cfg.get('model', 1)
             )
@@ -269,16 +266,10 @@ class NRLClient:
                 self.logger.warning("设置接收缓冲区失败，使用默认配置")
             
             # 发送初始包进行设备注册
-            # 使用设备配置，根据DMRID计算开关决定是否计算DMRID
-            cpuid_to_use = self.device_config.cpuid
-            if self.enable_cpuid_calc:
-                # 如果启用DMRID计算，使用呼号+SSID计算DMRID
-                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
-            
             test_packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
                 self.device_config.ssid, 
-                dmr_id=cpuid_to_use, 
+                dmr_id=self.device_config.dmr_id, 
                 dev_mode=self.device_config.model   
             )
             
@@ -646,16 +637,11 @@ class NRLClient:
                 self.logger.warning(f"语音数据超长（{len(voice_data)}字节），截断为500字节")
                 voice_data = voice_data[:500]
             
-            # 根据DMRID计算开关决定使用哪个DMRID
-            cpuid_to_use = self.device_config.cpuid
-            if self.enable_cpuid_calc:
-                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
-            
             # 创建语音数据包
             packet = self.protocol.create_voice_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,
-                dmr_id=cpuid_to_use,
+                dmr_id=self.device_config.dmr_id,
                 voice_data=voice_data,
                 dev_mode=self.device_config.model
             )
@@ -699,11 +685,6 @@ class NRLClient:
                 self.logger.warning("文本消息为空")
                 return False
             
-            # 根据DMRID计算开关决定使用哪个DMRID
-            cpuid_to_use = self.device_config.cpuid
-            if self.enable_cpuid_calc:
-                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
-            
             # 编码文本消息（UTF-8）
             text_bytes = message.encode('utf-8')
             
@@ -717,7 +698,7 @@ class NRLClient:
             packet = self.protocol.create_text_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,
-                dmr_id=cpuid_to_use,
+                dmr_id=self.device_config.dmr_id,
                 text_data=text_bytes,
                 dev_mode=self.device_config.model
             )
@@ -751,16 +732,11 @@ class NRLClient:
             if not self.is_connected or not self.socket:
                 return False
             
-            # 创建心跳包，根据DMRID计算开关决定是否计算DMRID
-            cpuid_to_use = self.device_config.cpuid
-            if self.enable_cpuid_calc:
-                # 如果启用DMRID计算，使用呼号+SSID计算DMRID
-                cpuid_to_use = f"{self.device_config.callsign}-{self.device_config.ssid}"
-            
+            # 创建心跳包
             packet = self.protocol.create_heartbeat_packet(
                 self.device_config.callsign,
                 self.device_config.ssid,  # 使用设备配置的SSID
-                dmr_id=cpuid_to_use,  # 使用配置的CPUID或计算值
+                dmr_id=self.device_config.dmr_id,
                 dev_mode=self.device_config.model   # 设备模式
             )
             
@@ -843,7 +819,7 @@ class NRLClient:
         return {
             'callsign': self.device_config.callsign,
             'ssid': self.device_config.ssid,
-            'cpuid': self.device_config.cpuid,
+            'dmr_id': self.device_config.dmr_id,
             'model': self.device_config.model,
             'online': self.is_connected,
             'status': self.device_status

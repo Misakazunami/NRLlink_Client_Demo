@@ -22,7 +22,7 @@ ctk.set_default_color_theme("blue")  # "blue", "green", "dark-blue"
 class NRLGUIClient:
     """NRL客户端GUI类 (CustomTkinter版本)"""
     
-    def __init__(self, enable_cpuid_calc: bool = False):
+    def __init__(self):
         # 设置窗口
         self.root = ctk.CTk()
         self.root.title("NRLLink_Client Beta V1.4.2 - 无线电网络互联客户端")
@@ -30,9 +30,6 @@ class NRLGUIClient:
         # 根据操作系统设置窗口大小
         self.system_kind = os.name
         self.root.geometry({"nt": "850x650", "posix": "850x750"}.get(self.system_kind, "850x700"))
-        
-        # CPUID计算开关
-        self.enable_cpuid_calc = ctk.BooleanVar(value=enable_cpuid_calc)
         
         # 客户端
         self.client = None
@@ -370,12 +367,6 @@ class NRLGUIClient:
         self.tools_menu.add_command(label="音频设备测试", command=self.test_audio_devices)
         self.tools_menu.add_command(label="网络测试", command=self.test_network)
         self.tools_menu.add_separator()
-        # CPUID计算开关
-        self.tools_menu.add_checkbutton(label="启用CPUID计算", 
-                        variable=self.enable_cpuid_calc,
-                        onvalue=True, offvalue=False,
-                        command=self.menu_toggle_cpuid_calc)
-        self.tools_menu.add_separator()
         # 调试开关：强制解码空包（在菜单中控制）
         self.tools_menu.add_checkbutton(label="[调试]强制解码空包", 
                         variable=self.debug_force_decode_var,
@@ -401,7 +392,7 @@ class NRLGUIClient:
         """连接到服务器"""
         try:
             if not self.client:
-                self.client = NRLClient(enable_cpuid_calc=self.enable_cpuid_calc.get())
+                self.client = NRLClient()
                 
                 # 设置回调
                 self.client.set_message_callback(self.on_message_received)
@@ -588,26 +579,41 @@ class NRLGUIClient:
         # 在主线程中处理
         self.root.after(0, lambda: self.log_message("收到语音数据"))
     
-    def on_status_changed(self, status: Dict[str, Any]):
-        """状态改变回调"""
-        # 在主线程中处理
+    def on_status_changed(self, key: str, value):
+        """状态改变回调 - 由 nrl_client._update_status(key, value) 触发"""
+        # 在主线程中更新 UI
         self.root.after(0, self.update_status_display)
     
     def update_status_display(self):
         """更新状态显示"""
-        if self.client and self.client.is_connected:
-            # 更新设备信息
-            if hasattr(self.client, 'device_info'):
-                self.device_info.set(str(self.client.device_info))
+        if self.client and self.client.device_config:
+            dc = self.client.device_config
+            ss = self.client.device_status
             
-            # 更新底部状态栏
-            if hasattr(self.client, 'callsign_ssid'):
-                self.callsign_ssid_label.configure(text=self.client.callsign_ssid)
+            # 更新呼号-SSID
+            self.callsign_ssid_label.configure(text=f"{dc.callsign}-{dc.ssid}")
+            
+            # 更新设备信息
+            self.device_info.set(
+                f"呼号: {dc.callsign}  SSID: {dc.ssid}  DMRID: {dc.dmr_id}  型号: {dc.model}"
+            )
             
             # 更新包计数
-            if hasattr(self.client, 'packet_stats'):
-                stats = self.client.packet_stats
-                self.packet_count_label.configure(text=f"↑{stats['tx']} ↓{stats['rx']}")
+            tx = ss.get('packets_sent', 0)
+            rx = ss.get('packets_received', 0)
+            self.packet_count_label.configure(text=f"↑{tx} ↓{rx}")
+            
+            # 更新服务器名称
+            if self.client.server_config:
+                self.server_name_label.configure(
+                    text=f"{self.client.server_config.host}:{self.client.server_config.port}"
+                )
+            
+            # 更新连接状态
+            if self.client.is_connected:
+                self.bottom_connection_status.configure(text="在线", text_color="green")
+            else:
+                self.bottom_connection_status.configure(text="离线", text_color="red")
     
     def start_status_update(self):
         """开始状态更新"""
@@ -635,19 +641,6 @@ class NRLGUIClient:
             self.log_message(f"调试模式: {'开启' if enabled else '关闭'}")
         else:
             self.log_message(f"调试模式: {'开启' if enabled else '关闭'} (将在下次连接时生效)")
-    
-    def menu_toggle_cpuid_calc(self):
-        """菜单切换CPUID计算开关"""
-        enabled = self.enable_cpuid_calc.get()
-        if self.client:
-            self.client.enable_cpuid_calc = enabled
-            self.log_message(f"CPUID计算: {'启用' if enabled else '禁用'}")
-            if enabled:
-                self.log_message("注意：启用CPUID计算会增加计算量，但提高安全性")
-            else:
-                self.log_message("注意：禁用CPUID计算将直接使用配置文件中的CPUID值")
-        else:
-            self.log_message(f"CPUID计算: {'启用' if enabled else '禁用'} (将在下次连接时生效)")
 
     def show_about(self):
         """显示关于信息"""
@@ -1049,9 +1042,9 @@ NRLLink_Client Demo
             ssid_var = tk.IntVar(value=dev_defaults.get('ssid', 1))
             ttk.Entry(device_frame, textvariable=ssid_var, width=15).grid(row=1, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
-            ttk.Label(device_frame, text="CPUID:").grid(row=2, column=0, sticky=tk.W, pady=3)
-            cpuid_var = tk.StringVar(value=dev_defaults.get('cpuid', '12345678'))
-            ttk.Entry(device_frame, textvariable=cpuid_var, width=15).grid(row=2, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            ttk.Label(device_frame, text="DMRID:").grid(row=2, column=0, sticky=tk.W, pady=3)
+            dmr_id_var = tk.StringVar(value=dev_defaults.get('dmr_id', '123456'))
+            ttk.Entry(device_frame, textvariable=dmr_id_var, width=15).grid(row=2, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
             ttk.Label(device_frame, text="密码:").grid(row=3, column=0, sticky=tk.W, pady=3)
             pwd_var = tk.StringVar(value=dev_defaults.get('password', ''))
@@ -1255,7 +1248,7 @@ NRLLink_Client Demo
                         'device': {
                             'callsign': callsign_var.get().strip(),
                             'ssid': ssid_var.get(),
-                            'cpuid': cpuid_var.get(),
+                            'dmr_id': dmr_id_var.get(),
                             'password': pwd_var.get(),
                             'model': model_var.get()
                         },
@@ -1396,7 +1389,7 @@ NRLLink_Client Demo
                 self.client = None
             
             # 重新初始化客户端
-            self.client = NRLClient(enable_cpuid_calc=self.enable_cpuid_calc.get())
+            self.client = NRLClient()
             
             # 设置回调
             self.client.set_message_callback(self.on_message_received)

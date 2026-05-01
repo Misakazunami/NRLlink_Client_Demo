@@ -63,8 +63,6 @@ def main():
                        help='列出音频设备并退出')
     parser.add_argument('--gui', choices=['ctk', 'tk'], default='ctk',
                        help='选择GUI类型: ctk (现代CustomTkinter, 默认) 或 tk (传统Tkinter)')
-    parser.add_argument('--enable-cpuid-calc', action='store_true',
-                       help='启用CPUID计算（默认关闭，直接使用配置文件中的CPUID）')
     
     args = parser.parse_args()
     
@@ -102,7 +100,7 @@ def main():
                     gui_type = "Tkinter"
                 
                 logger.info(f"启动NRL客户端 ({gui_type} GUI模式)")
-                app = NRLGUIClient(enable_cpuid_calc=args.enable_cpuid_calc)
+                app = NRLGUIClient()
                 app.run()
                 
             except ImportError:
@@ -111,7 +109,7 @@ def main():
                     try:
                         from gui_client import NRLGUIClient
                         logger.info("启动NRL客户端 (Tkinter GUI模式 - 回退)")
-                        app = NRLGUIClient(enable_cpuid_calc=args.enable_cpuid_calc)
+                        app = NRLGUIClient()
                         app.run()
                     except ImportError:
                         logger.error("所有GUI组件导入失败，尝试使用命令行模式...")
@@ -128,7 +126,7 @@ def main():
             logger.info(f"系统类型: {syskd}")
             
             # 创建客户端
-            client = NRLClient(args.config, enable_cpuid_calc=args.enable_cpuid_calc)
+            client = NRLClient(args.config)
             
             # 简单的命令行界面
             print("\nNRL客户端命令行界面")

@@ -216,7 +216,7 @@ class NRLPacket:
     
     def __str__(self) -> str:
         return (f"NRLPacket(version={self.version}, type={self.packet_type}, "
-                f"callsign={self.get_callsign_ssid()}, cpuid={self.cpuid.hex()})")
+                f"callsign={self.get_callsign_ssid()}, dmr_id={self.dmr_id.hex()})")
 
 
 class NRLProtocol:
@@ -226,21 +226,24 @@ class NRLProtocol:
         self.packet_count = 0
     
     @staticmethod
-    def _calculate_dmr_id_bytes(dmr_id: str) -> bytes:
-        """计算3字节DMRID，统一所有包类型的DMRID生成逻辑
+    def _parse_dmr_id_hex(dmr_id: str) -> bytes:
+        """将DMRID十六进制字符串转换为3字节
         
-        如果dmr_id是6位十六进制字符串，直接转换；
-        否则使用字符串哈希值的前3字节。
+        DMRID由用户自行申请，直接使用配置中的十六进制值。
         """
         if not dmr_id:
             return b'\x00' * 3
-        if len(dmr_id) >= 6 and all(c in '0123456789abcdefABCDEF' for c in dmr_id):
-            return bytes.fromhex(dmr_id[:6])
-        # 使用字符串的哈希值的前3字节
-        hash_val = 0
-        for char in dmr_id:
-            hash_val = (hash_val * 31 + ord(char)) & 0xFFFFFFFF
-        return struct.pack(">I", hash_val)[:3]
+        # 去除可能的前导空格，取前6位十六进制字符
+        clean = dmr_id.strip()
+        if len(clean) >= 6 and all(c in '0123456789abcdefABCDEF' for c in clean[:6]):
+            return bytes.fromhex(clean[:6])
+        # 如果格式不对，尝试填充到6位
+        clean = clean.replace(' ', '')
+        if len(clean) < 6:
+            clean = clean.zfill(6)
+        if all(c in '0123456789abcdefABCDEF' for c in clean[:6]):
+            return bytes.fromhex(clean[:6])
+        return b'\x00' * 3
     
     def create_voice_packet(self, callsign: str, ssid: int, dmr_id: str, 
                           voice_data: bytes, dev_mode: int = 1) -> NRLPacket:
@@ -254,7 +257,7 @@ class NRLProtocol:
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid
         
-        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，bit0用作DCD/PTT标志
@@ -289,11 +292,7 @@ class NRLProtocol:
         packet.ssid = ssid  # 通常为200
         
         # 根据协议规范，心跳包使用3字节DMRID
-        if dmr_id is None:
-            # 使用callsign-SSID生成哈希值的前3字节（与Go版本一致）
-            dmr_id_bytes = self._calculate_dmr_id_bytes(f"{callsign}-{ssid}")
-        else:
-            dmr_id_bytes = self._calculate_dmr_id_bytes(dmr_id)
+        dmr_id_bytes = self._parse_dmr_id_hex(dmr_id or "")
             
         packet.dmr_id = dmr_id_bytes
         packet.dev_mode = dev_mode if dev_mode else 0x10  # 默认0x10表示正常模式
@@ -310,7 +309,7 @@ class NRLProtocol:
         packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
         packet.ssid = ssid
         # 使用3字节DMRID
-        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
         packet.dev_mode = dev_mode
         packet.data = config_data
         packet.count = self.packet_count
@@ -325,7 +324,7 @@ class NRLProtocol:
         packet.ssid = ssid
         
         # 根据协议规范，使用3字节DMRID
-        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，状态为0x01
@@ -345,7 +344,7 @@ class NRLProtocol:
         packet.ssid = ssid
         
         # 根据协议规范，使用3字节DMRID
-        packet.dmr_id = self._calculate_dmr_id_bytes(dmr_id)
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
         
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，bit0用作DCD/PTT标志
@@ -370,15 +369,6 @@ class NRLProtocol:
     
 
 
-
-def calculate_dmr_id(callsign: str) -> bytes:
-    """计算DMRID，与Go服务器保持一致
-    
-    参考nrllink的calculateCpuId函数：
-    将字符串生成32位哈希值，哈希算法为: hash = (hash*31 + char) & 0xFFFFFFFF
-    返回3字节用于DMRID的二进制数据
-    """
-    return NRLProtocol._calculate_dmr_id_bytes(callsign)
 
 # G.711编解码相关常量（与Go版本保持一致）
 SEG_MASK = 0x70
