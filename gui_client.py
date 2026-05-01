@@ -12,15 +12,18 @@ import yaml #type: ignore
 import shutil
 from typing import Dict, Any, Optional
 
-from nrl_client import NRLClient
+from nrl_client import NRLClient, get_os_display_name
 
 class NRLGUIClient:
     """NRL客户端GUI类"""
     
     def __init__(self, enable_cpuid_calc: bool = False):
         self.root = tk.Tk()
-        self.root.title("NRLLink_Client Beta V1.3.4 - 无线电网络互联客户端")
-        self.root.geometry("850x650")
+        self.root.title("NRLLink_Client Beta V1.4.2 - 无线电网络互联客户端")
+        # 根据操作系统设置窗口大小
+        self.system_kind = os.name
+        self.root.geometry({"nt": "850x650", "posix": "850x750"}.get(self.system_kind, "850x700"))
+        
         
         # CPUID计算开关
         self.enable_cpuid_calc = tk.BooleanVar(value=enable_cpuid_calc)
@@ -37,7 +40,7 @@ class NRLGUIClient:
         
         # 状态变量
         self.connection_status = tk.StringVar(value="未连接")
-        self.device_info = tk.StringVar(value="设备信息")
+        self.device_info = tk.StringVar(value="正在获取...")
         self.audio_level = tk.DoubleVar(value=0.0)
         self.ptt_active = tk.BooleanVar(value=False)
         # 播放状态
@@ -121,6 +124,11 @@ class NRLGUIClient:
         ttk.Label(self.status_frame, text="设备信息:").grid(row=0, column=2, sticky=tk.W)
         device_label = ttk.Label(self.status_frame, textvariable=self.device_info)
         device_label.grid(row=0, column=3, sticky=tk.W, padx=(5, 0))
+
+        # 操作系统
+        ttk.Label(self.status_frame, text="操作系统:").grid(row=0, column=4, sticky=tk.W, padx=(20, 5))
+        os_label = ttk.Label(self.status_frame, text=get_os_display_name(), font=('Arial', 10, 'bold'))
+        os_label.grid(row=0, column=5, sticky=tk.W, padx=(5, 0))
     
     def create_control_frame(self):
         """创建控制面板"""
@@ -301,6 +309,7 @@ class NRLGUIClient:
         file_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="文件", menu=file_menu)
         file_menu.add_command(label="新建配置", command=self.new_config)
+        file_menu.add_command(label="编辑配置", command=self.edit_config)
         file_menu.add_command(label="加载配置", command=self.load_config)
         file_menu.add_command(label="配置管理器", command=self.show_config_manager)
         
@@ -675,145 +684,349 @@ CPUID: {device_info.get('cpuid', '未知')}
         
         messagebox.showinfo("设备配置", config_text.strip())
     
-    def new_config(self):
-        """新建配置"""
+    def new_config(self, initial_data: dict = None):
+        """新建或编辑配置
+        
+        Args:
+            initial_data: 编辑模式时传入的已有配置数据，新建时为None
+        """
+        is_edit = initial_data is not None
         try:
             # 创建新配置窗口
             new_config_window = tk.Toplevel(self.root)
-            new_config_window.title("新建配置")
-            new_config_window.geometry("500x600")
+            title = "编辑配置" if is_edit else "新建配置"
+            new_config_window.title(title)
+            new_config_window.geometry("650x700")
             new_config_window.transient(self.root)
             new_config_window.grab_set()
             
-            # 配置框架
-            config_frame = ttk.LabelFrame(new_config_window, text="配置信息", padding="10")
-            config_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+            # 主滚动画布
+            canvas = tk.Canvas(new_config_window, borderwidth=0)
+            scrollbar = ttk.Scrollbar(new_config_window, orient="vertical", command=canvas.yview)
+            scrollable_frame = ttk.Frame(canvas)
             
-            # 配置名称
+            scrollable_frame.bind(
+                "<Configure>",
+                lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+            )
+            canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+            canvas.configure(yscrollcommand=scrollbar.set)
+            
+            canvas.pack(side="left", fill="both", expand=True)
+            scrollbar.pack(side="right", fill="y")
+            
+            # 鼠标滚轮支持
+            def _on_mousewheel(event):
+                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+            canvas.bind_all("<MouseWheel>", _on_mousewheel)
+            def _unbind_mw(event):
+                canvas.unbind_all("<MouseWheel>")
+            canvas.bind("<Destroy>", _unbind_mw)
+            
+            # ---- 配置信息 ----
+            config_frame = ttk.LabelFrame(scrollable_frame, text="配置信息", padding="10")
+            config_frame.pack(fill=tk.X, padx=10, pady=(10, 5))
+            
             ttk.Label(config_frame, text="配置名称:").grid(row=0, column=0, sticky=tk.W, pady=5)
-            config_name_var = tk.StringVar(value="新配置")
+            config_name_var = tk.StringVar(value=os.path.basename(self.current_config_file.get()).replace('.yaml','') if is_edit else "新配置")
             config_name_entry = ttk.Entry(config_frame, textvariable=config_name_var, width=30)
             config_name_entry.grid(row=0, column=1, sticky=tk.W, pady=5, padx=(5, 0))
             
-            # 设备配置
+            # ---- 设备配置 ----
+            dev_defaults = initial_data.get('device', {}) if is_edit else {}
             device_frame = ttk.LabelFrame(config_frame, text="设备配置", padding="5")
             device_frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
             
             ttk.Label(device_frame, text="呼号:").grid(row=0, column=0, sticky=tk.W, pady=3)
-            callsign_var = tk.StringVar(value="BH6XXX")
+            callsign_var = tk.StringVar(value=dev_defaults.get('callsign', 'BH6XXX'))
             ttk.Entry(device_frame, textvariable=callsign_var, width=15).grid(row=0, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
             ttk.Label(device_frame, text="SSID:").grid(row=1, column=0, sticky=tk.W, pady=3)
-            ssid_var = tk.IntVar(value=1)
+            ssid_var = tk.IntVar(value=dev_defaults.get('ssid', 1))
             ttk.Entry(device_frame, textvariable=ssid_var, width=15).grid(row=1, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
             ttk.Label(device_frame, text="CPUID:").grid(row=2, column=0, sticky=tk.W, pady=3)
-            cpuid_var = tk.StringVar(value="12345678")
+            cpuid_var = tk.StringVar(value=dev_defaults.get('cpuid', '12345678'))
             ttk.Entry(device_frame, textvariable=cpuid_var, width=15).grid(row=2, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
-            ttk.Label(device_frame, text="型号:").grid(row=3, column=0, sticky=tk.W, pady=3)
-            model_var = tk.IntVar(value=1)
-            ttk.Entry(device_frame, textvariable=model_var, width=15).grid(row=3, column=1, sticky=tk.W, pady=3, padx=(5, 0))
+            ttk.Label(device_frame, text="密码:").grid(row=3, column=0, sticky=tk.W, pady=3)
+            pwd_var = tk.StringVar(value=dev_defaults.get('password', ''))
+            pwd_entry = ttk.Entry(device_frame, textvariable=pwd_var, width=15, show="*")
+            pwd_entry.grid(row=3, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
-            # 服务器配置
-            servers_frame = ttk.LabelFrame(config_frame, text="服务器配置", padding="5")
-            servers_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
+            ttk.Label(device_frame, text="型号:").grid(row=4, column=0, sticky=tk.W, pady=3)
+            model_var = tk.IntVar(value=dev_defaults.get('model', 1))
+            ttk.Entry(device_frame, textvariable=model_var, width=15).grid(row=4, column=1, sticky=tk.W, pady=3, padx=(5, 0))
             
-            ttk.Label(servers_frame, text="服务器1:").grid(row=0, column=0, sticky=tk.W, pady=3)
-            server1_name_var = tk.StringVar(value="主服务器")
-            server1_host_var = tk.StringVar(value="43.143.14.24")
-            server1_port_var = tk.IntVar(value=60050)
+            # ---- 服务器列表（动态） ----
+            servers_outer = ttk.LabelFrame(scrollable_frame, text="服务器列表", padding="5")
+            servers_outer.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
             
-            ttk.Entry(servers_frame, textvariable=server1_name_var, width=10).grid(row=0, column=1, sticky=tk.W, pady=3, padx=(5, 0))
-            ttk.Entry(servers_frame, textvariable=server1_host_var, width=15).grid(row=0, column=2, sticky=tk.W, pady=3, padx=(5, 0))
-            ttk.Entry(servers_frame, textvariable=server1_port_var, width=8).grid(row=0, column=3, sticky=tk.W, pady=3, padx=(5, 0))
+            # 服务器表格
+            columns = ('名称', '地址', '端口', '密码')
+            server_tree = ttk.Treeview(servers_outer, columns=columns, show='headings', height=5)
+            server_tree.heading('名称', text='名称')
+            server_tree.heading('地址', text='地址')
+            server_tree.heading('端口', text='端口')
+            server_tree.heading('密码', text='密码')
+            server_tree.column('名称', width=120)
+            server_tree.column('地址', width=160)
+            server_tree.column('端口', width=70)
+            server_tree.column('密码', width=80)
             
-            ttk.Label(servers_frame, text="服务器2:").grid(row=1, column=0, sticky=tk.W, pady=3)
-            server2_name_var = tk.StringVar(value="备用服务器")
-            server2_host_var = tk.StringVar(value="43.143.14.25")
-            server2_port_var = tk.IntVar(value=60050)
+            tree_scroll = ttk.Scrollbar(servers_outer, orient=tk.VERTICAL, command=server_tree.yview)
+            server_tree.configure(yscrollcommand=tree_scroll.set)
+            server_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+            tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
             
-            ttk.Entry(servers_frame, textvariable=server2_name_var, width=10).grid(row=1, column=1, sticky=tk.W, pady=3, padx=(5, 0))
-            ttk.Entry(servers_frame, textvariable=server2_host_var, width=15).grid(row=1, column=2, sticky=tk.W, pady=3, padx=(5, 0))
-            ttk.Entry(servers_frame, textvariable=server2_port_var, width=8).grid(row=1, column=3, sticky=tk.W, pady=3, padx=(5, 0))
+            # 服务器数据存储 {name, host, port, password}
+            server_entries = []
             
-            # 按钮区域
-            button_frame = ttk.Frame(new_config_window)
-            button_frame.pack(fill=tk.X, padx=10, pady=10)
+            # 加载已有服务器数据
+            servers_data = initial_data.get('servers', []) if is_edit else [
+                {'name': '主服务器', 'host': '43.143.14.24', 'port': 60050, 'password': ''},
+                {'name': '备用服务器', 'host': '43.143.14.25', 'port': 60050, 'password': ''},
+            ]
+            for srv in servers_data:
+                row = {
+                    'name': tk.StringVar(value=str(srv.get('name', ''))),
+                    'host': tk.StringVar(value=str(srv.get('host', ''))),
+                    'port': tk.StringVar(value=str(srv.get('port', 60050))),
+                    'password': tk.StringVar(value=str(srv.get('password', ''))),
+                }
+                server_entries.append(row)
+                server_tree.insert('', tk.END, values=(
+                    row['name'].get(), row['host'].get(), row['port'].get(),
+                    '****' if row['password'].get() else ''
+                ))
+            
+            # 服务器操作按钮
+            srv_btn_frame = ttk.Frame(servers_outer)
+            srv_btn_frame.pack(fill=tk.X, pady=(5, 0))
+            
+            def add_server_entry():
+                """添加一行空白服务器"""
+                row = {
+                    'name': tk.StringVar(value='新服务器'),
+                    'host': tk.StringVar(value=''),
+                    'port': tk.StringVar(value='60050'),
+                    'password': tk.StringVar(value=''),
+                }
+                server_entries.append(row)
+                server_tree.insert('', tk.END, values=(row['name'].get(), row['host'].get(), row['port'].get(), ''))
+            
+            def edit_server_entry():
+                """编辑选中的服务器"""
+                sel = server_tree.selection()
+                if not sel:
+                    messagebox.showwarning("提示", "请先选中一个服务器")
+                    return
+                idx = server_tree.index(sel[0])
+                row = server_entries[idx]
+                
+                edit_win = tk.Toplevel(new_config_window)
+                edit_win.title("编辑服务器")
+                edit_win.geometry("380x200")
+                edit_win.transient(new_config_window)
+                edit_win.grab_set()
+                
+                f = ttk.Frame(edit_win, padding="10")
+                f.pack(fill=tk.BOTH, expand=True)
+                
+                ttk.Label(f, text="名称:").grid(row=0, column=0, sticky=tk.W, pady=3)
+                e_name = ttk.Entry(f, textvariable=row['name'], width=25)
+                e_name.grid(row=0, column=1, padx=(5, 0), pady=3)
+                
+                ttk.Label(f, text="地址:").grid(row=1, column=0, sticky=tk.W, pady=3)
+                e_host = ttk.Entry(f, textvariable=row['host'], width=25)
+                e_host.grid(row=1, column=1, padx=(5, 0), pady=3)
+                
+                ttk.Label(f, text="端口:").grid(row=2, column=0, sticky=tk.W, pady=3)
+                e_port = ttk.Entry(f, textvariable=row['port'], width=25)
+                e_port.grid(row=2, column=1, padx=(5, 0), pady=3)
+                
+                ttk.Label(f, text="密码:").grid(row=3, column=0, sticky=tk.W, pady=3)
+                e_pwd = ttk.Entry(f, textvariable=row['password'], width=25, show="*")
+                e_pwd.grid(row=3, column=1, padx=(5, 0), pady=3)
+                
+                def save_edit():
+                    server_tree.item(sel[0], values=(
+                        row['name'].get(), row['host'].get(), row['port'].get(),
+                        '****' if row['password'].get() else ''
+                    ))
+                    edit_win.destroy()
+                
+                btn_f = ttk.Frame(f)
+                btn_f.grid(row=4, column=0, columnspan=2, pady=(15, 0))
+                ttk.Button(btn_f, text="确定", command=save_edit).pack(side=tk.LEFT, padx=5)
+                ttk.Button(btn_f, text="取消", command=edit_win.destroy).pack(side=tk.LEFT, padx=5)
+            
+            def remove_server_entry():
+                """删除选中的服务器"""
+                sel = server_tree.selection()
+                if not sel:
+                    messagebox.showwarning("提示", "请先选中一个服务器")
+                    return
+                if not messagebox.askyesno("确认", "确定要删除该服务器吗？"):
+                    return
+                idx = server_tree.index(sel[0])
+                server_tree.delete(sel[0])
+                server_entries.pop(idx)
+            
+            def move_up():
+                """上移服务器"""
+                sel = server_tree.selection()
+                if not sel:
+                    return
+                idx = server_tree.index(sel[0])
+                if idx == 0:
+                    return
+                server_entries[idx], server_entries[idx-1] = server_entries[idx-1], server_entries[idx]
+                server_tree.move(sel[0], '', idx-1)
+            
+            def move_down():
+                """下移服务器"""
+                sel = server_tree.selection()
+                if not sel:
+                    return
+                idx = server_tree.index(sel[0])
+                if idx >= len(server_entries) - 1:
+                    return
+                server_entries[idx], server_entries[idx+1] = server_entries[idx+1], server_entries[idx]
+                server_tree.move(sel[0], '', idx+1)
+            
+            ttk.Button(srv_btn_frame, text="添加", command=add_server_entry, width=8).pack(side=tk.LEFT, padx=(0, 3))
+            ttk.Button(srv_btn_frame, text="编辑", command=edit_server_entry, width=8).pack(side=tk.LEFT, padx=3)
+            ttk.Button(srv_btn_frame, text="删除", command=remove_server_entry, width=8).pack(side=tk.LEFT, padx=3)
+            ttk.Button(srv_btn_frame, text="上移", command=move_up, width=6).pack(side=tk.LEFT, padx=3)
+            ttk.Button(srv_btn_frame, text="下移", command=move_down, width=6).pack(side=tk.LEFT, padx=3)
+            
+            # ---- 音频配置 ----
+            audio_defaults = initial_data.get('audio', {}) if is_edit else {}
+            audio_frame = ttk.LabelFrame(scrollable_frame, text="音频配置", padding="5")
+            audio_frame.pack(fill=tk.X, padx=10, pady=5)
+            
+            ttk.Label(audio_frame, text="采样率:").grid(row=0, column=0, sticky=tk.W, pady=3)
+            sr_var = tk.IntVar(value=audio_defaults.get('sample_rate', 8000))
+            ttk.Entry(audio_frame, textvariable=sr_var, width=10).grid(row=0, column=1, sticky=tk.W, pady=3, padx=(5, 15))
+            
+            ttk.Label(audio_frame, text="声道数:").grid(row=0, column=2, sticky=tk.W, pady=3)
+            ch_var = tk.IntVar(value=audio_defaults.get('channels', 1))
+            ttk.Entry(audio_frame, textvariable=ch_var, width=8).grid(row=0, column=3, sticky=tk.W, pady=3, padx=(5, 15))
+            
+            ttk.Label(audio_frame, text="块大小:").grid(row=1, column=0, sticky=tk.W, pady=3)
+            ck_var = tk.IntVar(value=audio_defaults.get('chunk_size', 500))
+            ttk.Entry(audio_frame, textvariable=ck_var, width=10).grid(row=1, column=1, sticky=tk.W, pady=3, padx=(5, 15))
+            
+            ttk.Label(audio_frame, text="格式:").grid(row=1, column=2, sticky=tk.W, pady=3)
+            fmt_var = tk.StringVar(value=audio_defaults.get('format', 'paInt16'))
+            ttk.Entry(audio_frame, textvariable=fmt_var, width=10).grid(row=1, column=3, sticky=tk.W, pady=3, padx=(5, 15))
+            
+            # ---- 网络配置 ----
+            net_defaults = initial_data.get('network', {}) if is_edit else {}
+            net_frame = ttk.LabelFrame(scrollable_frame, text="网络配置", padding="5")
+            net_frame.pack(fill=tk.X, padx=10, pady=5)
+            
+            ttk.Label(net_frame, text="缓冲区大小:").grid(row=0, column=0, sticky=tk.W, pady=3)
+            buf_var = tk.IntVar(value=net_defaults.get('buffer_size', 4096))
+            ttk.Entry(net_frame, textvariable=buf_var, width=10).grid(row=0, column=1, sticky=tk.W, pady=3, padx=(5, 15))
+            
+            ttk.Label(net_frame, text="心跳间隔(秒):").grid(row=0, column=2, sticky=tk.W, pady=3)
+            hb_var = tk.IntVar(value=net_defaults.get('heartbeat_interval', 2))
+            ttk.Entry(net_frame, textvariable=hb_var, width=8).grid(row=0, column=3, sticky=tk.W, pady=3, padx=(5, 15))
+            
+            # ---- 底部按钮 ----
+            button_frame = ttk.Frame(scrollable_frame)
+            button_frame.pack(fill=tk.X, padx=10, pady=(10, 15))
             
             def create_config():
                 try:
+                    # 校验服务器列表
+                    if not server_entries:
+                        messagebox.showerror("错误", "请至少添加一个服务器")
+                        return
+                    
+                    # 校验设备配置
+                    if not callsign_var.get().strip():
+                        messagebox.showerror("错误", "请输入设备呼号")
+                        return
+                    
+                    # 构建服务器列表
+                    servers_list = []
+                    for row in server_entries:
+                        servers_list.append({
+                            'name': row['name'].get(),
+                            'host': row['host'].get(),
+                            'port': int(row['port'].get()) if row['port'].get().isdigit() else row['port'].get(),
+                            'password': row['password'].get(),
+                        })
+                    
                     # 构建配置数据
                     config_data = {
-                        'servers': [
-                            {
-                                'name': server1_name_var.get(),
-                                'host': server1_host_var.get(),
-                                'port': server1_port_var.get()
-                            },
-                            {
-                                'name': server2_name_var.get(),
-                                'host': server2_host_var.get(),
-                                'port': server2_port_var.get()
-                            }
-                        ],
+                        'servers': servers_list,
                         'current_server': 0,
                         'device': {
-                            'callsign': callsign_var.get(),
+                            'callsign': callsign_var.get().strip(),
                             'ssid': ssid_var.get(),
                             'cpuid': cpuid_var.get(),
-                            'password': '',
+                            'password': pwd_var.get(),
                             'model': model_var.get()
                         },
                         'audio': {
-                            'sample_rate': 8000,
-                            'channels': 1,
-                            'chunk_size': 500,
-                            'format': 'paInt16'
+                            'sample_rate': sr_var.get(),
+                            'channels': ch_var.get(),
+                            'chunk_size': ck_var.get(),
+                            'format': fmt_var.get()
                         },
                         'network': {
-                            'buffer_size': 4096,
-                            'heartbeat_interval': 2
+                            'buffer_size': buf_var.get(),
+                            'heartbeat_interval': hb_var.get()
                         }
                     }
                     
-                    # 保存文件对话框
+                    if is_edit:
+                        # 编辑模式：直接保存到原文件
+                        filename = self.current_config_file.get()
+                        with open(filename, 'w', encoding='utf-8') as f:
+                            yaml.dump(config_data, f, allow_unicode=True, default_flow_style=False)
+                        self.log_message(f"配置已更新: {filename}")
+                        messagebox.showinfo("成功", f"配置已更新:\n{filename}")
+                        new_config_window.destroy()
+                        # 重新加载配置
+                        self.load_config_file(filename)
+                        return
+                    
+                    # 新建模式：弹出保存对话框
                     filename = filedialog.asksaveasfilename(
                         defaultextension=".yaml",
                         filetypes=[("YAML files", "*.yaml"), ("All files", "*.*")],
                         initialfile=f"{config_name_var.get()}.yaml"
                     )
                     
-                    if filename:
-                        # 保存配置
-                        with open(filename, 'w', encoding='utf-8') as f:
-                            yaml.dump(config_data, f, allow_unicode=True, default_flow_style=False)
-                        
-                        self.log_message(f"配置已保存到: {filename}")
-                        messagebox.showinfo("成功", f"配置已成功保存到:\n{filename}")
-                        
-                        # 更新配置历史记录
-                        if filename not in self.config_history:
-                            self.config_history.insert(0, filename)
-                            # 限制历史记录数量
-                            if len(self.config_history) > 10:
-                                self.config_history = self.config_history[:10]
-                        else:
-                            # 如果已存在，移到最前面
-                            self.config_history.remove(filename)
-                            self.config_history.insert(0, filename)
-                        
-                        # 更新最近使用菜单
-                        self.update_recent_configs_menu()
-                        
-                        # 更新配置显示
-                        self.update_config_display()
-                        
-                        new_config_window.destroy()
-                        
-                        # 询问是否加载新配置
-                        if messagebox.askyesno("加载配置", "是否要立即加载新创建的配置？"):
-                            self.load_config_file(filename)
+                    if not filename:
+                        return
+                    
+                    with open(filename, 'w', encoding='utf-8') as f:
+                        yaml.dump(config_data, f, allow_unicode=True, default_flow_style=False)
+                    
+                    self.log_message(f"配置已保存到: {filename}")
+                    messagebox.showinfo("成功", f"配置已成功保存到:\n{filename}")
+                    
+                    # 更新配置历史记录
+                    if filename not in self.config_history:
+                        self.config_history.insert(0, filename)
+                        if len(self.config_history) > 10:
+                            self.config_history = self.config_history[:10]
+                    else:
+                        self.config_history.remove(filename)
+                        self.config_history.insert(0, filename)
+                    
+                    self.update_recent_configs_menu()
+                    self.update_config_display()
+                    new_config_window.destroy()
+                    
+                    if messagebox.askyesno("加载配置", "是否要立即加载新创建的配置？"):
+                        self.load_config_file(filename)
                     
                 except Exception as e:
                     messagebox.showerror("错误", f"创建配置失败: {str(e)}")
@@ -822,12 +1035,29 @@ CPUID: {device_info.get('cpuid', '未知')}
             def cancel_create():
                 new_config_window.destroy()
             
-            ttk.Button(button_frame, text="创建", command=create_config).pack(side=tk.RIGHT, padx=(5, 0))
+            ttk.Button(button_frame, text="保存", command=create_config, width=10).pack(side=tk.RIGHT, padx=(5, 0))
             ttk.Button(button_frame, text="取消", command=cancel_create).pack(side=tk.RIGHT)
             
         except Exception as e:
             messagebox.showerror("错误", f"新建配置功能出错: {str(e)}")
             self.log_message(f"新建配置功能出错: {str(e)}")
+    
+    def edit_config(self):
+        """编辑当前配置"""
+        try:
+            config_file = self.current_config_file.get()
+            if not os.path.exists(config_file):
+                messagebox.showerror("错误", f"配置文件不存在: {config_file}")
+                return
+            
+            with open(config_file, 'r', encoding='utf-8') as f:
+                config_data = yaml.safe_load(f) or {}
+            
+            self.new_config(initial_data=config_data)
+            
+        except Exception as e:
+            messagebox.showerror("错误", f"编辑配置失败: {str(e)}")
+            self.log_message(f"编辑配置失败: {str(e)}")
     
     def load_config(self):
         """加载配置"""
@@ -874,9 +1104,6 @@ CPUID: {device_info.get('cpuid', '未知')}
             
             # 更新当前配置文件路径
             self.current_config_file.set(filename)
-            
-            # 备份当前配置
-            current_config = self.current_config_file.get()
             
             # 添加到历史记录
             if filename not in self.config_history:
@@ -1014,13 +1241,14 @@ CPUID: {device_info.get('cpuid', '未知')}
         """显示关于信息"""
         about_text = """
 NRLLink_Client Demo
-版本: Beta V1.3.4
+版本: Beta V1.4.2
 
 基于nrllink项目开发的Python客户端
 支持功能:
 - 设备上线注册
 - 服务器选择和切换
 - 语音通信 (G.711编解码)
+- 支持触发DMR转发BM（测试性）
 - 文本消息
 - 心跳维持
 - 音频设备选择

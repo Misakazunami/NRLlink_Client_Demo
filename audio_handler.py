@@ -366,23 +366,6 @@ class AudioHandler:
                 if self.audio_callback:
                     self.audio_callback(send_data)
                     self.logger.debug(f"发送音频数据: {len(send_data)} bytes PCM")
-            
-            # 备选方案：如果长时间没有足够数据，可以考虑填充并发送
-            # 但这可能导致失真，所以默认不启用
-            # 只有在需要特殊情况处理时才启用
-            if False and (current_time - self.last_voice_send_time) >= 0.1:  # 100ms超时
-                if len(self.voice_data_cache) > 0:
-                    # 填充至1000字节后发送
-                    # 使用静音值填充（16位零值）
-                    silence = b'\x00\x00'
-                    padding_size = 1000 - len(self.voice_data_cache)
-                    send_data = bytes(self.voice_data_cache) + (silence * (padding_size // 2))
-                    self.voice_data_cache.clear()
-                    self.last_voice_send_time = current_time
-                    
-                    if self.audio_callback:
-                        self.audio_callback(send_data)
-                        self.logger.warning(f"发送填充后的音频数据: {len(send_data)} bytes PCM")
         
         return (None, pyaudio.paContinue)
     
@@ -604,16 +587,12 @@ class VoiceProcessor:
                 self.logger.warning("G.711数据为空，返回静音数据")
                 return b'\x00' * 1000  # 返回静音数据（500样本 * 2字节）
             
-            if len(g711_data) == 0:
-                self.logger.warning("G.711数据长度为0，返回静音数据")
-                return b'\x00' * 1000
-            
             # 解码G.711数据
             pcm_data = self.codec.decode(g711_data)
             
             # 如果解码失败或返回空数据，提供静音数据
-            if not pcm_data or len(pcm_data) == 0:
-                self.logger.warning(f"G.711解码失败: 输入长度={len(g711_data)}, 输出长度={len(pcm_data) if pcm_data else 0}")
+            if not pcm_data:
+                self.logger.warning(f"G.711解码失败: 输入长度={len(g711_data)}")
                 return b'\x00' * 1000  # 返回静音数据
             
             self.decode_count += 1

@@ -34,6 +34,9 @@ import logging
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, current_dir)
 
+from nrl_client import get_os_display_name, OS_NAME_MAP
+syskd = get_os_display_name()
+
 def setup_logging(level=logging.INFO):
     """设置日志系统"""
     logging.basicConfig(
@@ -58,6 +61,8 @@ def main():
                        help='测试音频设备并退出')
     parser.add_argument('--list-audio', action='store_true',
                        help='列出音频设备并退出')
+    parser.add_argument('--gui', choices=['ctk', 'tk'], default='ctk',
+                       help='选择GUI类型: ctk (现代CustomTkinter, 默认) 或 tk (传统Tkinter)')
     parser.add_argument('--enable-cpuid-calc', action='store_true',
                        help='启用CPUID计算（默认关闭，直接使用配置文件中的CPUID）')
     
@@ -88,28 +93,46 @@ def main():
         # GUI模式
         if not args.no_gui:
             try:
-                from gui_client import NRLGUIClient
+                if args.gui == 'ctk':
+                    # 默认使用现代CustomTkinter GUI
+                    from gui_client_ctk import NRLGUIClient
+                    gui_type = "CustomTkinter"
+                else:
+                    from gui_client import NRLGUIClient
+                    gui_type = "Tkinter"
                 
-                logger.info("启动NRL客户端 (GUI模式)")
+                logger.info(f"启动NRL客户端 ({gui_type} GUI模式)")
                 app = NRLGUIClient(enable_cpuid_calc=args.enable_cpuid_calc)
                 app.run()
                 
-            except ImportError as e:
-                logger.error(f"GUI组件导入失败: {e}")
-                logger.info("尝试使用命令行模式...")
-                args.no_gui = True
+            except ImportError:
+                if args.gui == 'ctk':
+                    logger.warning("CustomTkinter未安装，尝试回退到Tkinter GUI...")
+                    try:
+                        from gui_client import NRLGUIClient
+                        logger.info("启动NRL客户端 (Tkinter GUI模式 - 回退)")
+                        app = NRLGUIClient(enable_cpuid_calc=args.enable_cpuid_calc)
+                        app.run()
+                    except ImportError:
+                        logger.error("所有GUI组件导入失败，尝试使用命令行模式...")
+                        args.no_gui = True
+                else:
+                    logger.error(f"GUI组件导入失败，尝试使用命令行模式...")
+                    args.no_gui = True
         
         # 命令行模式
         if args.no_gui:
             from nrl_client import NRLClient
             
             logger.info("启动NRL客户端 (命令行模式)")
+            logger.info(f"系统类型: {syskd}")
             
             # 创建客户端
             client = NRLClient(args.config, enable_cpuid_calc=args.enable_cpuid_calc)
             
             # 简单的命令行界面
             print("\nNRL客户端命令行界面")
+            print(f"当前操作系统是：{syskd}")
             print("可用命令:")
             print("  connect - 连接到服务器")
             print("  disconnect - 断开连接")
@@ -117,14 +140,15 @@ def main():
             print("  send <消息> - 发送文本消息")
             print("  voice_start - 开始语音传输")
             print("  voice_stop - 停止语音传输")
-            print("  quit - 退出")
+            print("  help - 列出所有可用命令")
+            print("  exit - 退出")
             print()
             
             while True:
                 try:
                     command = input("> ").strip().lower()
                     
-                    if command == 'quit':
+                    if command == 'exit':
                         break
                     elif command == 'connect':
                         if client.connect():
@@ -151,13 +175,24 @@ def main():
                     elif command == 'voice_stop':
                         client.stop_voice_transmission()
                         print("语音传输已停止")
+                    elif command == 'help':
+                        print("可用命令：")
+                        print("  connect - 连接到服务器")
+                        print("  disconnect - 断开连接")
+                        print("  status - 查看状态")
+                        print("  send <消息> - 发送文本消息")
+                        print("  voice_start - 开始语音传输")
+                        print("  voice_stop - 停止语音传输")
+                        print("  help - 列出所有可用命令")
+                        print("  exit - 退出")
+                        print()
                     elif command == '':
                         continue
                     else:
                         print(f"未知命令: {command}")
-                        
+                        print(f"键入 help 来列出所有可用的命令")
                 except KeyboardInterrupt:
-                    print("\n使用 'quit' 命令退出")
+                    print("\n使用 'exit' 命令退出")
                 except Exception as e:
                     logger.error(f"命令执行错误: {e}")
             
