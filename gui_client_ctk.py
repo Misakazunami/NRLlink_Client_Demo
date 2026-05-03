@@ -74,7 +74,7 @@ class NRLGUIClient:
         )
         
         # 创建日志处理器用于GUI显示
-        self.log_handler = GUILogHandler(self.log_message)
+        self.log_handler = GUILogHandler(self.log_message, self.root)
         self.log_handler.setLevel(logging.INFO)
         
         # 获取根日志记录器
@@ -115,76 +115,85 @@ class NRLGUIClient:
         """创建状态栏"""
         self.status_frame = ctk.CTkFrame(self.main_frame)
         self.status_frame.grid(row=0, column=0, sticky=(ctk.W, ctk.E), pady=(0, 10), padx=(0, 0))
-        self.status_frame.grid_columnconfigure((0, 1, 2, 3, 4, 5), weight=1)
-        # 创建标签作为标题
+        
+        # 标题
         status_title = ctk.CTkLabel(self.status_frame, text="状态", font=("Arial", 14, "bold"))
-        status_title.grid(row=0, column=0, columnspan=6, sticky="w", padx=10, pady=(5, 5))
+        status_title.grid(row=0, column=0, columnspan=6, sticky="w", padx=15, pady=(8, 8))
         
-        # 连接状态 - 现在从row=1开始，因为row=0是标题
-        ctk.CTkLabel(self.status_frame, text="连接状态:").grid(row=1, column=0, sticky=ctk.W, padx=(5, 0))
-        status_label = ctk.CTkLabel(self.status_frame, textvariable=self.connection_status, 
-                                   font=('Arial', 12, 'bold'))
-        status_label.grid(row=1, column=1, sticky=ctk.W, padx=(5, 10))
+        # 内容行 - 使用统一的间距和对齐
+        content_frame = ctk.CTkFrame(self.status_frame, fg_color="transparent")
+        content_frame.grid(row=1, column=0, columnspan=6, sticky=(ctk.W, ctk.E), padx=15, pady=(0, 8))
         
-        # 设备信息
-        ctk.CTkLabel(self.status_frame, text="设备信息:").grid(row=1, column=2, sticky=ctk.W, padx=(5, 0))
-        device_label = ctk.CTkLabel(self.status_frame, textvariable=self.device_info)
-        device_label.grid(row=1, column=3, sticky=ctk.W, padx=(5, 0))
+        # 连接状态
+        ctk.CTkLabel(content_frame, text="连接状态:").grid(row=0, column=0, sticky=ctk.W, padx=(0, 5))
+        status_label = ctk.CTkLabel(content_frame, textvariable=self.connection_status, 
+                                   font=('Arial', 11, 'bold'))
+        status_label.grid(row=0, column=1, sticky=ctk.W, padx=(0, 20))
+        
+        # 设备信息 - 分开显示各个字段
+        ctk.CTkLabel(content_frame, text="呼号:").grid(row=0, column=2, sticky=ctk.W, padx=(0, 3))
+        self.callsign_value_label = ctk.CTkLabel(content_frame, text="BH6ERO", font=('Arial', 11))
+        self.callsign_value_label.grid(row=0, column=3, sticky=ctk.W, padx=(0, 15))
+        
+        ctk.CTkLabel(content_frame, text="SSID:").grid(row=0, column=4, sticky=ctk.W, padx=(0, 3))
+        self.ssid_value_label = ctk.CTkLabel(content_frame, text="1", font=('Arial', 11))
+        self.ssid_value_label.grid(row=0, column=5, sticky=ctk.W, padx=(0, 15))
+        
+        ctk.CTkLabel(content_frame, text="DMRID:").grid(row=0, column=6, sticky=ctk.W, padx=(0, 3))
+        self.dmr_id_value_label = ctk.CTkLabel(content_frame, text="4613402", font=('Arial', 11))
+        self.dmr_id_value_label.grid(row=0, column=7, sticky=ctk.W, padx=(0, 15))
 
         # 操作系统
-        ctk.CTkLabel(self.status_frame, text="操作系统:").grid(row=1, column=4, sticky=ctk.W, padx=(5, 0))
-        os_label = ctk.CTkLabel(self.status_frame, text=get_os_display_name(), font=('Arial', 12, 'bold'))
-        os_label.grid(row=1, column=5, sticky=ctk.W, padx=(5, 0))
+        ctk.CTkLabel(content_frame, text="操作系统:").grid(row=0, column=8, sticky=ctk.W, padx=(0, 3))
+        os_label = ctk.CTkLabel(content_frame, text=get_os_display_name(), font=('Arial', 11, 'bold'))
+        os_label.grid(row=0, column=9, sticky=ctk.W, padx=(0, 0))
     
     def create_control_frame(self):
         """创建控制面板"""
-        self.control_frame = ctk.CTkFrame(self.main_frame, height=130)  # 设置最小高度
+        self.control_frame = ctk.CTkFrame(self.main_frame)
         self.control_frame.grid(row=1, column=0, sticky=(ctk.W, ctk.E), pady=(0, 10), padx=(0, 0))
         self.control_frame.grid_columnconfigure(0, weight=1)
-        self.control_frame.grid_propagate(False)  # 防止框架自动调整大小
-        # 创建标签作为标题
+        
+        # 标题
         control_title = ctk.CTkLabel(self.control_frame, text="控制", font=("Arial", 14, "bold"))
-        control_title.grid(row=0, column=0, columnspan=3, sticky="w", padx=10, pady=(5, 5))
+        control_title.grid(row=0, column=0, sticky="w", padx=15, pady=(8, 8))
         
-        # 服务器选择
+        # 服务器选择行
         server_frame = ctk.CTkFrame(self.control_frame, fg_color="transparent")
-        server_frame.grid(row=1, column=0, sticky=(ctk.W, ctk.E), pady=(0, 10), padx=(0, 0))  # 增加底部间距
-        server_frame.grid_columnconfigure(1, weight=1)
+        server_frame.grid(row=1, column=0, sticky=(ctk.W, ctk.E), padx=15, pady=(0, 10))
+        server_frame.grid_columnconfigure(1, weight=1)  # 下拉框可伸展
         
-        ctk.CTkLabel(server_frame, text="服务器:").grid(row=0, column=0, sticky=ctk.W)
+        ctk.CTkLabel(server_frame, text="服务器:").grid(row=0, column=0, sticky=ctk.W, padx=(0, 8))
         self.server_combo = ctk.CTkComboBox(server_frame, variable=self.current_server_var,
-                                           width=200, state="readonly")
-        self.server_combo.grid(row=0, column=1, padx=(5, 10), sticky=(ctk.W, ctk.E))
-        self.server_combo.bind("<Configure>", self.on_server_changed)  # Note: CustomTkinter doesn't have <<ComboboxSelected>>
+                                           state="readonly")
+        self.server_combo.grid(row=0, column=1, padx=(0, 15), sticky=(ctk.W, ctk.E))
+        self.server_combo.bind("<Configure>", self.on_server_changed)
         
-        # 连接控制
-        button_frame = ctk.CTkFrame(server_frame, fg_color="transparent")
-        button_frame.grid(row=0, column=2, columnspan=2, sticky=ctk.W, padx=(0, 0))
+        # 连接按钮
+        self.connect_button = ctk.CTkButton(server_frame, text="连接", 
+                                          command=self.connect_to_server, width=90)
+        self.connect_button.grid(row=0, column=2, padx=(0, 5))
         
-        self.connect_button = ctk.CTkButton(button_frame, text="连接", 
-                                          command=self.connect_to_server, width=80)
-        self.connect_button.grid(row=0, column=0, padx=(0, 5))
-        
-        self.disconnect_button = ctk.CTkButton(button_frame, text="断开", 
+        self.disconnect_button = ctk.CTkButton(server_frame, text="断开", 
                                             command=self.disconnect_from_server,
-                                            state=ctk.DISABLED, width=80)
-        self.disconnect_button.grid(row=0, column=1, padx=(0, 5))
+                                            state=ctk.DISABLED, width=90)
+        self.disconnect_button.grid(row=0, column=3, padx=(0, 0))
         
         # 调试模式变量（菜单中控制）
         self.debug_force_decode_var = ctk.BooleanVar(value=False)
         
-        # 发送文本消息
+        # 消息发送行
         message_frame = ctk.CTkFrame(self.control_frame, fg_color="transparent")
-        message_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), pady=(5, 0), padx=(0, 0))
-        message_frame.grid_columnconfigure(1, weight=1)
+        message_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), padx=15, pady=(0, 10))
+        message_frame.grid_columnconfigure(1, weight=1)  # 输入框可伸展
         
-        ctk.CTkLabel(message_frame, text="消息:").grid(row=0, column=0, sticky=ctk.W)
-        self.message_entry = ctk.CTkEntry(message_frame, placeholder_text="输入要发送的消息...", width=300)
-        self.message_entry.grid(row=0, column=1, sticky=(ctk.W, ctk.E), padx=(5, 10))
+        ctk.CTkLabel(message_frame, text="消息:").grid(row=0, column=0, sticky=ctk.W, padx=(0, 8))
+        self.message_entry = ctk.CTkEntry(message_frame, placeholder_text="输入要发送的消息...")
+        self.message_entry.grid(row=0, column=1, sticky=(ctk.W, ctk.E), padx=(0, 10))
         
         self.send_message_button = ctk.CTkButton(message_frame, text="发送", 
                                                command=self.send_text_message,
-                                               state=ctk.DISABLED, width=60)
+                                               state=ctk.DISABLED, width=80)
         self.send_message_button.grid(row=0, column=2, padx=(0, 0))
     
     def create_audio_frame(self):
@@ -192,151 +201,148 @@ class NRLGUIClient:
         self.audio_frame = ctk.CTkFrame(self.main_frame)
         self.audio_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), pady=(0, 10), padx=(0, 0))
         self.audio_frame.grid_columnconfigure(0, weight=1)
-        # 创建标签作为标题
+        
+        # 标题
         audio_title = ctk.CTkLabel(self.audio_frame, text="音频控制", font=("Arial", 14, "bold"))
-        audio_title.grid(row=0, column=0, sticky="w", padx=10, pady=(5, 5))
+        audio_title.grid(row=0, column=0, sticky="w", padx=15, pady=(8, 8))
         
-        # 设备选择区域
+        # 设备选择行
         device_frame = ctk.CTkFrame(self.audio_frame, fg_color="transparent")
-        device_frame.grid(row=1, column=0, sticky=(ctk.W, ctk.E), pady=(0, 10), padx=(0, 0))
-        device_frame.grid_columnconfigure((1, 3), weight=1)
+        device_frame.grid(row=1, column=0, sticky=(ctk.W, ctk.E), padx=15, pady=(0, 10))
+        device_frame.grid_columnconfigure((1, 3), weight=1)  # 两个下拉框均可伸展
         
-        # 输入设备选择
-        ctk.CTkLabel(device_frame, text="输入设备:").grid(row=0, column=0, sticky=ctk.W, padx=(0, 5))
+        # 输入设备
+        ctk.CTkLabel(device_frame, text="输入设备:").grid(row=0, column=0, sticky=ctk.W, padx=(0, 8))
         self.input_device_var = ctk.StringVar()
         self.input_device_combo = ctk.CTkComboBox(device_frame, variable=self.input_device_var,
-                                                width=180, state="readonly")
-        self.input_device_combo.grid(row=0, column=1, sticky=ctk.W, padx=(0, 15))
-        # Note: CustomTkinter doesn't have <<ComboboxSelected>>, so we'll handle this differently
+                                                state="readonly")
+        self.input_device_combo.grid(row=0, column=1, sticky=(ctk.W, ctk.E), padx=(0, 15))
         
-        # 输出设备选择
-        ctk.CTkLabel(device_frame, text="输出设备:").grid(row=0, column=2, sticky=ctk.W, padx=(0, 5))
+        # 输出设备
+        ctk.CTkLabel(device_frame, text="输出设备:").grid(row=0, column=2, sticky=ctk.W, padx=(0, 8))
         self.output_device_var = ctk.StringVar()
         self.output_device_combo = ctk.CTkComboBox(device_frame, variable=self.output_device_var,
-                                                 width=180, state="readonly")
-        self.output_device_combo.grid(row=0, column=3, sticky=ctk.W, padx=(0, 15))
+                                                 state="readonly")
+        self.output_device_combo.grid(row=0, column=3, sticky=(ctk.W, ctk.E), padx=(0, 15))
         
-        # 刷新设备按钮
+        # 刷新按钮
         ctk.CTkButton(device_frame, text="刷新设备", 
-                     command=self.refresh_audio_devices, width=80).grid(row=0, column=4, padx=(10, 0))
+                     command=self.refresh_audio_devices, width=90).grid(row=0, column=4, padx=(0, 0))
         
-        # PTT按钮和相关控件
+        # PTT控制行
         ptt_frame = ctk.CTkFrame(self.audio_frame, fg_color="transparent")
-        ptt_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), padx=(0, 0), pady=(0, 0))
-        ptt_frame.grid_columnconfigure(0, weight=1)
+        ptt_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), padx=15, pady=(0, 10))
         
         self.ptt_button = ctk.CTkButton(ptt_frame, text="按住说话 (PTT)", 
-                                      command=self.toggle_ptt, width=120, height=40)
-        self.ptt_button.grid(row=0, column=0, padx=(0, 10))
+                                      command=self.toggle_ptt, width=150, height=40)
+        self.ptt_button.pack(side=ctk.LEFT, padx=(0, 20))
         
         # PTT状态指示
         self.ptt_status_label = ctk.CTkLabel(ptt_frame, text="PTT: 未激活", 
                                            font=('Arial', 12, 'bold'))
-        self.ptt_status_label.grid(row=0, column=1, padx=(0, 20))
+        self.ptt_status_label.pack(side=ctk.LEFT, padx=(0, 30))
         
-        # 音频控制按钮（单个切换按钮）
+        # 播放按钮
         self.play_toggle_button = ctk.CTkButton(ptt_frame, text="开始播放", 
-                              command=self.toggle_playback, width=100)
-        self.play_toggle_button.grid(row=0, column=2, padx=(0, 10))
+                              command=self.toggle_playback, width=120, height=40)
+        self.play_toggle_button.pack(side=ctk.LEFT, padx=(0, 0))
     
     def create_log_frame(self):
         """创建日志区域"""
         self.log_frame = ctk.CTkFrame(self.main_frame)
         self.log_frame.grid(row=3, column=0, sticky=(ctk.W, ctk.E, ctk.N, ctk.S), pady=(0, 10), padx=(0, 0))
-        self.log_frame.grid_rowconfigure(1, weight=1)  # 让日志文本框行占据剩余空间
+        self.log_frame.grid_rowconfigure(1, weight=1)  # 日志文本框占据剩余空间
         self.log_frame.grid_columnconfigure(0, weight=1)
-        # 创建标签作为标题
+        
+        # 标题
         log_title = ctk.CTkLabel(self.log_frame, text="日志", font=("Arial", 14, "bold"))
-        log_title.grid(row=0, column=0, sticky="w", padx=10, pady=(5, 5))
+        log_title.grid(row=0, column=0, sticky="w", padx=15, pady=(8, 8))
         
-        # 日志文本框 - CustomTkinter没有内置的滚动文本框，使用Textbox
-        self.log_text = ctk.CTkTextbox(self.log_frame, height=200, wrap=ctk.WORD)
-        self.log_text.grid(row=1, column=0, sticky=(ctk.W, ctk.E, ctk.N, ctk.S), padx=10, pady=(5, 5))  # 放在第二行
+        # 日志文本框
+        self.log_text = ctk.CTkTextbox(self.log_frame, wrap=ctk.WORD)
+        self.log_text.grid(row=1, column=0, sticky=(ctk.W, ctk.E, ctk.N, ctk.S), padx=15, pady=(0, 8))
         
-        # 日志级别控制
+        # 日志控制行
         log_control_frame = ctk.CTkFrame(self.log_frame, fg_color="transparent")
-        log_control_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), pady=(5, 0), padx=10)
-        log_control_frame.grid_columnconfigure(0, weight=1)
+        log_control_frame.grid(row=2, column=0, sticky=(ctk.W, ctk.E), padx=15, pady=(0, 8))
         
-        ctk.CTkLabel(log_control_frame, text="日志级别:").grid(row=0, column=0, sticky=ctk.W)
+        ctk.CTkLabel(log_control_frame, text="日志级别:").pack(side=ctk.LEFT, padx=(0, 8))
         self.log_level_var = ctk.StringVar(value="INFO")
         log_level_combo = ctk.CTkComboBox(log_control_frame, variable=self.log_level_var,
                                        values=["DEBUG", "INFO", "WARNING", "ERROR"],
                                        state="readonly", width=100)
-        log_level_combo.grid(row=0, column=1, padx=(5, 0))
-        # Note: We'll handle selection change differently
+        log_level_combo.pack(side=ctk.LEFT, padx=(0, 20))
         
         ctk.CTkButton(log_control_frame, text="清空日志", 
-                     command=self.clear_log, width=80).grid(row=0, column=2, padx=(20, 0))
+                     command=self.clear_log, width=90).pack(side=ctk.RIGHT, padx=(0, 0))
     
     def create_bottom_status_bar(self):
         """创建底部状态栏"""
         # 创建底部状态栏框架
-        bottom_frame = ctk.CTkFrame(self.root, fg_color="gray15", height=40)
+        bottom_frame = ctk.CTkFrame(self.root, fg_color="#2b2b2b", height=45)
         bottom_frame.grid(row=1, column=0, sticky=(ctk.W, ctk.E), padx=10, pady=(5, 10))
-        bottom_frame.grid_columnconfigure(1, weight=1)  # 中间空白可扩展
         bottom_frame.grid_propagate(False)
         
-        # 呼号和SSID
-        ctk.CTkLabel(bottom_frame, text="呼号-SSID:", font=('Arial', 10)).grid(row=0, column=0, sticky=ctk.W, padx=(5, 2))
-        self.callsign_ssid_label = ctk.CTkLabel(bottom_frame, text="未连接", font=('Arial', 12, 'bold'))
-        self.callsign_ssid_label.grid(row=0, column=1, sticky=ctk.W, padx=(0, 10))
+        # 使用 pack 布局实现更灵活的底部状态栏
+        # 左侧区域
+        left_frame = ctk.CTkFrame(bottom_frame, fg_color="transparent")
+        left_frame.pack(side=ctk.LEFT, fill=ctk.X, expand=True, padx=(15, 0), pady=8)
         
-        # 分隔符
-        separator1 = ctk.CTkLabel(bottom_frame, text="|", font=('Arial', 12))
-        separator1.grid(row=0, column=2, sticky=ctk.W, padx=(5, 5))
+        # 呼号和SSID
+        ctk.CTkLabel(left_frame, text="呼号-SSID:", font=('Arial', 10), text_color="gray").pack(side=ctk.LEFT, padx=(0, 5))
+        self.callsign_ssid_label = ctk.CTkLabel(left_frame, text="未连接", font=('Arial', 12, 'bold'))
+        self.callsign_ssid_label.pack(side=ctk.LEFT, padx=(0, 20))
+        
+        # 分隔点
+        ctk.CTkLabel(left_frame, text="•", font=('Arial', 14), text_color="gray").pack(side=ctk.LEFT, padx=(0, 20))
         
         # 服务器名称
-        ctk.CTkLabel(bottom_frame, text="服务器:", font=('Arial', 10)).grid(row=0, column=3, sticky=ctk.W, padx=(5, 2))
-        self.server_name_label = ctk.CTkLabel(bottom_frame, text="未连接", font=('Arial', 12))
-        self.server_name_label.grid(row=0, column=4, sticky=ctk.W, padx=(0, 12))
+        ctk.CTkLabel(left_frame, text="服务器:", font=('Arial', 10), text_color="gray").pack(side=ctk.LEFT, padx=(0, 5))
+        self.server_name_label = ctk.CTkLabel(left_frame, text="未连接", font=('Arial', 12))
+        self.server_name_label.pack(side=ctk.LEFT, padx=(0, 20))
         
-        # 分隔符
-        separator2 = ctk.CTkLabel(bottom_frame, text="|", font=('Arial', 12))
-        separator2.grid(row=0, column=5, sticky=ctk.W, padx=(5, 5))
+        # 分隔点
+        ctk.CTkLabel(left_frame, text="•", font=('Arial', 14), text_color="gray").pack(side=ctk.LEFT, padx=(0, 20))
         
         # 数据包统计
-        ctk.CTkLabel(bottom_frame, text="包数:", font=('Arial', 12)).grid(row=0, column=6, sticky=ctk.W, padx=(5, 2))
-        self.packet_count_label = ctk.CTkLabel(bottom_frame, text="↑0 ↓0", font=('Arial', 12))
-        self.packet_count_label.grid(row=0, column=7, sticky=ctk.W, padx=(0, 12))
+        ctk.CTkLabel(left_frame, text="包数:", font=('Arial', 10), text_color="gray").pack(side=ctk.LEFT, padx=(0, 5))
+        self.packet_count_label = ctk.CTkLabel(left_frame, text="↑0 ↓0", font=('Arial', 11))
+        self.packet_count_label.pack(side=ctk.LEFT, padx=(0, 0))
         
-        # 分隔符
-        separator3 = ctk.CTkLabel(bottom_frame, text="|", font=('Arial', 12))
-        separator3.grid(row=0, column=8, sticky=ctk.W, padx=(5, 5))
-        
-        # 当前时间
-        ctk.CTkLabel(bottom_frame, text="时间:", font=('Arial', 12)).grid(row=0, column=9, sticky=ctk.W, padx=(5, 2))
-        self.current_time_label = ctk.CTkLabel(bottom_frame, text="--:--:--", font=('Arial', 12))
-        self.current_time_label.grid(row=0, column=10, sticky=ctk.W, padx=(0, 12))
-        
-        # 分隔符
-        separator4 = ctk.CTkLabel(bottom_frame, text="|", font=('Arial', 12))
-        separator4.grid(row=0, column=11, sticky=ctk.W, padx=(5, 5))
-        
-        # 调试模式状态
-        ctk.CTkLabel(bottom_frame, text="调试:", font=('Arial', 12)).grid(row=0, column=12, sticky=ctk.W, padx=(5, 2))
-        self.debug_status_label = ctk.CTkLabel(bottom_frame, text="关闭", font=('Arial', 12),
-                                            text_color="gray")
-        self.debug_status_label.grid(row=0, column=13, sticky=ctk.W, padx=(0, 12))
-        
-        # 分隔符
-        separator5 = ctk.CTkLabel(bottom_frame, text="|", font=('Arial', 10))
-        separator5.grid(row=0, column=14, sticky=ctk.W, padx=(5, 5))
-        
-        # 当前配置文件
-        ctk.CTkLabel(bottom_frame, text="配置:", font=('Arial', 12)).grid(row=0, column=15, sticky=ctk.W, padx=(5, 2))
-        self.config_file_label = ctk.CTkLabel(bottom_frame, text="config.yaml", font=('Arial', 12))
-        self.config_file_label.grid(row=0, column=16, sticky=ctk.W, padx=(0, 12))
-        
-        # 分隔符
-        separator6 = ctk.CTkLabel(bottom_frame, text="|", font=('Arial', 12))
-        separator6.grid(row=0, column=17, sticky=ctk.W, padx=(5, 5))
+        # 右侧区域
+        right_frame = ctk.CTkFrame(bottom_frame, fg_color="transparent")
+        right_frame.pack(side=ctk.RIGHT, fill=ctk.X, padx=(0, 15), pady=8)
         
         # 连接状态指示
-        ctk.CTkLabel(bottom_frame, text="状态:", font=('Arial', 12)).grid(row=0, column=18, sticky=ctk.W, padx=(5, 2))
-        self.bottom_connection_status = ctk.CTkLabel(bottom_frame, text="离线", font=('Arial', 12, 'bold'),
-                                                   text_color="red")
-        self.bottom_connection_status.grid(row=0, column=19, sticky=ctk.W, padx=(0, 12))
+        ctk.CTkLabel(right_frame, text="状态:", font=('Arial', 10), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 5))
+        self.bottom_connection_status = ctk.CTkLabel(right_frame, text="离线", font=('Arial', 12, 'bold'),
+                                                   text_color="#ff5555")
+        self.bottom_connection_status.pack(side=ctk.RIGHT, padx=(0, 15))
+        
+        # 分隔点
+        ctk.CTkLabel(right_frame, text="•", font=('Arial', 14), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 15))
+        
+        # 当前配置文件
+        ctk.CTkLabel(right_frame, text="配置:", font=('Arial', 10), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 5))
+        self.config_file_label = ctk.CTkLabel(right_frame, text="config.yaml", font=('Arial', 11))
+        self.config_file_label.pack(side=ctk.RIGHT, padx=(0, 15))
+        
+        # 分隔点
+        ctk.CTkLabel(right_frame, text="•", font=('Arial', 14), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 15))
+        
+        # 调试模式状态
+        ctk.CTkLabel(right_frame, text="调试:", font=('Arial', 10), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 5))
+        self.debug_status_label = ctk.CTkLabel(right_frame, text="关闭", font=('Arial', 11),
+                                            text_color="gray")
+        self.debug_status_label.pack(side=ctk.RIGHT, padx=(0, 15))
+        
+        # 分隔点
+        ctk.CTkLabel(right_frame, text="•", font=('Arial', 14), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 15))
+        
+        # 当前时间
+        ctk.CTkLabel(right_frame, text="时间:", font=('Arial', 10), text_color="gray").pack(side=ctk.RIGHT, padx=(0, 5))
+        self.current_time_label = ctk.CTkLabel(right_frame, text="--:--:--", font=('Arial', 11))
+        self.current_time_label.pack(side=ctk.RIGHT, padx=(0, 0))
     
     def create_menu(self):
         """创建菜单 - CustomTkinter没有内置菜单，我们保留tkinter菜单"""
@@ -423,6 +429,13 @@ class NRLGUIClient:
         except Exception as e:
             messagebox.showerror("连接错误", f"连接失败: {str(e)}")
             self.log_message(f"连接错误: {str(e)}")
+            # 异常时重置 client 状态
+            if self.client:
+                try:
+                    self.client.close()
+                except Exception:
+                    pass
+                self.client = None
     
     def disconnect_from_server(self):
         """断开服务器连接"""
@@ -667,9 +680,18 @@ NRLLink_Client Demo
         messagebox.showinfo("关于", about_text.strip())
     
     def on_closing(self):
-        """窗口关闭处理"""
+        """窗口关闭处理 — 添加超时保护，防止 close() 阻塞导致窗口无法关闭"""
         if self.client:
-            self.client.close()
+            import threading as _threading
+            close_done = _threading.Event()
+            def _close():
+                try:
+                    self.client.close()
+                except Exception:
+                    pass
+                close_done.set()
+            _threading.Thread(target=_close, daemon=True).start()
+            close_done.wait(timeout=2.0)
         
         self.root.destroy()
     
@@ -1459,21 +1481,32 @@ NRLLink_Client Demo
 
 
 class GUILogHandler(logging.Handler):
-    """GUI日志处理器"""
+    """GUI日志处理器 - 线程安全，带限流防止GUI卡死"""
     
-    def __init__(self, callback):
+    def __init__(self, callback, root=None):
         super().__init__()
         self.callback = callback
+        self.root = root
+        self._last_emit_time = 0.0
+        self._min_interval = 0.05  # 最短 50ms 间隔
     
     def emit(self, record):
-        """发送日志记录"""
+        """发送日志记录 - 限流 + 崩溃保护"""
         try:
+            now = time.time()
+            if now - self._last_emit_time < self._min_interval:
+                return
+            self._last_emit_time = now
+            
             msg = self.format(record)
             if self.callback:
-                # 使用线程安全的方式调用
-                self.callback(msg)
+                if self.root:
+                    self.root.after(0, self.callback, msg)
+                else:
+                    self.callback(msg)
         except Exception:
-            self.handleError(record)
+            # root 可能已被销毁，静默忽略
+            pass
 
 # 在 GUILogHandler 类之后，NRLGUIClient 类内部添加缺失的方法
 # （注意：这些方法应与类中的其他方法具有相同的缩进级别）

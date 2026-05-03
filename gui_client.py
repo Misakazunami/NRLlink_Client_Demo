@@ -13,6 +13,7 @@ import shutil
 from typing import Dict, Any, Optional
 
 from nrl_client import NRLClient, get_os_display_name
+from nrl_protocol import OpusCodec
 
 class NRLGUIClient:
     """NRL客户端GUI类"""
@@ -41,6 +42,8 @@ class NRLGUIClient:
         self.ptt_active = tk.BooleanVar(value=False)
         # 播放状态
         self.is_playing = False
+        # 语音编码格式
+        self.codec_var = tk.StringVar(value="g711")
         
         # 服务器列表
         self.servers_list = []
@@ -189,6 +192,24 @@ class NRLGUIClient:
         # 刷新设备按钮
         ttk.Button(device_frame, text="刷新设备", 
                   command=self.refresh_audio_devices).grid(row=0, column=4, padx=(10, 0))
+        
+        # 语音编码格式选择
+        codec_values = ["G.711 (8kHz)", "Opus (16kHz)"]
+        if not OpusCodec.is_available():
+            codec_values = ["G.711 (8kHz)"]
+        
+        ttk.Label(device_frame, text="发射编码:").grid(row=0, column=5, sticky=tk.W, padx=(15, 5))
+        self.codec_combo = ttk.Combobox(device_frame, textvariable=self.codec_var,
+                                         values=codec_values, state="readonly", width=14)
+        self.codec_combo.grid(row=0, column=6, sticky=tk.W)
+        self.codec_combo.bind('<<ComboboxSelected>>', self.on_codec_changed)
+        
+        # 根据当前配置设置初始值
+        if self.client and self.client.audio_config:
+            if self.client.audio_config.codec == 'opus':
+                self.codec_var.set("Opus (16kHz)")
+            else:
+                self.codec_var.set("G.711 (8kHz)")
         
         # PTT按钮
         self.ptt_button = ttk.Button(self.audio_frame, text="按住说话 (PTT)", 
@@ -379,6 +400,13 @@ class NRLGUIClient:
         except Exception as e:
             messagebox.showerror("连接错误", f"连接失败: {str(e)}")
             self.log_message(f"连接错误: {str(e)}")
+            # 异常时重置 client 状态，避免残留不一致的 client 实例
+            if self.client:
+                try:
+                    self.client.close()
+                except Exception:
+                    pass
+                self.client = None
     
     def disconnect_from_server(self):
         """断开服务器连接"""
@@ -626,7 +654,41 @@ class NRLGUIClient:
             except Exception as e:
                 messagebox.showerror("设置错误", f"设置输出设备失败: {str(e)}")
     
-    def test_audio_devices(self):
+    def on_codec_changed(self, event):
+        """发射编码格式选择改变"""
+        if not self.client:
+            return
+        
+        selected = self.codec_var.get()
+        new_codec = "opus" if "Opus" in selected else "g711"
+        
+        # 如果PTT正在使用中，不允许切换
+        if self.ptt_active.get():
+            messagebox.showwarning("切换失败", "请先停止PTT（按住说话）再切换发射编码")
+            # 恢复原值
+            current_codec = self.client.audio_config.codec
+            self.codec_var.set("Opus (16kHz)" if current_codec == "opus" else "G.711 (8kHz)")
+            return
+        
+        # 如果新格式与当前相同，不需要切换
+        if new_codec == self.client.audio_config.codec:
+            return
+        
+        # 检查Opus可用性
+        if new_codec == "opus" and not OpusCodec.is_available():
+            messagebox.showerror("切换失败", "opuslib 未安装，无法使用Opus编码。\n请运行: pip install opuslib")
+            self.codec_var.set("G.711 (8kHz)")
+            return
+        
+        if self.client.set_codec(new_codec):
+            self.log_message(f"发射编码已切换为: {selected}（已保存到配置文件）")
+            # 更新音频设备列表（采样率改变后设备能力可能不同）
+            self.refresh_audio_devices()
+        else:
+            messagebox.showerror("切换失败", "切换发射编码失败，请查看日志")
+            # 恢复原值
+            current_codec = self.client.audio_config.codec
+            self.codec_var.set("Opus (16kHz)" if current_codec == "opus" else "G.711 (8kHz)")
         """测试音频设备"""
         if self.client and self.client.audio_handler:
             try:
@@ -1239,9 +1301,20 @@ NRLLink_Client Demo
         messagebox.showinfo("关于", about_text.strip())
     
     def on_closing(self):
-        """窗口关闭处理"""
+        """窗口关闭处理 — 添加超时保护，防止 close() 阻塞导致窗口无法关闭"""
         if self.client:
-            self.client.close()
+            # 在后台线程执行 close()，避免阻塞 GUI 主线程
+            import threading as _threading
+            close_done = _threading.Event()
+            def _close():
+                try:
+                    self.client.close()
+                except Exception:
+                    pass
+                close_done.set()
+            _threading.Thread(target=_close, daemon=True).start()
+            # 等待最多 2 秒，超时则强制销毁窗口
+            close_done.wait(timeout=2.0)
         
         self.root.destroy()
     
@@ -1553,25 +1626,33 @@ NRLLink_Client Demo
 
 
 class GUILogHandler(logging.Handler):
-    """GUI日志处理器 - 线程安全，使用after()调度GUI更新"""
+    """GUI日志处理器 - 线程安全，使用after()调度GUI更新，带限流防止GUI卡死"""
     
     def __init__(self, callback, root=None):
         super().__init__()
         self.callback = callback
         self.root = root
+        self._last_emit_time = 0.0
+        self._min_interval = 0.05  # 最短 50ms 间隔，防止 after() 回调堆积
     
     def emit(self, record):
-        """发送日志记录"""
+        """发送日志记录 - 限流 + 崩溃保护"""
         try:
+            # 限流：避免后台线程高频日志导致 after() 回调堆积冻卡 GUI
+            now = time.time()
+            if now - self._last_emit_time < self._min_interval:
+                return
+            self._last_emit_time = now
+            
             msg = self.format(record)
             if self.callback:
-                # 使用 after() 确保在主线程更新GUI，避免 RuntimeError
                 if self.root:
                     self.root.after(0, self.callback, msg)
                 else:
                     self.callback(msg)
         except Exception:
-            self.handleError(record)
+            # root 可能已被销毁，静默忽略，绝不调用 handleError（会导致连锁崩溃）
+            pass
 
 
 def main():

@@ -1,41 +1,31 @@
-# NRL客户端配置文件
-# 支持新版服务器配置格式（兼容 PlatformList）
-# 服务器列表配置
-servers:
-  - name: "示例服务器1"
-    host: "example1.com"
-    port: 60050
-    password: ""           # 服务器连接密码（可选）
-  - name: "示例服务器2"
-    host: "example2.com"
-    port: 60050
-    password: ""
-  - name: "本地测试服务器"
-    host: "127.0.0.1"
-    port: 60050
-    password: ""
-
-# 当前使用的服务器索引（默认使用第一个）
-current_server: 0
-
-# 服务器配置（向后兼容）
-server:
-  host: "example1.com"  # 服务器地址
-  port: 60050           # 服务器UDP端口
-
-device:
-  callsign: "TEST01"    # 设备呼号
-  ssid: 1               # 设备SSID
-  cpuid: "12345678"     # 设备CPUID
-  password: ""          # 设备密码
-  model: 1              # 设备型号
-
 audio:
-  sample_rate: 8000     # 采样率
-  channels: 1           # 声道数
-  chunk_size: 500       # 音频块大小（500字节G.711包）
-  format: "paInt16"     # 音频格式
-
+  channels: 1
+  format: paInt16
+  sample_rate: 8000
+  tx_codec: "g711"
+current_server: 0
+device:
+  callsign: BH6ERO
+  dmr_id: '4613402'
+  model: 1
+  password: ''
+  ssid: 1
 network:
-  buffer_size: 4096     # 网络缓冲区大小
-  heartbeat_interval: 2 # 心跳间隔（秒）
+  buffer_size: 4096
+  heartbeat_interval: 2
+server:
+  host: 43.143.14.24
+  port: 60050
+servers:
+- host: 43.143.14.24
+  name: NRL-安徽服务器
+  password: ''
+  port: 60050
+- host: example2.com
+  name: 示例服务器2
+  password: ''
+  port: 60050
+- host: 127.0.0.1
+  name: 本地测试服务器
+  password: ''
+  port: 60050

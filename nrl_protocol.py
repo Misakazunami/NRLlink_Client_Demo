@@ -110,6 +110,9 @@ class NRLPacket:
             header[38] = 0
             header[39:43] = b'\x00' * 4
         
+        # 保留字段（5字节）显式清零
+        header[43:48] = b'\x00' * 5
+        
         # 数据部分
         if data_len > 0:
             return bytes(header) + self.data
@@ -133,6 +136,9 @@ class NRLPacket:
             # 检查数据长度
             if len(data) < self.length:
                 # 报文不完整，无法解析
+                import logging
+                logging.getLogger(__name__).debug(
+                    f"数据包不完整: 期望 {self.length} 字节，实际 {len(data)} 字节")
                 return False
             
             # DMRID (3字节) - 设备唯一标识
@@ -182,14 +188,17 @@ class NRLPacket:
                 self.original_ssid = 0
                 self.original_ip = b"\x00" * 4
             
-            # 数据部分
-            # 与服务端 decodeNRL21 保持一致：直接取头部后所有字节，不使用 Length 字段切片
-            self.data = data[self.HEADER_SIZE:]
+            # 数据部分 — 严格按 Length 字段截取，避免 UDP 填充字节混入
+            if self.length > self.HEADER_SIZE:
+                self.data = data[self.HEADER_SIZE:self.length]
+            else:
+                self.data = b""
             
             return True
             
         except (struct.error, IndexError) as e:
-            print(f"解码错误: {e}")
+            import logging
+            logging.getLogger(__name__).debug(f"解码错误: {e}")
             return False
     
     @staticmethod
@@ -201,8 +210,8 @@ class NRLPacket:
         if not callsign:
             return False
         for b in callsign:
-            # 大写字母 A-Z 或数字 0-9
-            if not ((b >= ord('A') and b <= ord('Z')) or (b >= ord('0') and b <= ord('9'))):
+            # bytes 迭代已是整数，无需 ord()
+            if not ((ord('A') <= b <= ord('Z')) or (ord('0') <= b <= ord('9'))):
                 return False
         return True
     
@@ -247,10 +256,10 @@ class NRLProtocol:
     
     def create_voice_packet(self, callsign: str, ssid: int, dmr_id: str, 
                           voice_data: bytes, dev_mode: int = 1) -> NRLPacket:
-        """创建语音数据包 - 根据协议规范，语音包包含500字节G.711数据
+        """创建语音数据包 - G.711 A-law (Type=1)
         
-        参考nrllink的encodeNRL21函数
-        语音包格式：48字节头部 + 500字节G.711数据
+        新规范：20ms帧 @ 8kHz，160字节G.711数据
+        语音包格式：48字节头部 + 160字节G.711数据
         """
         packet = NRLPacket()
         packet.packet_type = NRLPacket.TYPE_VOICE
@@ -262,17 +271,40 @@ class NRLProtocol:
         packet.dev_mode = dev_mode if dev_mode else 0x01  # 默认设备模式
         packet.status = 0x01  # 根据协议规范，bit0用作DCD/PTT标志
         
-        # 确保语音数据正好是500字节
+        # 确保语音数据正好是160字节
         if not voice_data or len(voice_data) == 0:
-            voice_data = b'\x80' * 500  # 静音数据
-        elif len(voice_data) < 500:
-            voice_data = voice_data.ljust(500, b'\x80')  # G.711静音值
-        elif len(voice_data) > 500:
-            voice_data = voice_data[:500]
+            voice_data = b'\x80' * 160  # 静音数据
+        elif len(voice_data) < 160:
+            voice_data = voice_data.ljust(160, b'\x80')  # G.711静音值
+        elif len(voice_data) > 160:
+            voice_data = voice_data[:160]
         
         packet.data = voice_data
         packet.count = self.packet_count
         self.packet_count = (self.packet_count + 1) & 0xFFFF  # 确保16位计数器
+        return packet
+    
+    def create_opus_voice_packet(self, callsign: str, ssid: int, dmr_id: str, 
+                                opus_data: bytes, dev_mode: int = 1) -> NRLPacket:
+        """创建Opus语音数据包 - Opus 16K (Type=8)
+        
+        Opus是变长编码，数据长度不固定（通常40-80字节）
+        语音包格式：48字节头部 + Opus编码数据
+        """
+        packet = NRLPacket()
+        packet.packet_type = NRLPacket.TYPE_OPUS
+        packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
+        packet.ssid = ssid
+        
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
+        
+        packet.dev_mode = dev_mode if dev_mode else 0x01
+        packet.status = 0x01
+        
+        # Opus数据是变长的，直接使用
+        packet.data = opus_data if opus_data else b''
+        packet.count = self.packet_count
+        self.packet_count = (self.packet_count + 1) & 0xFFFF
         return packet
     
     def create_heartbeat_packet(self, callsign: str, ssid: int, dmr_id: str = None, 
@@ -354,13 +386,12 @@ class NRLProtocol:
         packet.original_ssid = original_ssid
         packet.original_ip = original_ip.ljust(4, b'\x00')[:4] if len(original_ip) >= 4 else b'\x00' * 4
         
-        # 确保语音数据正好是500字节
-        if len(voice_data) != 500:
-            # 填充或截断到500字节
-            if len(voice_data) < 500:
-                voice_data = voice_data.ljust(500, b'\x80')  # G.711静音值
+        # 确保语音数据正好是160字节（新规范：20ms @ 8kHz）
+        if len(voice_data) != 160:
+            if len(voice_data) < 160:
+                voice_data = voice_data.ljust(160, b'\x80')  # G.711静音值
             else:
-                voice_data = voice_data[:500]
+                voice_data = voice_data[:160]
         
         packet.data = voice_data
         packet.count = self.packet_count
@@ -429,65 +460,145 @@ class G711Codec:
     A-law是用于欧洲、非洲和亚洲大部分地区的标准语音压缩算法
     """
     
+    # 预计算解码查找表：256个A-law值 -> 16位PCM样本
+    _DECODE_TABLE = tuple(alaw2linear(i) for i in range(256))
+    
     @staticmethod
     def encode(pcm_data: bytes) -> bytes:
-        """PCM数据编码为G.711 A-law
+        """PCM数据编码为G.711 A-law（查表优化）
         
         将16位线性PCM样本编码为8位A-law样本
-        输出总是500字节（用于NRL协议的语音包）
+        新规范：输出160字节（20ms @ 8kHz，160样本）
         """
         if not pcm_data:
-            # 返回静音帧
-            return b'\x80' * 500
+            return b'\x80' * 160
         
         encoded = bytearray()
         
         try:
-            # 处理所有可用的PCM样本（每个样本2字节，小端序）
-            for i in range(0, len(pcm_data), 2):
-                if i + 1 < len(pcm_data):
-                    # 小端序读取16位有符号整数
-                    sample = int.from_bytes(pcm_data[i:i+2], 'little', signed=True)
-                    encoded.append(linear2alaw(sample))
+            # 使用 struct 一次解包所有样本，避免逐样本 int.from_bytes
+            sample_count = len(pcm_data) // 2
+            samples = struct.unpack(f'<{sample_count}h', pcm_data[:sample_count * 2])
+            for sample in samples:
+                encoded.append(linear2alaw(sample))
         except Exception as e:
-            print(f"G.711编码错误: {e}")
-            return bytes([linear2alaw(0)]) * 500
+            import logging
+            logging.getLogger(__name__).debug(f"G.711编码错误: {e}")
+            return bytes([linear2alaw(0)]) * 160
         
-        # 确保输出正好是500字节
-        if len(encoded) > 500:
-            # 如果超过500字节，截断
-            return bytes(encoded[:500])
-        elif len(encoded) < 500:
-            # 如果不足500字节，用G.711静音值填充
-            # 正确的G.711静音值: linear2alaw(0) = 0xD5
+        # 确保输出正好是160字节
+        if len(encoded) > 160:
+            return bytes(encoded[:160])
+        elif len(encoded) < 160:
             silence_value = linear2alaw(0)
-            encoded.extend([silence_value] * (500 - len(encoded)))
+            encoded.extend([silence_value] * (160 - len(encoded)))
         
         return bytes(encoded)
     
     @staticmethod
     def decode(alaw_data: bytes) -> bytes:
-        """G.711 A-law数据解码为PCM
+        """G.711 A-law数据解码为PCM（查表优化）
         
         将8位A-law样本解码为16位线性PCM样本
         输出为小端序的16位有符号整数对
         """
-        # 检查输入数据
         if not alaw_data or len(alaw_data) == 0:
-            print(f"G.711解码警告: 输入数据为空")
             return b""
-        
-        decoded = bytearray()
         
         try:
-            # 处理所有G.711样本（每个样本1字节）
-            for byte in alaw_data:
-                sample = alaw2linear(byte)
-                # 小端序编码16位有符号整数
-                decoded.extend(sample.to_bytes(2, 'little', signed=True))
-                
+            # 使用预计算查找表 + struct 一次打包
+            table = G711Codec._DECODE_TABLE
+            return struct.pack(f'<{len(alaw_data)}h', *(table[b] for b in alaw_data))
         except Exception as e:
-            print(f"G.711解码错误: {e}, 数据长度: {len(alaw_data)}")
+            import logging
+            logging.getLogger(__name__).debug(f"G.711解码错误: {e}, 数据长度: {len(alaw_data)}")
             return b""
+
+
+# 尝试导入Opus编解码库
+try:
+    import opuslib  # type: ignore
+    import opuslib.api  # type: ignore
+    OPUS_AVAILABLE = True
+except ImportError:
+    OPUS_AVAILABLE = False
+
+
+class OpusCodec:
+    """Opus编解码器 - 用于NRL协议 Type=8
+    
+    参考nrllink服务器端规范：
+    - 采样率: 16kHz
+    - 声道数: 1 (Mono)
+    - 帧大小: 20ms (320 samples @ 16kHz)
+    - 比特率: 32-40 kbps (VBR)
+    - 应用模式: OPUS_APPLICATION_VOIP
+    - 复杂度: 10
+    """
+    
+    SAMPLE_RATE = 16000
+    CHANNELS = 1
+    FRAME_DURATION_MS = 20  # 20ms
+    FRAME_SIZE = 320  # 320 samples @ 16kHz = 20ms
+    PCM_FRAME_BYTES = FRAME_SIZE * 2  # 320 samples * 2 bytes/sample = 640 bytes
+    BITRATE = 36000  # 36 kbps VBR
+    COMPLEXITY = 10
+    
+    def __init__(self):
+        if not OPUS_AVAILABLE:
+            raise ImportError("opuslib 未安装，请运行: pip install opuslib")
         
-        return bytes(decoded)
+        self._encoder = opuslib.Encoder(self.SAMPLE_RATE, self.CHANNELS, opuslib.APPLICATION_VOIP)
+        self._decoder = opuslib.Decoder(self.SAMPLE_RATE, self.CHANNELS)
+        
+        # 设置编码器参数
+        self._encoder.bitrate = self.BITRATE
+        self._encoder.complexity = self.COMPLEXITY
+        
+        self._logger = logging.getLogger(__name__)
+    
+    def encode(self, pcm_data: bytes) -> bytes:
+        """将16位PCM数据编码为Opus帧
+        
+        输入: 640字节PCM (320 samples * 2 bytes @ 16kHz = 20ms)
+        输出: Opus编码数据 (变长, 通常40-80字节)
+        """
+        if not pcm_data:
+            # 返回DTX (不连续传输) 静音帧
+            return self._encoder.encode(b'\x00' * self.PCM_FRAME_BYTES, self.FRAME_SIZE)
+        
+        try:
+            # 确保输入是正确的帧大小
+            if len(pcm_data) < self.PCM_FRAME_BYTES:
+                pcm_data = pcm_data + b'\x00' * (self.PCM_FRAME_BYTES - len(pcm_data))
+            elif len(pcm_data) > self.PCM_FRAME_BYTES:
+                pcm_data = pcm_data[:self.PCM_FRAME_BYTES]
+            
+            opus_data = self._encoder.encode(pcm_data, self.FRAME_SIZE)
+            return opus_data
+        except Exception as e:
+            self._logger.debug(f"Opus编码错误: {e}")
+            # 返回静音帧
+            return self._encoder.encode(b'\x00' * self.PCM_FRAME_BYTES, self.FRAME_SIZE)
+    
+    def decode(self, opus_data: bytes) -> bytes:
+        """将Opus数据解码为16位PCM
+        
+        输入: Opus编码数据 (变长)
+        输出: 640字节PCM (320 samples * 2 bytes @ 16kHz = 20ms)
+        """
+        if not opus_data:
+            return b'\x00' * self.PCM_FRAME_BYTES
+        
+        try:
+            pcm_data = self._decoder.decode(opus_data, self.FRAME_SIZE)
+            return pcm_data
+        except Exception as e:
+            self._logger.debug(f"Opus解码错误: {e}, 数据长度={len(opus_data)}")
+            # 返回静音帧
+            return b'\x00' * self.PCM_FRAME_BYTES
+    
+    @staticmethod
+    def is_available() -> bool:
+        """检查Opus编解码器是否可用"""
+        return OPUS_AVAILABLE

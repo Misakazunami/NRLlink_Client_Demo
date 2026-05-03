@@ -3,17 +3,17 @@ NRL客户端主类
 实现与服务器的UDP通信，设备管理，语音处理等功能
 """
 import socket
+import select
 import threading
 import time
 import logging
 import yaml #type: ignore
 import json
 import os
-from io import BlockingIOError
 from typing import Optional, Dict, Any, Callable
 from dataclasses import dataclass
 
-from nrl_protocol import NRLProtocol, NRLPacket
+from nrl_protocol import NRLProtocol, NRLPacket, OpusCodec
 from audio_handler import AudioHandler, VoiceProcessor
 
 # 操作系统名称映射
@@ -25,7 +25,7 @@ OS_NAME_MAP = {
 
 
 def get_os_display_name() -> str:
-    """获取人类可读的操作系统名称"""
+    """获取可读的操作系统名称"""
     return OS_NAME_MAP.get(os.name, "未知")
 
 @dataclass
@@ -76,7 +76,7 @@ class AudioConfig:
     """音频配置"""
     sample_rate: int
     channels: int
-    chunk_size: int
+    codec: str          # 语音编码格式: "g711" 或 "opus"
     format: str
 
 @dataclass
@@ -90,6 +90,7 @@ class NRLClient:
     
     def __init__(self, config_file: str = "config.yaml"):
         self.logger = logging.getLogger(__name__)
+        self.config_file = config_file
         
         # 配置
         self.device_config: Optional[DeviceConfig] = None
@@ -116,6 +117,7 @@ class NRLClient:
         self.voice_processor = None
         
         # 状态
+        self._status_lock = threading.Lock()
         self.device_status = {
             'online': False,
             'last_heartbeat': 0,
@@ -145,11 +147,24 @@ class NRLClient:
         # 初始化音频
         self.init_audio()
     
+    def _inc_status(self, key: str, amount: int = 1):
+        """线程安全地递增 device_status 计数器"""
+        with self._status_lock:
+            self.device_status[key] += amount
+    
+    def _set_status_value(self, key: str, value):
+        """线程安全地设置 device_status 值"""
+        with self._status_lock:
+            self.device_status[key] = value
+    
     def load_config(self, config_file: str):
         """加载配置文件"""
         try:
             with open(config_file, 'r', encoding='utf-8') as f:
                 config_data = yaml.safe_load(f)
+            
+            if not config_data:
+                config_data = {}
             
             # 设备配置
             device_cfg = config_data.get('device', {})
@@ -206,10 +221,23 @@ class NRLClient:
             
             # 音频配置
             audio_cfg = config_data.get('audio', {})
+            # 兼容新旧字段名：优先读 tx_codec，回退到 codec
+            codec = audio_cfg.get('tx_codec', audio_cfg.get('codec', 'g711'))
+            # 根据编码格式自动确定采样率
+            default_rate = 16000 if codec == 'opus' else 8000
+            sample_rate = audio_cfg.get('sample_rate', default_rate)
+            # 如果用户配置了错误的采样率，自动修正
+            if codec == 'opus' and sample_rate != 16000:
+                self.logger.info(f"Opus编码需要16kHz采样率，自动从{sample_rate}Hz修正为16000Hz")
+                sample_rate = 16000
+            elif codec == 'g711' and sample_rate != 8000:
+                self.logger.info(f"G.711编码使用8kHz采样率，自动从{sample_rate}Hz修正为8000Hz")
+                sample_rate = 8000
+            
             self.audio_config = AudioConfig(
-                sample_rate=audio_cfg.get('sample_rate', 8000),
+                sample_rate=sample_rate,
                 channels=audio_cfg.get('channels', 1),
-                chunk_size=audio_cfg.get('chunk_size', 1024),
+                codec=codec,
                 format=audio_cfg.get('format', 'paInt16')
             )
             
@@ -226,19 +254,64 @@ class NRLClient:
             self.logger.error(f"加载配置失败: {e}")
             raise
     
+    def save_config(self):
+        """保存当前发射编码到配置文件（保留注释和格式）"""
+        try:
+            with open(self.config_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            import re
+            codec_value = self.audio_config.codec
+            
+            # 替换 tx_codec 字段值
+            if 'tx_codec:' in content:
+                content = re.sub(
+                    r'(tx_codec:\s*)["\']?\w+["\']?',
+                    rf'\g<1>"{codec_value}"',
+                    content
+                )
+            elif 'codec:' in content:
+                # 兼容旧字段名：替换为新字段名
+                content = re.sub(
+                    r'(codec:\s*)["\']?\w+["\']?',
+                    rf'tx_codec: "{codec_value}"',
+                    content
+                )
+            else:
+                # 字段不存在，在 audio 段落末尾追加
+                content = re.sub(
+                    r'(audio:\s*\n(?:\s+\S.*\n)*)',
+                    lambda m: m.group(0).rstrip('\n') + f'\n  tx_codec: "{codec_value}"\n',
+                    content
+                )
+            
+            with open(self.config_file, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            self.logger.info(f"发射编码已保存到 {self.config_file}: {codec_value}")
+        except Exception as e:
+            self.logger.error(f"保存配置失败: {e}")
+    
     def init_audio(self):
         """初始化音频处理"""
         try:
+            # 根据编码格式确定PCM帧大小作为chunk_size
+            if self.audio_config.codec == 'opus':
+                chunk_size = 640  # 320 samples * 2 bytes @ 16kHz = 20ms
+            else:
+                chunk_size = 320  # 160 samples * 2 bytes @ 8kHz = 20ms
+            
             self.audio_handler = AudioHandler(
                 sample_rate=self.audio_config.sample_rate,
                 channels=self.audio_config.channels,
-                chunk_size=self.audio_config.chunk_size,
-                format_str=self.audio_config.format
+                chunk_size=chunk_size,
+                format_str=self.audio_config.format,
+                codec_type=self.audio_config.codec
             )
             
-            self.voice_processor = VoiceProcessor()
+            self.voice_processor = VoiceProcessor(codec_type=self.audio_config.codec)
             
-            self.logger.info("音频处理初始化成功")
+            self.logger.info(f"音频处理初始化成功 (编码: {self.audio_config.codec}, 采样率: {self.audio_config.sample_rate}Hz)")
             
         except Exception as e:
             self.logger.error(f"音频处理初始化失败: {e}")
@@ -247,7 +320,16 @@ class NRLClient:
     def connect(self) -> bool:
         """连接到服务器"""
         try:
-            # 关闭已有的连接
+            # === 关键：先停止旧线程，避免 old threads 继续运行并堆积 GUI 回调 ===
+            self.running = False
+            for t in (self.receive_thread, self.heartbeat_thread, self.playback_check_thread):
+                if t and t.is_alive():
+                    t.join(timeout=1.0)
+            self.receive_thread = None
+            self.heartbeat_thread = None
+            self.playback_check_thread = None
+            
+            # 关闭旧 socket
             if self.socket:
                 try:
                     self.socket.close()
@@ -257,7 +339,6 @@ class NRLClient:
             
             # 创建UDP套接字
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            self.socket.settimeout(5.0)  # 5秒超时
             self.socket.setblocking(False)  # 非阻塞模式，防止sendto阻塞音频回调
             
             # 设置接收缓冲区大小
@@ -269,14 +350,17 @@ class NRLClient:
             
             # 发送初始包进行设备注册
             test_packet = self.protocol.create_heartbeat_packet(
-                self.device_config.callsign,
+                self.device_config.callsign, 
                 self.device_config.ssid, 
                 dmr_id=self.device_config.dmr_id, 
                 dev_mode=self.device_config.model   
             )
             
-            self.socket.sendto(test_packet.encode(), 
-                             (self.server_config.host, self.server_config.port))
+            try:
+                self.socket.sendto(test_packet.encode(), 
+                                 (self.server_config.host, self.server_config.port))
+            except BlockingIOError:
+                self.logger.warning("初始连接包发送缓冲区满，将在心跳中重试")
             
             self.logger.info(f"已发送初始连接包到 {self.server_config.host}:{self.server_config.port}")
             
@@ -327,6 +411,11 @@ class NRLClient:
         self.running = False
         self.is_connected = False
         
+        # 等待后台线程退出，避免资源竞争
+        for t in (self.receive_thread, self.heartbeat_thread, self.playback_check_thread):
+            if t and t.is_alive():
+                t.join(timeout=2.0)
+        
         if self.socket:
             try:
                 self.socket.close()
@@ -340,12 +429,8 @@ class NRLClient:
     def _receive_loop(self):
         """接收数据循环
         
-        这里我参考nrllink Go代码的udpProcess函数
-        主要功能：
-        1. 循环接收UDP数据包
-        2. 解析NRL协议数据包
-        3. 路由处理不同类型的数据包
-        4. 统计数据包计数
+        使用 select.select() 等待 socket 可读，避免忙等导致 CPU 占用过高。
+        连续错误达到上限后执行真正的重连（重建 socket + 重新注册）。
         """
         consecutive_errors = 0
         max_consecutive_errors = 5
@@ -354,6 +439,11 @@ class NRLClient:
             try:
                 if not self.socket:
                     time.sleep(0.1)
+                    continue
+                
+                # 使用 select 等待 socket 可读，超时 100ms
+                ready, _, _ = select.select([self.socket], [], [], 0.1)
+                if not ready:
                     continue
                 
                 # 接收数据
@@ -366,38 +456,73 @@ class NRLClient:
                 # 解析数据包
                 packet = NRLPacket()
                 if not packet.decode(data):
-                    self.logger.warning(f"数据包解析失败: {addr}")
+                    self.logger.debug(f"数据包解析失败: {addr}")
                     continue
                 
                 # 处理数据包
                 self._handle_packet(packet, addr)
-                self.device_status['packets_received'] += 1
+                self._inc_status('packets_received')
                 
                 # 重置错误计数
                 consecutive_errors = 0
                 
-            except socket.timeout:
-                # 超时是正常的，不计为错误
-                continue
-            except BlockingIOError:
-                # 非阻塞模式下暂无数据，正常等待
-                time.sleep(0.01)
-                continue
-            except ConnectionError as e:
-                self.logger.error(f"连接错误: {e}")
+            except OSError as e:
+                if not self.running:
+                    break
+                self.logger.error(f"接收数据错误: {e}")
                 consecutive_errors += 1
             except Exception as e:
                 if self.running:
                     self.logger.error(f"接收数据错误: {e}")
                     consecutive_errors += 1
             
-            # 检查连续错误
+            # 检查连续错误，执行真正的重连
             if consecutive_errors >= max_consecutive_errors:
                 self.logger.error(f"连续接收错误达到{max_consecutive_errors}次，尝试重新连接")
-                self.is_connected = False
-                # 自动重连
-                time.sleep(2)
                 consecutive_errors = 0
+                self._attempt_reconnect()
+    
+    def _attempt_reconnect(self):
+        """尝试重新连接到服务器"""
+        self.is_connected = False
+        
+        # 关闭旧 socket
+        if self.socket:
+            try:
+                self.socket.close()
+            except:
+                pass
+            self.socket = None
+        
+        time.sleep(2)  # 等待后重试
+        
+        if not self.running:
+            return
+        
+        try:
+            # 重建 socket
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            self.socket.setblocking(False)
+            try:
+                self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF,
+                                     self.network_config.buffer_size)
+            except:
+                pass
+            
+            # 重新发送注册包
+            test_packet = self.protocol.create_heartbeat_packet(
+                self.device_config.callsign,
+                self.device_config.ssid,
+                dmr_id=self.device_config.dmr_id,
+                dev_mode=self.device_config.model
+            )
+            self.socket.sendto(test_packet.encode(),
+                             (self.server_config.host, self.server_config.port))
+            
+            self.is_connected = True
+            self.logger.info(f"重新连接成功: {self.server_config.host}:{self.server_config.port}")
+        except Exception as e:
+            self.logger.error(f"重新连接失败: {e}")
     
     def _heartbeat_loop(self):
         """心跳循环
@@ -460,7 +585,7 @@ class NRLClient:
         self.logger.debug(f"收到数据包: {packet}")
         
         # 检查状态位的DCD/PTT标志
-        if packet.packet_type == NRLPacket.TYPE_VOICE or packet.packet_type == NRLPacket.TYPE_SERVER_VOICE:
+        if packet.packet_type in (NRLPacket.TYPE_VOICE, NRLPacket.TYPE_OPUS, NRLPacket.TYPE_SERVER_VOICE):
             # 如果状态位bit0为0，表示监听/非发送模式，应丢弃包
             if packet.status & 0x01 == 0:
                 self.logger.debug(f"丢弃语音包: 状态位表示非发送模式 from {packet.get_callsign_ssid()}")
@@ -468,7 +593,11 @@ class NRLClient:
         
         if packet.packet_type == NRLPacket.TYPE_VOICE:
             self._handle_voice_packet(packet)
-            self.device_status['voice_packets_received'] += 1
+            self._inc_status('voice_packets_received')
+            
+        elif packet.packet_type == NRLPacket.TYPE_OPUS:
+            self._handle_opus_voice_packet(packet)
+            self._inc_status('voice_packets_received')
             
         elif packet.packet_type == NRLPacket.TYPE_HEARTBEAT:
             self._handle_heartbeat_packet(packet)
@@ -478,30 +607,45 @@ class NRLClient:
             
         elif packet.packet_type == NRLPacket.TYPE_SERVER_VOICE:
             self._handle_server_voice_packet(packet)
-            self.device_status['voice_packets_received'] += 1
+            self._inc_status('voice_packets_received')
             
         else:
             self.logger.info(f"收到未知类型数据包: type={packet.packet_type}")
     
     def _normalize_voice_data(self, packet: NRLPacket, context: str = "语音") -> bool:
-        """统一处理语音包数据：验证、调试模式填充、返回是否有效"""
+        """统一处理语音包数据：验证、调试模式填充、返回是否有效
+        
+        根据数据包类型确定期望帧大小：
+        - G.711 (Type=1): 160字节
+        - Opus (Type=8): 变长，不校验长度
+        - 服务器互联 (Type=9): 160字节
+        """
+        is_opus = (packet.packet_type == NRLPacket.TYPE_OPUS)
+        expected_size = 160  # G.711 / 服务器互联的期望大小
+        
         if not packet.data or len(packet.data) == 0:
             if not self.debug_force_decode:
                 self.logger.warning(f"收到空{context}数据包 from {packet.get_callsign_ssid()}")
                 return False
             self.logger.info(f"[调试模式] 收到空{context}数据包，强制解码 from {packet.get_callsign_ssid()}")
-            packet.data = b'\x80' * 500
-        elif self.debug_force_decode and len(packet.data) != 500:
-            if len(packet.data) > 500:
+            packet.data = b'\x80' * expected_size
+        
+        # Opus是变长编码，不做长度校验
+        if is_opus:
+            return True
+        
+        # G.711长度校验
+        if self.debug_force_decode and len(packet.data) != expected_size:
+            if len(packet.data) > expected_size:
                 original_len = len(packet.data)
-                packet.data = packet.data[-500:]
-                self.logger.info(f"[调试模式] {context}包长度异常 ({original_len} bytes)，提取最后500字节")
-            elif len(packet.data) < 500:
+                packet.data = packet.data[:expected_size]
+                self.logger.info(f"[调试模式] {context}包长度异常 ({original_len} bytes)，截取前{expected_size}字节")
+            elif len(packet.data) < expected_size:
                 original_len = len(packet.data)
-                packet.data = b'\x80' * (500 - len(packet.data)) + packet.data
-                self.logger.info(f"[调试模式] {context}包长度不足 ({original_len} bytes)，补充静音至500字节")
-        elif not self.debug_force_decode and len(packet.data) != 500:
-            self.logger.warning(f"{context}数据包长度不是500字节: {len(packet.data)} from {packet.get_callsign_ssid()}")
+                packet.data = packet.data + b'\x80' * (expected_size - len(packet.data))
+                self.logger.info(f"[调试模式] {context}包长度不足 ({original_len} bytes)，补充静音至{expected_size}字节")
+        elif not self.debug_force_decode and len(packet.data) != expected_size:
+            self.logger.warning(f"{context}数据包长度不是{expected_size}字节: {len(packet.data)} from {packet.get_callsign_ssid()}")
         return True
     
     def _play_voice_pcm(self, pcm_data: bytes, packet: NRLPacket, extra_info: dict = None):
@@ -531,23 +675,38 @@ class NRLClient:
             self.voice_callback(pcm_data, extra_info) if extra_info else self.voice_callback(pcm_data)
     
     def _handle_voice_packet(self, packet: NRLPacket):
-        """处理语音数据包"""
+        """处理G.711语音数据包 (Type=1)"""
         try:
-            if not self._normalize_voice_data(packet, "语音"):
+            if not self._normalize_voice_data(packet, "G.711语音"):
                 return
             
-            # 解码语音数据
-            pcm_data = self.voice_processor.decode_voice(packet.data)
+            # 根据数据包类型解码，不依赖本端codec设置
+            pcm_data = self.voice_processor.decode_voice_by_type(packet.data, packet.packet_type)
             self._play_voice_pcm(pcm_data, packet)
             
-            self.logger.debug(f"处理语音数据包成功: {len(packet.data)} bytes from {packet.get_callsign_ssid()}")
+            self.logger.debug(f"处理G.711语音数据包成功: {len(packet.data)} bytes from {packet.get_callsign_ssid()}")
         except Exception as e:
-            self.logger.error(f"处理语音数据包失败: {e}")
+            self.logger.error(f"处理G.711语音数据包失败: {e}")
+            self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
+    
+    def _handle_opus_voice_packet(self, packet: NRLPacket):
+        """处理Opus语音数据包 (Type=8)"""
+        try:
+            if not self._normalize_voice_data(packet, "Opus语音"):
+                return
+            
+            # 根据数据包类型解码
+            pcm_data = self.voice_processor.decode_voice_by_type(packet.data, packet.packet_type)
+            self._play_voice_pcm(pcm_data, packet)
+            
+            self.logger.debug(f"处理Opus语音数据包成功: {len(packet.data)} bytes from {packet.get_callsign_ssid()}")
+        except Exception as e:
+            self.logger.error(f"处理Opus语音数据包失败: {e}")
             self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
     
     def _handle_heartbeat_packet(self, packet: NRLPacket):
         """处理心跳数据包 心跳包只有头部，没有数据"""
-        self.device_status['last_heartbeat'] = time.time()
+        self._set_status_value('last_heartbeat', time.time())
         self.logger.debug(f"收到心跳包: {packet.get_callsign_ssid()}, DMRID: {packet.dmr_id.hex()}")
         
         # 验证心跳包格式
@@ -600,8 +759,8 @@ class NRLClient:
             if not self._normalize_voice_data(packet, "服务器互联语音"):
                 return
             
-            # 解码G.711语音数据
-            pcm_data = self.voice_processor.decode_voice(packet.data)
+            # 根据数据包类型解码（Type=9使用G.711编码）
+            pcm_data = self.voice_processor.decode_voice_by_type(packet.data, packet.packet_type)
             
             # 携带原始设备信息播放
             original_info = {
@@ -619,9 +778,10 @@ class NRLClient:
     
     def send_voice_data(self, voice_data: bytes) -> bool:
         """发送语音数据
-
         
-        每个语音包包含500字节G.711数据
+        根据当前编码格式创建对应的数据包：
+        - G.711 (Type=1): 160字节固定长度
+        - Opus (Type=8): 变长编码
         使用状态位的bit0作为发送/接收标志
         有一个计数器用于包排序
         """
@@ -634,23 +794,24 @@ class NRLClient:
                 self.logger.warning("语音数据为空")
                 return False
             
-            # 确保数据长度正好是500字节
-            if len(voice_data) < 500:
-                # 填充静音数据（G.711的0值编码）
-                voice_data = voice_data + (b'\x80' * (500 - len(voice_data)))
-            elif len(voice_data) > 500:
-                # 截断超长数据
-                self.logger.warning(f"语音数据超长（{len(voice_data)}字节），截断为500字节")
-                voice_data = voice_data[:500]
-            
-            # 创建语音数据包
-            packet = self.protocol.create_voice_packet(
-                self.device_config.callsign,
-                self.device_config.ssid,
-                dmr_id=self.device_config.dmr_id,
-                voice_data=voice_data,
-                dev_mode=self.device_config.model
-            )
+            # 根据编码格式创建对应的数据包
+            codec = self.audio_config.codec
+            if codec == 'opus':
+                packet = self.protocol.create_opus_voice_packet(
+                    self.device_config.callsign,
+                    self.device_config.ssid,
+                    dmr_id=self.device_config.dmr_id,
+                    opus_data=voice_data,
+                    dev_mode=self.device_config.model
+                )
+            else:
+                packet = self.protocol.create_voice_packet(
+                    self.device_config.callsign,
+                    self.device_config.ssid,
+                    dmr_id=self.device_config.dmr_id,
+                    voice_data=voice_data,
+                    dev_mode=self.device_config.model
+                )
             
             if not packet:
                 self.logger.error("语音包创建失败")
@@ -666,8 +827,8 @@ class NRLClient:
             self.socket.sendto(packet_data, 
                              (self.server_config.host, self.server_config.port))
             
-            self.device_status['voice_packets_sent'] += 1
-            self.device_status['packets_sent'] += 1
+            self._inc_status('voice_packets_sent')
+            self._inc_status('packets_sent')
             
             self.logger.debug(f"语音包已发送: {len(voice_data)} bytes, 总长度: {len(packet_data)} bytes")
             return True
@@ -718,7 +879,7 @@ class NRLClient:
             self.socket.sendto(packet_data, 
                              (self.server_config.host, self.server_config.port))
             
-            self.device_status['packets_sent'] += 1
+            self._inc_status('packets_sent')
             self.logger.info(f"文本消息已发送: {message} (长度: {len(text_bytes)} 字节)")
             return True
             
@@ -767,7 +928,7 @@ class NRLClient:
             self.socket.sendto(packet_data, 
                              (self.server_config.host, self.server_config.port))
             
-            self.device_status['packets_sent'] += 1
+            self._inc_status('packets_sent')
             self.logger.debug(f"心跳包已发送: {packet.get_callsign_ssid()}, "
                             f"DMRID: {packet.dmr_id.hex()}, 长度: {len(packet_data)} bytes")
             return True
@@ -829,6 +990,73 @@ class NRLClient:
             
         except Exception as e:
             self.logger.error(f"停止语音传输失败: {e}")
+    
+    def set_codec(self, codec_type: str) -> bool:
+        """运行时切换发射编码格式（自动保存到配置文件）
+        
+        接收端不受影响，会根据数据包Type字段自动识别并解码。
+        
+        Args:
+            codec_type: "g711" 或 "opus"
+            
+        Returns:
+            切换是否成功
+        """
+        if codec_type not in ("g711", "opus"):
+            self.logger.error(f"不支持的编码格式: {codec_type}")
+            return False
+        
+        if codec_type == self.audio_config.codec:
+            return True  # 已经是目标格式
+        
+        # Opus需要opuslib支持
+        if codec_type == "opus" and not OpusCodec.is_available():
+            self.logger.error("opuslib 未安装，无法使用Opus编码")
+            return False
+        
+        # 确保不在录音中切换
+        if self.is_recording_local:
+            self.logger.warning("录音中无法切换编码格式，请先停止PTT")
+            return False
+        
+        try:
+            # 更新配置
+            self.audio_config.codec = codec_type
+            
+            # 更新采样率
+            if codec_type == 'opus':
+                self.audio_config.sample_rate = 16000
+                chunk_size = 640
+            else:
+                self.audio_config.sample_rate = 8000
+                chunk_size = 320
+            
+            # 更新音频处理器
+            if self.audio_handler:
+                self.audio_handler.stop_playback()
+                self.audio_handler.close()
+                self.audio_handler = AudioHandler(
+                    sample_rate=self.audio_config.sample_rate,
+                    channels=self.audio_config.channels,
+                    chunk_size=chunk_size,
+                    format_str=self.audio_config.format,
+                    codec_type=codec_type
+                )
+            
+            # 更新语音处理器
+            if self.voice_processor:
+                self.voice_processor.set_codec(codec_type)
+            
+            self.logger.info(f"语音编码格式已切换为: {codec_type} (采样率: {self.audio_config.sample_rate}Hz)")
+            
+            # 持久化到配置文件
+            self.save_config()
+            
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"切换编码格式失败: {e}")
+            return False
     
     def get_device_info(self) -> Dict[str, Any]:
         """获取设备信息"""
