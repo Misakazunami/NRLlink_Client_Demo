@@ -13,7 +13,8 @@ import os
 from typing import Optional, Dict, Any, Callable
 from dataclasses import dataclass
 
-from nrl_protocol import NRLProtocol, NRLPacket, OpusCodec
+from nrl_protocol import (NRLProtocol, NRLPacket, OpusCodec,
+    format_location_message, parse_text_subtype, parse_location_content, generate_map_url)
 from audio_handler import AudioHandler, VoiceProcessor
 
 # 操作系统名称映射
@@ -27,6 +28,76 @@ OS_NAME_MAP = {
 def get_os_display_name() -> str:
     """获取可读的操作系统名称"""
     return OS_NAME_MAP.get(os.name, "未知")
+
+
+class LocationProvider:
+    """位置获取提供者，支持多级回退:
+    1. Windows Location API (GPS/基站/WiFi)
+    2. IP 地理定位 (公网 IP)
+    """
+
+    _logger = logging.getLogger("LocationProvider")
+
+    @classmethod
+    def get_location(cls) -> tuple:
+        """获取当前位置
+
+        返回: (lat: float, lng: float, source: str)
+        source 为 "gps" / "ip" / "unavailable"
+        """
+        # 1. 尝试 Windows Location API
+        result = cls._try_winrt_gps()
+        if result:
+            return (result[0], result[1], "gps")
+
+        # 2. 尝试 IP 地理定位
+        result = cls._try_ip_geolocation()
+        if result:
+            return (result[0], result[1], "ip")
+
+        return (0.0, 0.0, "unavailable")
+
+    @classmethod
+    def _try_winrt_gps(cls) -> tuple:
+        """尝试通过 Windows Location API 获取坐标"""
+        if os.name != "nt":
+            return None
+        try:
+            import asyncio
+            from winrt.windows.devices.geolocation import Geolocator  # type: ignore
+
+            async def _get_pos():
+                locator = Geolocator()
+                pos = await locator.get_geopoint_async()
+                coord = pos.coordinate
+                return (coord.latitude, coord.longitude)
+
+            loop = asyncio.new_event_loop()
+            try:
+                return loop.run_until_complete(_get_pos())
+            finally:
+                loop.close()
+        except ImportError:
+            cls._logger.debug("winrt 未安装，跳过 GPS 定位")
+        except Exception as e:
+            cls._logger.debug(f"Windows GPS 定位失败: {e}")
+        return None
+
+    @classmethod
+    def _try_ip_geolocation(cls) -> tuple:
+        """尝试通过 IP 地址获取大致位置"""
+        try:
+            import requests  # type: ignore
+            resp = requests.get("http://ip-api.com/json/?fields=lat,lon,status", timeout=5)
+            data = resp.json()
+            if data.get("status") == "success":
+                return (float(data["lat"]), float(data["lon"]))
+        except ImportError:
+            cls._logger.debug("requests 未安装，跳过 IP 定位")
+        except Exception as e:
+            cls._logger.debug(f"IP 定位失败: {e}")
+        return None
+
 
 @dataclass
 class DeviceConfig:
@@ -85,6 +156,14 @@ class NetworkConfig:
     buffer_size: int
     heartbeat_interval: int
 
+@dataclass
+class LocationConfig:
+    """位置配置"""
+    default_lat: float = 0.0
+    default_lng: float = 0.0
+    auto_report: bool = False
+    report_interval: int = 600  # 秒
+
 class NRLClient:
     """NRL客户端的主类"""
     
@@ -97,6 +176,7 @@ class NRLClient:
         self.server_config: Optional[ServerConfig] = None
         self.audio_config: Optional[AudioConfig] = None
         self.network_config: Optional[NetworkConfig] = None
+        self.location_config: Optional[LocationConfig] = None
         
         # 服务器列表
         self.servers_list: list[ServerInfo] = []
@@ -107,6 +187,7 @@ class NRLClient:
         self.is_connected = False
         self.receive_thread = None
         self.heartbeat_thread = None
+        self.location_report_thread = None
         self.running = False
         
         # 协议处理
@@ -140,6 +221,17 @@ class NRLClient:
         self.voice_playback_timeout = 0.5  # 语音播放超时时间（秒）
         self.playback_check_thread = None  # 播放超时检查线程
         self.is_recording_local = False  # 本地正在录音标志，录音期间禁用自动播放
+        
+        # 房间（Group）状态
+        self.current_group_id: int = 0           # 当前所在房间 ID
+        self.current_group_name: str = "公共大厅"  # 当前房间名
+        self.group_list: list = []                # 房间列表缓存 [{"id": int, "name": str}, ...]
+        self._group_list_pending: bool = False     # 等待房间列表响应
+        self._join_group_pending: bool = False     # 等待加入房间响应
+        self._group_list_timeout: float = 3.0      # 房间列表请求超时（秒）
+        self._join_group_timeout: float = 3.0      # 加入房间请求超时（秒）
+        self.group_list_callback: Optional[Callable[[list], None]] = None   # 房间列表更新回调
+        self.group_change_callback: Optional[Callable[[int, str], None]] = None  # 房间切换结果回调
         
         # 加载配置
         self.load_config(config_file)
@@ -248,6 +340,15 @@ class NRLClient:
                 heartbeat_interval=network_cfg.get('heartbeat_interval', 30)
             )
             
+            # 位置配置
+            location_cfg = config_data.get('location', {})
+            self.location_config = LocationConfig(
+                default_lat=location_cfg.get('default_lat', 0.0),
+                default_lng=location_cfg.get('default_lng', 0.0),
+                auto_report=location_cfg.get('auto_report', False),
+                report_interval=location_cfg.get('report_interval', 600)
+            )
+            
             self.logger.info("配置加载成功")
             
         except Exception as e:
@@ -322,12 +423,13 @@ class NRLClient:
         try:
             # === 关键：先停止旧线程，避免 old threads 继续运行并堆积 GUI 回调 ===
             self.running = False
-            for t in (self.receive_thread, self.heartbeat_thread, self.playback_check_thread):
+            for t in (self.receive_thread, self.heartbeat_thread, self.playback_check_thread, self.location_report_thread):
                 if t and t.is_alive():
                     t.join(timeout=1.0)
             self.receive_thread = None
             self.heartbeat_thread = None
             self.playback_check_thread = None
+            self.location_report_thread = None
             
             # 关闭旧 socket
             if self.socket:
@@ -379,6 +481,12 @@ class NRLClient:
             self.playback_check_thread = threading.Thread(target=self._playback_timeout_loop, daemon=True)
             self.playback_check_thread.start()
             
+            # 启动自动位置上报线程（如果配置开启）
+            if self.location_config and self.location_config.auto_report:
+                self.location_report_thread = threading.Thread(target=self._location_report_loop, daemon=True)
+                self.location_report_thread.start()
+                self.logger.info(f"自动位置上报已开启，间隔 {self.location_config.report_interval} 秒")
+            
             self._update_status('connected', True)
             self.logger.info(f"连接到服务器成功: {self.server_config.host}:{self.server_config.port}")
             self.logger.info(f"NRL_Link Client Beta V1.4.2")
@@ -412,7 +520,7 @@ class NRLClient:
         self.is_connected = False
         
         # 等待后台线程退出，避免资源竞争
-        for t in (self.receive_thread, self.heartbeat_thread, self.playback_check_thread):
+        for t in (self.receive_thread, self.heartbeat_thread, self.playback_check_thread, self.location_report_thread):
             if t and t.is_alive():
                 t.join(timeout=2.0)
         
@@ -557,6 +665,37 @@ class NRLClient:
                     self.is_connected = False
                     heartbeat_failures = 0
     
+    def _location_report_loop(self):
+        """自动上报位置循环
+
+        在 auto_report 开启且连接成功后，按 report_interval 间隔
+        自动解析位置（GPS → IP → 默认配置）并发送给服务器。
+        """
+        # 连接后立即上报一次
+        try:
+            lat, lng, source = self.resolve_location()
+            if lat != 0.0 or lng != 0.0:
+                self.send_location_message(lat, lng)
+                self.logger.info(f"自动上报位置: {lat:.6f},{lng:.6f} (来源: {source})")
+            else:
+                self.logger.warning("自动上报位置失败：无可用位置")
+        except Exception as e:
+            self.logger.error(f"自动上报位置异常: {e}")
+
+        while self.running:
+            try:
+                time.sleep(self.location_config.report_interval)
+                if not self.running or not self.is_connected:
+                    break
+                lat, lng, source = self.resolve_location()
+                if lat != 0.0 or lng != 0.0:
+                    self.send_location_message(lat, lng)
+                    self.logger.info(f"自动上报位置: {lat:.6f},{lng:.6f} (来源: {source})")
+                else:
+                    self.logger.warning("自动上报位置失败：无可用位置")
+            except Exception as e:
+                self.logger.error(f"自动上报位置异常: {e}")
+
     def _playback_timeout_loop(self):
         """播放超时检查循环 - 定期检查是否需要关闭播放
         
@@ -608,6 +747,9 @@ class NRLClient:
         elif packet.packet_type == NRLPacket.TYPE_SERVER_VOICE:
             self._handle_server_voice_packet(packet)
             self._inc_status('voice_packets_received')
+            
+        elif packet.packet_type == NRLPacket.TYPE_JOIN_GROUP:
+            self._handle_join_group_response(packet)
             
         else:
             self.logger.info(f"收到未知类型数据包: type={packet.packet_type}")
@@ -732,13 +874,23 @@ class NRLClient:
                 self.logger.debug(f"[调试模式] 文本包长度: {len(packet.data)} bytes，直接解码")
             
             text_data = packet.data.decode('utf-8', errors='ignore')
+            parsed = parse_text_subtype(packet.data)
             message = {
                 'type': 'text',
+                'subtype': parsed['subtype'],
                 'from': packet.get_callsign_ssid(),
                 'data': text_data,
+                'content': parsed['content'],
                 'timestamp': time.time(),
                 'length': len(packet.data)
             }
+            
+            # 位置消息额外解析坐标和地图链接
+            if parsed['subtype'] == 'loc':
+                lat, lng = parse_location_content(parsed['content'])
+                message['lat'] = lat
+                message['lng'] = lng
+                message['map_url'] = generate_map_url(lat, lng)
             
             if self.message_callback:
                 self.message_callback(message)
@@ -776,6 +928,107 @@ class NRLClient:
             self.logger.error(f"处理服务器互联语音数据包失败: {e}")
             self.logger.error(f"数据包信息: type={packet.packet_type}, callsign={packet.get_callsign_ssid()}, data_len={len(packet.data)}")
     
+    def _handle_join_group_response(self, packet: NRLPacket):
+        """处理房间操作响应包 (Type=7)
+
+        Subtype 1: 加入/切换房间响应
+        Subtype 2: 房间列表响应
+        """
+        try:
+            if not packet.data or len(packet.data) < 1:
+                self.logger.warning("收到空的房间操作响应包")
+                return
+
+            subtype = packet.data[0]
+
+            if subtype == 2 and self._group_list_pending:
+                # 房间列表响应
+                self._group_list_pending = False
+                group_list = self.protocol.parse_group_list_response(packet.data)
+                self.group_list = group_list
+                self.logger.info(f"收到房间列表: 共 {len(group_list)} 个房间")
+                for g in group_list:
+                    self.logger.info(f"  房间 {g['id']}: {g['name']}")
+                if self.group_list_callback:
+                    self.group_list_callback(group_list)
+
+            elif subtype == 1 and self._join_group_pending:
+                # 加入房间响应
+                self._join_group_pending = False
+                group_id, group_name = self.protocol.parse_join_group_response(packet.data)
+                if group_name == "error":
+                    self.logger.warning(f"加入房间 {group_id} 失败: 服务器拒绝（可能无权限或房间不存在）")
+                    if self.group_change_callback:
+                        self.group_change_callback(-1, "error")
+                else:
+                    self.current_group_id = group_id
+                    self.current_group_name = group_name
+                    self.logger.info(f"已切换到房间: {group_id}-{group_name}")
+                    self._update_status('current_group', f"{group_id}-{group_name}")
+                    if self.group_change_callback:
+                        self.group_change_callback(group_id, group_name)
+            else:
+                self.logger.debug(f"收到房间操作响应 (subtype={subtype})，无待处理请求")
+
+        except Exception as e:
+            self.logger.error(f"处理房间操作响应失败: {e}")
+            self.logger.error(f"数据包信息: type={packet.packet_type}, data_len={len(packet.data) if packet.data else 0}")
+
+    def request_group_list(self) -> bool:
+        """请求服务器房间列表
+
+        发送 Type=7, Subtype=2 的 UDP 包请求公共房间列表。
+        结果通过 group_list_callback 回调返回，或直接访问 self.group_list。
+        """
+        if not self.is_connected:
+            self.logger.warning("未连接到服务器，无法请求房间列表")
+            return False
+
+        try:
+            packet = self.protocol.create_group_list_packet(
+                self.device_config.callsign,
+                self.device_config.ssid,
+                dmr_id=self.device_config.dmr_id,
+                dev_mode=self.device_config.model
+            )
+            self.socket.sendto(packet.encode(),
+                             (self.server_config.host, self.server_config.port))
+            self._group_list_pending = True
+            self._inc_status('packets_sent')
+            self.logger.info("已发送房间列表请求")
+            return True
+        except Exception as e:
+            self.logger.error(f"发送房间列表请求失败: {e}")
+            return False
+
+    def join_group(self, group_id: int) -> bool:
+        """加入/切换到指定房间
+
+        发送 Type=7, Subtype=1 的 UDP 包请求切换房间。
+        结果通过 group_change_callback 回调返回。
+        """
+        if not self.is_connected:
+            self.logger.warning("未连接到服务器，无法切换房间")
+            return False
+
+        try:
+            packet = self.protocol.create_join_group_packet(
+                self.device_config.callsign,
+                self.device_config.ssid,
+                dmr_id=self.device_config.dmr_id,
+                group_id=group_id,
+                dev_mode=self.device_config.model
+            )
+            self.socket.sendto(packet.encode(),
+                             (self.server_config.host, self.server_config.port))
+            self._join_group_pending = True
+            self._inc_status('packets_sent')
+            self.logger.info(f"已发送加入房间请求: {group_id}")
+            return True
+        except Exception as e:
+            self.logger.error(f"发送加入房间请求失败: {e}")
+            return False
+
     def send_voice_data(self, voice_data: bytes) -> bool:
         """发送语音数据
         
@@ -892,6 +1145,42 @@ class NRLClient:
         except Exception as e:
             self.logger.error(f"发送文本消息失败: {e}")
             return False
+    
+    def send_location_message(self, lat: float, lng: float) -> bool:
+        """发送位置消息（[loc] 子类型）
+
+        将坐标格式化为 [loc]lat,lng 并作为 Type=5 文本消息发送。
+        """
+        if not self.is_connected:
+            self.logger.warning("未连接到服务器，无法发送位置消息")
+            return False
+        if lat == 0.0 and lng == 0.0:
+            self.logger.warning("坐标无效，无法发送位置消息")
+            return False
+        loc_msg = format_location_message(lat, lng)
+        return self.send_text_message(loc_msg)
+    
+    def get_current_location(self) -> tuple:
+        """获取当前位置（阻塞调用，建议在子线程中使用）
+
+        返回: (lat: float, lng: float, source: str)
+        source: "gps" / "ip" / "unavailable"
+        """
+        return LocationProvider.get_location()
+
+    def resolve_location(self) -> tuple:
+        """解析最终可用位置：GPS → IP → 默认配置
+
+        返回: (lat: float, lng: float, source: str)
+        source: "gps" / "ip" / "default" / "unavailable"
+        """
+        lat, lng, source = self.get_current_location()
+        if lat != 0.0 or lng != 0.0:
+            return (lat, lng, source)
+        # 尝试使用默认配置
+        if self.location_config and (self.location_config.default_lat != 0.0 or self.location_config.default_lng != 0.0):
+            return (self.location_config.default_lat, self.location_config.default_lng, "default")
+        return (0.0, 0.0, "unavailable")
     
     def send_heartbeat(self) -> bool:
         """发送心跳包
@@ -1067,6 +1356,18 @@ class NRLClient:
             'model': self.device_config.model,
             'online': self.is_connected,
             'status': self.device_status
+        }
+    
+    def get_audio_buffer_status(self) -> Dict[str, Any]:
+        """获取音频缓冲区状态（用于 GUI 监控）"""
+        if self.audio_handler:
+            return self.audio_handler.get_buffer_status()
+        return {
+            'play_depth': 0,
+            'play_ms': 0,
+            'record_cache_bytes': 0,
+            'is_playing': False,
+            'is_recording': False,
         }
     
     def get_status(self) -> Dict[str, Any]:

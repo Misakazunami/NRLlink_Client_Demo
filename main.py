@@ -136,6 +136,9 @@ def main():
             print("  disconnect - 断开连接")
             print("  status - 查看状态")
             print("  send <消息> - 发送文本消息")
+            print("  rooms - 拉取房间列表")
+            print("  join <房间ID> - 加入指定房间")
+            print("  loc [lat lng] - 发送位置 (自动GPS或手动坐标)")
             print("  voice_start - 开始语音传输")
             print("  voice_stop - 停止语音传输")
             print("  help - 列出所有可用命令")
@@ -173,12 +176,79 @@ def main():
                     elif command == 'voice_stop':
                         client.stop_voice_transmission()
                         print("语音传输已停止")
+                    elif command == 'rooms':
+                        if not client.is_connected:
+                            print("请先连接到服务器")
+                        else:
+                            # 设置回调打印结果
+                            def _on_group_list(gl):
+                                print(f"\n房间列表 (共 {len(gl)} 个):")
+                                for g in gl:
+                                    marker = " <-- 当前" if g['id'] == client.current_group_id else ""
+                                    print(f"  {g['id']:>4}  {g['name']}{marker}")
+                                print()
+                            client.group_list_callback = _on_group_list
+                            if client.request_group_list():
+                                print("正在获取房间列表...")
+                            else:
+                                print("发送请求失败")
+                    elif command.startswith('join '):
+                        if not client.is_connected:
+                            print("请先连接到服务器")
+                        else:
+                            try:
+                                group_id = int(command[5:].strip())
+                                # 设置回调打印结果
+                                def _on_group_changed(gid, gname):
+                                    if gid < 0 or gname == "error":
+                                        print(f"加入房间失败: 服务器拒绝")
+                                    else:
+                                        print(f"已切换到房间: {gid}-{gname}")
+                                client.group_change_callback = _on_group_changed
+                                if client.join_group(group_id):
+                                    print(f"正在加入房间 {group_id}...")
+                                else:
+                                    print("发送请求失败")
+                            except ValueError:
+                                print("用法: join <房间ID> (纯数字)")
+                    elif command.startswith('loc'):
+                        if not client.is_connected:
+                            print("请先连接到服务器")
+                        else:
+                            parts = command.split()
+                            if len(parts) == 3:
+                                # loc <lat> <lng> 手动输入坐标
+                                try:
+                                    lat = float(parts[1])
+                                    lng = float(parts[2])
+                                    if client.send_location_message(lat, lng):
+                                        print(f"已发送位置: {lat},{lng}")
+                                    else:
+                                        print("发送失败")
+                                except ValueError:
+                                    print("用法: loc <纬度> <经度> (如: loc 31.8612 117.2839)")
+                            else:
+                                # loc 自动获取GPS
+                                print("正在获取位置...")
+                                lat, lng, source = client.get_current_location()
+                                if lat == 0.0 and lng == 0.0:
+                                    print("定位失败: 无法获取当前位置")
+                                else:
+                                    source_name = {"gps": "GPS", "ip": "IP定位"}.get(source, source)
+                                    print(f"当前位置: {lat:.6f},{lng:.6f} (来源: {source_name})")
+                                    if client.send_location_message(lat, lng):
+                                        print("位置消息已发送")
+                                    else:
+                                        print("发送失败")
                     elif command == 'help':
                         print("可用命令：")
                         print("  connect - 连接到服务器")
                         print("  disconnect - 断开连接")
                         print("  status - 查看状态")
                         print("  send <消息> - 发送文本消息")
+                        print("  rooms - 拉取房间列表")
+                        print("  join <房间ID> - 加入指定房间")
+                        print("  loc [lat lng] - 发送位置 (自动GPS或手动坐标)")
                         print("  voice_start - 开始语音传输")
                         print("  voice_stop - 停止语音传输")
                         print("  help - 列出所有可用命令")

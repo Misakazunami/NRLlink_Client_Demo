@@ -580,6 +580,39 @@ class AudioHandler:
         
         return normalized_level
     
+    def get_buffer_status(self) -> dict:
+        """获取音频缓冲区状态（用于 GUI 监控）
+        
+        Returns:
+            dict: {
+                'play_depth': int,        # 播放缓冲帧数
+                'play_ms': int,           # 播放缓冲延迟（毫秒），每帧20ms
+                'record_cache_bytes': int, # 录音编码缓存字节数
+                'is_playing': bool,       # 是否正在播放
+                'is_recording': bool,     # 是否正在录音
+            }
+        """
+        try:
+            with self.voice_cache_lock:
+                record_cache = len(self.voice_data_cache)
+        except Exception:
+            record_cache = 0
+        
+        try:
+            with self.lock:
+                play_depth = len(self.play_buffer)
+        except Exception:
+            play_depth = 0
+        
+        # 每帧固定 20ms（G.711: 320B PCM, Opus: 640B PCM 均为 20ms）
+        return {
+            'play_depth': play_depth,
+            'play_ms': play_depth * 20,
+            'record_cache_bytes': record_cache,
+            'is_playing': self.is_playing,
+            'is_recording': self.is_recording,
+        }
+    
     def test_audio_devices(self):
         """测试音频设备"""
         print("测试音频设备...")

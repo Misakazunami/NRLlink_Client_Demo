@@ -5,6 +5,7 @@ NRL协议处理模块
 import struct
 import time
 import socket
+import logging
 from typing import Optional, Tuple
 
 class NRLPacket:
@@ -188,9 +189,24 @@ class NRLPacket:
                 self.original_ssid = 0
                 self.original_ip = b"\x00" * 4
             
-            # 数据部分 — 严格按 Length 字段截取，避免 UDP 填充字节混入
+            # 数据部分
+            # 新版服务端：Length 字段正确，严格按 Length 截取
+            # 旧版服务端：Length 字段可能仅填头部长度(48)甚至为 0，
+            #   但 UDP 包中头部后面仍然携带了语音数据。
+            #   Go 服务端解码直接用 d[48:]，不看 Length 字段。
+            #   客户端对语音类型包做兼容：Length <= HEADER_SIZE 时回退取剩余数据。
             if self.length > self.HEADER_SIZE:
                 self.data = data[self.HEADER_SIZE:self.length]
+            elif (self.packet_type in (NRLPacket.TYPE_VOICE,
+                                       NRLPacket.TYPE_OPUS,
+                                       NRLPacket.TYPE_SERVER_VOICE)
+                  and len(data) > self.HEADER_SIZE):
+                # 兼容旧版服务端：Length 异常但实际携带了语音数据
+                import logging
+                logging.getLogger(__name__).debug(
+                    f"旧版语音包兼容: Type={self.packet_type}, "
+                    f"Length={self.length}, 实际数据={len(data) - self.HEADER_SIZE}字节")
+                self.data = data[self.HEADER_SIZE:]
             else:
                 self.data = b""
             
@@ -397,8 +413,170 @@ class NRLProtocol:
         packet.count = self.packet_count
         self.packet_count = (self.packet_count + 1) & 0xFFFF  # 确保16位计数器
         return packet
-    
+# ==================== 房间（Group）协议方法 ====================
 
+    def create_group_list_packet(self, callsign: str, ssid: int, dmr_id: str,
+                                 dev_mode: int = 1) -> NRLPacket:
+        """创建获取房间列表请求包 (Type=7, Subtype=2)
+
+        服务端收到后返回公共房间 CSV 列表，格式: "id,name\\nid,name\\n..."
+        参考服务端 udphub.go case 7 -> case 2
+        """
+        packet = NRLPacket()
+        packet.packet_type = NRLPacket.TYPE_JOIN_GROUP  # Type=7
+        packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
+        packet.ssid = ssid
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
+        packet.dev_mode = dev_mode if dev_mode else 0x01
+        packet.status = 0x01
+        packet.data = b'\x02'  # subtype 2 = 获取组列表
+        packet.count = self.packet_count
+        self.packet_count = (self.packet_count + 1) & 0xFFFF
+        return packet
+
+    def create_join_group_packet(self, callsign: str, ssid: int, dmr_id: str,
+                                 group_id: int, dev_mode: int = 1) -> NRLPacket:
+        """创建加入/切换房间请求包 (Type=7, Subtype=1)
+
+        data[0] = 1 (切换组指令), data[1:5] = group_id (big-endian uint32)
+        参考服务端 udphub.go case 7 -> case 1
+        """
+        packet = NRLPacket()
+        packet.packet_type = NRLPacket.TYPE_JOIN_GROUP  # Type=7
+        packet.callsign = callsign.encode('utf-8').ljust(6, b'\x00')[:6]
+        packet.ssid = ssid
+        packet.dmr_id = self._parse_dmr_id_hex(dmr_id)
+        packet.dev_mode = dev_mode if dev_mode else 0x01
+        packet.status = 0x01
+        packet.data = b'\x01' + struct.pack('>I', group_id)
+        packet.count = self.packet_count
+        self.packet_count = (self.packet_count + 1) & 0xFFFF
+        return packet
+
+    @staticmethod
+    def parse_group_list_response(data: bytes) -> list:
+        """解析房间列表响应数据
+
+        服务器返回格式: CSV "id,name\\nid,name\\n..."
+        跳过 subtype 字节 (data[0]) 后解析 CSV
+        返回: [{"id": int, "name": str}, ...]
+        """
+        result = []
+        if not data or len(data) < 2:
+            return result
+        # data[0] 是 subtype (2)，data[1:] 是 CSV 文本
+        text = data[1:].decode('utf-8', errors='ignore').strip()
+        if not text:
+            return result
+        for line in text.split('\n'):
+            line = line.strip()
+            if not line:
+                continue
+            parts = line.split(',', 1)
+            if len(parts) >= 2:
+                try:
+                    group_id = int(parts[0].strip())
+                    group_name = parts[1].strip()
+                    result.append({"id": group_id, "name": group_name})
+                except ValueError:
+                    continue
+        return result
+
+    @staticmethod
+    def parse_join_group_response(data: bytes) -> tuple:
+        """解析加入房间响应数据
+
+        服务器返回格式: 原始包 data + 追加字符串如 "0公共大厅" 或 "999error"
+        跳过 subtype 字节和 group_id (前5字节) 后解析结果文本
+        返回: (group_id: int, group_name: str)，失败时 group_name 为 "error"
+        """
+        if not data or len(data) < 5:
+            return (-1, "error")
+        # data[0] = subtype (1), data[1:5] = group_id (big-endian)
+        group_id = struct.unpack('>I', data[1:5])[0]
+        # data[5:] 是服务器追加的结果文本
+        if len(data) > 5:
+            result_text = data[5:].decode('utf-8', errors='ignore').strip()
+            if 'error' in result_text.lower():
+                return (group_id, "error")
+            # 成功时格式为 "id房间名"，提取房间名（跳过开头的数字ID）
+            i = 0
+            while i < len(result_text) and result_text[i].isdigit():
+                i += 1
+            group_name = result_text[i:] if i < len(result_text) else result_text
+            return (group_id, group_name.strip())
+        return (group_id, "")
+
+
+# ==================== 文本消息子类型工具函数 ====================
+
+# Type=5 文本消息子类型前缀定义（与服务端 decode.go 规范一致）
+TEXT_SUBTYPE_PREFIXES = {
+    "[text]":  "text",
+    "[loc]":   "loc",
+    "[json]":  "json",
+    "[xml]":   "xml",
+    "[html]":  "html",
+    "[bin]":   "bin",
+    "[img]":   "img",
+    "[video]": "video",
+    "[audio]": "audio",
+}
+
+
+def format_location_message(lat: float, lng: float) -> str:
+    """格式化位置消息（带 [loc] 前缀）
+
+    返回: "[loc]31.861200,117.283900"
+    """
+    return f"[loc]{lat:.6f},{lng:.6f}"
+
+
+def parse_text_subtype(data: bytes) -> dict:
+    """解析 Type=5 文本数据的子类型前缀
+
+    检测 [loc]、[text]、[json] 等前缀，返回结构化信息。
+    无前缀时默认 subtype="text"。
+    返回: {"subtype": str, "content": str, "raw": str}
+    """
+    raw = data.decode('utf-8', errors='ignore')
+    for prefix, subtype in TEXT_SUBTYPE_PREFIXES.items():
+        if raw.startswith(prefix):
+            return {
+                "subtype": subtype,
+                "content": raw[len(prefix):],
+                "raw": raw,
+            }
+    # 无前缀，视为纯文本
+    return {"subtype": "text", "content": raw, "raw": raw}
+
+
+def parse_location_content(content: str) -> tuple:
+    """解析位置坐标字符串
+
+    输入: "31.8612,117.2839" 或 "31.8612,117.2839,50.0,10.0"(含海拔、精度)
+    返回: (lat: float, lng: float) 或解析失败时 (0.0, 0.0)
+    """
+    parts = content.strip().split(',')
+    if len(parts) >= 2:
+        try:
+            lat = float(parts[0].strip())
+            lng = float(parts[1].strip())
+            if -90.0 <= lat <= 90.0 and -180.0 <= lng <= 180.0:
+                return (lat, lng)
+        except ValueError:
+            pass
+    return (0.0, 0.0)
+
+
+def generate_map_url(lat: float, lng: float) -> str:
+    """生成高德地图链接
+
+    高德 URI API 格式: position=lng,lat（注意经度在前）
+    """
+    if lat == 0.0 and lng == 0.0:
+        return ""
+    return f"https://uri.amap.com/marker?position={lng:.6f},{lat:.6f}"
 
 
 # G.711编解码相关常量（与Go版本保持一致）
@@ -516,16 +694,33 @@ class G711Codec:
 
 
 # 尝试导入Opus编解码库
+# 优先级: opuslib (原生绑定) > av/PyAV (FFmpeg内置opus)
+_OPUS_BACKEND = None
 try:
     import opuslib  # type: ignore
     import opuslib.api  # type: ignore
+    _OPUS_BACKEND = "opuslib"
     OPUS_AVAILABLE = True
-except ImportError:
-    OPUS_AVAILABLE = False
+except Exception:
+    pass
+
+if _OPUS_BACKEND is None:
+    try:
+        import av as _av  # type: ignore
+        # 快速验证 FFmpeg 是否支持 opus 编码
+        _test_codec = _av.Codec("libopus", "w")
+        _OPUS_BACKEND = "av"
+        OPUS_AVAILABLE = True
+    except Exception:
+        OPUS_AVAILABLE = False
 
 
 class OpusCodec:
     """Opus编解码器 - 用于NRL协议 Type=8
+    
+    支持两种后端：
+    - opuslib: 原生 opus 绑定（需要 opus DLL）
+    - av (PyAV): FFmpeg 内置 opus（pip install av 即可）
     
     参考nrllink服务器端规范：
     - 采样率: 16kHz
@@ -546,16 +741,26 @@ class OpusCodec:
     
     def __init__(self):
         if not OPUS_AVAILABLE:
-            raise ImportError("opuslib 未安装，请运行: pip install opuslib")
-        
-        self._encoder = opuslib.Encoder(self.SAMPLE_RATE, self.CHANNELS, opuslib.APPLICATION_VOIP)
-        self._decoder = opuslib.Decoder(self.SAMPLE_RATE, self.CHANNELS)
-        
-        # 设置编码器参数
-        self._encoder.bitrate = self.BITRATE
-        self._encoder.complexity = self.COMPLEXITY
+            raise ImportError("Opus不可用，请安装: pip install av  或  pip install opuslib")
         
         self._logger = logging.getLogger(__name__)
+        self._backend = _OPUS_BACKEND
+        
+        if self._backend == "opuslib":
+            self._encoder = opuslib.Encoder(self.SAMPLE_RATE, self.CHANNELS, opuslib.APPLICATION_VOIP)
+            self._decoder = opuslib.Decoder(self.SAMPLE_RATE, self.CHANNELS)
+            self._encoder.bitrate = self.BITRATE
+            self._encoder.complexity = self.COMPLEXITY
+        elif self._backend == "av":
+            import io
+            # 编码：每帧独立 ogg 容器（输出 ogg 页面数据，可直接发 UDP）
+            self._enc_pts = 0
+            # 解码：累积 ogg 页面数据，重建 ogg 流解码 + resample
+            self._dec_ogg_pages = []      # 已接收的 ogg 页面数据
+            self._dec_pcm_frames = []     # 解码后的 PCM 帧缓存
+            self._dec_frame_cursor = 0    # 下次返回的帧索引
+        
+        self._logger.info(f"Opus编解码器初始化成功 (后端: {self._backend})")
     
     def encode(self, pcm_data: bytes) -> bytes:
         """将16位PCM数据编码为Opus帧
@@ -564,22 +769,55 @@ class OpusCodec:
         输出: Opus编码数据 (变长, 通常40-80字节)
         """
         if not pcm_data:
-            # 返回DTX (不连续传输) 静音帧
-            return self._encoder.encode(b'\x00' * self.PCM_FRAME_BYTES, self.FRAME_SIZE)
+            pcm_data = b'\x00' * self.PCM_FRAME_BYTES
+        
+        # 确保输入是正确的帧大小
+        if len(pcm_data) < self.PCM_FRAME_BYTES:
+            pcm_data = pcm_data + b'\x00' * (self.PCM_FRAME_BYTES - len(pcm_data))
+        elif len(pcm_data) > self.PCM_FRAME_BYTES:
+            pcm_data = pcm_data[:self.PCM_FRAME_BYTES]
         
         try:
-            # 确保输入是正确的帧大小
-            if len(pcm_data) < self.PCM_FRAME_BYTES:
-                pcm_data = pcm_data + b'\x00' * (self.PCM_FRAME_BYTES - len(pcm_data))
-            elif len(pcm_data) > self.PCM_FRAME_BYTES:
-                pcm_data = pcm_data[:self.PCM_FRAME_BYTES]
-            
-            opus_data = self._encoder.encode(pcm_data, self.FRAME_SIZE)
-            return opus_data
+            if self._backend == "opuslib":
+                return self._encoder.encode(pcm_data, self.FRAME_SIZE)
+            else:
+                return self._encode_av(pcm_data)
         except Exception as e:
             self._logger.debug(f"Opus编码错误: {e}")
-            # 返回静音帧
-            return self._encoder.encode(b'\x00' * self.PCM_FRAME_BYTES, self.FRAME_SIZE)
+            try:
+                if self._backend == "opuslib":
+                    return self._encoder.encode(b'\x00' * self.PCM_FRAME_BYTES, self.FRAME_SIZE)
+                else:
+                    return self._encode_av(b'\x00' * self.PCM_FRAME_BYTES)
+            except Exception:
+                return b''
+    
+    def _encode_av(self, pcm_data: bytes) -> bytes:
+        """每帧独立 ogg 容器编码（输出 ogg 页面数据，SNR=24.7dB）"""
+        import io
+        import numpy as np  # type: ignore
+        
+        buf = io.BytesIO()
+        out = _av.open(buf, mode='w', format='ogg')
+        stream = out.add_stream('libopus', rate=self.SAMPLE_RATE)
+        stream.layout = 'mono'
+        stream.bit_rate = self.BITRATE
+        stream.format = 's16'
+        
+        samples = np.frombuffer(pcm_data, dtype=np.int16)
+        frame = _av.AudioFrame.from_ndarray(
+            samples.reshape(1, -1), format='s16', layout='mono'
+        )
+        frame.rate = self.SAMPLE_RATE
+        frame.pts = 0
+        
+        for pkt in stream.encode(frame):
+            out.mux(pkt)
+        for pkt in stream.encode(None):
+            out.mux(pkt)
+        out.close()
+        
+        return buf.getvalue()
     
     def decode(self, opus_data: bytes) -> bytes:
         """将Opus数据解码为16位PCM
@@ -591,14 +829,73 @@ class OpusCodec:
             return b'\x00' * self.PCM_FRAME_BYTES
         
         try:
-            pcm_data = self._decoder.decode(opus_data, self.FRAME_SIZE)
-            return pcm_data
+            if self._backend == "opuslib":
+                return self._decoder.decode(opus_data, self.FRAME_SIZE)
+            else:
+                return self._decode_av(opus_data)
         except Exception as e:
             self._logger.debug(f"Opus解码错误: {e}, 数据长度={len(opus_data)}")
-            # 返回静音帧
             return b'\x00' * self.PCM_FRAME_BYTES
+    
+    def _decode_av(self, opus_data: bytes) -> bytes:
+        """解码一个 ogg 页面数据为 16kHz 16bit PCM
+        
+        累积所有收到的 ogg 页面数据，重建 ogg 流解码 + resample，
+        缓存 PCM 帧，每次返回一帧（640字节）。
+        """
+        import io
+        import numpy as np  # type: ignore
+        
+        # 追加新页面
+        self._dec_ogg_pages.append(opus_data)
+        
+        # 从缓存取帧
+        if self._dec_frame_cursor < len(self._dec_pcm_frames):
+            result = self._dec_pcm_frames[self._dec_frame_cursor]
+            self._dec_frame_cursor += 1
+            return result
+        
+        # 重建 ogg 流，解码所有累积的页面
+        combined = b''.join(self._dec_ogg_pages)
+        buf = io.BytesIO(combined)
+        inp = _av.open(buf, mode='r')
+        resampler = _av.AudioResampler(format='s16', layout='mono', rate=self.SAMPLE_RATE)
+        
+        all_pcm = bytearray()
+        for frame in inp.decode():
+            for rf in resampler.resample(frame):
+                arr = rf.to_ndarray()
+                if arr.dtype != np.int16:
+                    arr = arr.astype(np.int16)
+                all_pcm.extend(arr.tobytes())
+        for rf in resampler.resample(None):
+            arr = rf.to_ndarray()
+            if arr.dtype != np.int16:
+                arr = arr.astype(np.int16)
+            all_pcm.extend(arr.tobytes())
+        inp.close()
+        
+        # 按 640 字节切分为帧
+        new_frames = []
+        offset = 0
+        while offset + self.PCM_FRAME_BYTES <= len(all_pcm):
+            new_frames.append(bytes(all_pcm[offset:offset + self.PCM_FRAME_BYTES]))
+            offset += self.PCM_FRAME_BYTES
+        
+        self._dec_pcm_frames = new_frames
+        self._dec_frame_cursor = 1  # 跳过第 0 帧（pre-skip），从第 1 帧开始返回
+        
+        if self._dec_pcm_frames:
+            return self._dec_pcm_frames[0]
+        
+        return b'\x00' * self.PCM_FRAME_BYTES
     
     @staticmethod
     def is_available() -> bool:
         """检查Opus编解码器是否可用"""
         return OPUS_AVAILABLE
+    
+    @staticmethod
+    def get_backend() -> str:
+        """返回当前使用的Opus后端名称"""
+        return _OPUS_BACKEND or "none"

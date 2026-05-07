@@ -163,6 +163,28 @@ class NRLGUIClient:
                                             command=self.send_text_message,
                                             state=tk.DISABLED)
         self.send_message_button.grid(row=1, column=5, padx=(10, 0), pady=(10, 0))
+        
+        self.send_location_button = ttk.Button(self.control_frame, text="发送位置",
+                                               command=self.send_location,
+                                               state=tk.DISABLED)
+        self.send_location_button.grid(row=1, column=6, padx=(5, 0), pady=(10, 0))
+        
+        # 房间选择行
+        ttk.Label(self.control_frame, text="房间:").grid(row=2, column=0, sticky=tk.W, pady=(10, 0))
+        self.room_var = tk.StringVar(value="公共大厅 (0)")
+        self.room_combo = ttk.Combobox(self.control_frame, textvariable=self.room_var,
+                                        values=["公共大厅 (0)"], state="readonly", width=25)
+        self.room_combo.grid(row=2, column=1, columnspan=2, sticky=(tk.W, tk.E), pady=(10, 0))
+        
+        self.refresh_rooms_button = ttk.Button(self.control_frame, text="刷新房间列表",
+                                               command=self.refresh_room_list,
+                                               state=tk.DISABLED)
+        self.refresh_rooms_button.grid(row=2, column=3, padx=(5, 5), pady=(10, 0))
+        
+        self.join_room_button = ttk.Button(self.control_frame, text="加入房间",
+                                           command=self.join_selected_room,
+                                           state=tk.DISABLED)
+        self.join_room_button.grid(row=2, column=4, padx=(0, 10), pady=(10, 0))
     
     def create_audio_frame(self):
         """创建音频控制面板"""
@@ -286,6 +308,14 @@ class NRLGUIClient:
         # 分隔符
         ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
         
+        # 房间信息
+        ttk.Label(bottom_frame, text="房间:").pack(side=tk.LEFT, padx=(10, 2))
+        self.room_label = ttk.Label(bottom_frame, text="0-公共大厅", font=('Arial', 9))
+        self.room_label.pack(side=tk.LEFT, padx=(0, 20))
+        
+        # 分隔符
+        ttk.Separator(bottom_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=5)
+        
         # 当前时间
         ttk.Label(bottom_frame, text="时间:").pack(side=tk.LEFT, padx=(10, 2))
         self.current_time_label = ttk.Label(bottom_frame, text="--:--:--", font=('Arial', 9))
@@ -365,6 +395,70 @@ class NRLGUIClient:
             self.log_text.insert(tk.END, f"{time.strftime('%H:%M:%S')} - {message}\n")
             self.log_text.see(tk.END)
     
+    def _auto_refresh_room_list(self):
+        """连接成功后自动刷新房间列表"""
+        if self.client and self.client.is_connected:
+            self.refresh_room_list()
+    
+    def refresh_room_list(self):
+        """刷新房间列表"""
+        if not self.client or not self.client.is_connected:
+            self.log_message("未连接到服务器，无法刷新房间列表")
+            return
+        if self.client.request_group_list():
+            self.log_message("已发送房间列表请求...")
+        else:
+            self.log_message("发送房间列表请求失败")
+    
+    def join_selected_room(self):
+        """加入选中的房间"""
+        if not self.client or not self.client.is_connected:
+            self.log_message("未连接到服务器，无法切换房间")
+            return
+        selected = self.room_var.get()
+        # 从 "房间名 (ID)" 格式中提取 ID
+        try:
+            group_id = int(selected.split("(")[-1].rstrip(")"))
+        except (ValueError, IndexError):
+            self.log_message(f"无法解析房间ID: {selected}")
+            return
+        if self.client.join_group(group_id):
+            self.log_message(f"正在加入房间: {group_id}...")
+        else:
+            self.log_message(f"发送加入房间请求失败")
+    
+    def on_group_list_updated(self, group_list: list):
+        """房间列表更新回调（从接收线程调用，需切换到主线程）"""
+        self.root.after(0, self._update_room_list_ui, group_list)
+    
+    def _update_room_list_ui(self, group_list: list):
+        """在主线程中更新房间下拉框"""
+        if not group_list:
+            self.log_message("房间列表为空")
+            return
+        room_values = [f"{g['name']} ({g['id']})" for g in group_list]
+        self.room_combo['values'] = room_values
+        # 保持选中当前房间
+        current_text = f"{self.client.current_group_name} ({self.client.current_group_id})"
+        if current_text in room_values:
+            self.room_var.set(current_text)
+        else:
+            self.room_var.set(room_values[0])
+        self.log_message(f"房间列表已更新: 共 {len(group_list)} 个房间")
+    
+    def on_group_changed(self, group_id: int, group_name: str):
+        """房间切换结果回调（从接收线程调用，需切换到主线程）"""
+        self.root.after(0, self._update_room_change_ui, group_id, group_name)
+    
+    def _update_room_change_ui(self, group_id: int, group_name: str):
+        """在主线程中更新房间切换结果"""
+        if group_id < 0 or group_name == "error":
+            self.log_message("加入房间失败: 服务器拒绝（可能无权限或房间不存在）")
+            return
+        self.room_label.config(text=f"{group_id}-{group_name}")
+        self.room_var.set(f"{group_name} ({group_id})")
+        self.log_message(f"已切换到房间: {group_id}-{group_name}")
+    
     def connect_to_server(self):
         """连接到服务器"""
         try:
@@ -375,12 +469,17 @@ class NRLGUIClient:
                 self.client.set_message_callback(self.on_message_received)
                 self.client.set_voice_callback(self.on_voice_received)
                 self.client.set_status_callback(self.on_status_changed)
+                self.client.group_list_callback = self.on_group_list_updated
+                self.client.group_change_callback = self.on_group_changed
             
             if self.client.connect():
                 self.connection_status.set("已连接")
                 self.connect_button.config(state=tk.DISABLED)
                 self.disconnect_button.config(state=tk.NORMAL)
                 self.send_message_button.config(state=tk.NORMAL)
+                self.refresh_rooms_button.config(state=tk.NORMAL)
+                self.join_room_button.config(state=tk.NORMAL)
+                self.send_location_button.config(state=tk.NORMAL)
                 
                 # 开始状态更新
                 self.start_status_update()
@@ -394,6 +493,9 @@ class NRLGUIClient:
                         self.log_message(f"刷新音频设备失败: {str(e)}")
                 
                 self.log_message("连接到服务器成功")
+                
+                # 连接成功后自动请求房间列表
+                self.root.after(1000, self._auto_refresh_room_list)
             else:
                 messagebox.showerror("连接失败", "无法连接到服务器")
                 
@@ -424,6 +526,9 @@ class NRLGUIClient:
             self.connect_button.config(state=tk.NORMAL)
             self.disconnect_button.config(state=tk.DISABLED)
             self.send_message_button.config(state=tk.DISABLED)
+            self.refresh_rooms_button.config(state=tk.DISABLED)
+            self.join_room_button.config(state=tk.DISABLED)
+            self.send_location_button.config(state=tk.DISABLED)
             
             # 停止状态更新
             self.stop_status_update()
@@ -489,9 +594,111 @@ class NRLGUIClient:
         except Exception as e:
             messagebox.showerror("发送错误", f"发送消息失败: {str(e)}")
     
-    def on_message_received(self, message: Dict):
-        """消息接收回调"""
-        self.log_message(f"收到消息 [{message.get('from', '未知')}] {message.get('data', '')}")
+    def send_location(self):
+        """发送当前位置"""
+        if not self.client:
+            messagebox.showwarning("未连接", "请先连接到服务器")
+            return
+        self.log_message("正在获取位置...")
+        self.send_location_button.config(state=tk.DISABLED, text="定位中...")
+        threading.Thread(target=self._send_location_thread, daemon=True).start()
+    
+    def _send_location_thread(self):
+        """在子线程中获取位置并发送（优先自动，回退默认配置，最后手动）"""
+        try:
+            lat, lng, source = self.client.resolve_location()
+            if lat == 0.0 and lng == 0.0:
+                self.root.after(0, lambda: self.log_message("所有定位方式均不可用，请手动输入坐标..."))
+                self.root.after(0, self._prompt_manual_location)
+                return
+            if self.client.send_location_message(lat, lng):
+                source_name = {"gps": "GPS", "ip": "IP定位", "default": "默认配置", "unavailable": "未知"}.get(source, source)
+                self.root.after(0, lambda: self.log_message(f"已发送位置: {lat:.6f},{lng:.6f} (来源: {source_name})"))
+            else:
+                self.root.after(0, lambda: self.log_message("位置消息发送失败"))
+        except Exception as e:
+            self.root.after(0, lambda: self.log_message(f"获取位置失败: {e}"))
+        finally:
+            self.root.after(0, lambda: self.send_location_button.config(state=tk.NORMAL, text="发送位置"))
+
+    def _prompt_manual_location(self):
+        """在主线程中弹出对话框让用户手动输入坐标"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("手动输入位置")
+        dialog.geometry("320x180")
+        dialog.resizable(False, False)
+        dialog.transient(self.root)
+        dialog.grab_set()
+
+        tk.Label(dialog, text="自动定位失败，请手动输入坐标：").pack(pady=(12, 6))
+
+        frame = tk.Frame(dialog)
+        frame.pack(pady=4)
+        tk.Label(frame, text="纬度:").grid(row=0, column=0, padx=5, sticky="e")
+        lat_var = tk.StringVar()
+        lat_entry = tk.Entry(frame, width=16, textvariable=lat_var)
+        lat_entry.grid(row=0, column=1, padx=5, pady=2)
+
+        tk.Label(frame, text="经度:").grid(row=1, column=0, padx=5, sticky="e")
+        lng_var = tk.StringVar()
+        lng_entry = tk.Entry(frame, width=16, textvariable=lng_var)
+        lng_entry.grid(row=1, column=1, padx=5, pady=2)
+
+        def on_ok():
+            try:
+                lat = float(lat_var.get())
+                lng = float(lng_var.get())
+            except ValueError:
+                messagebox.showerror("输入错误", "请输入有效的数字", parent=dialog)
+                return
+            if not (-90.0 <= lat <= 90.0 and -180.0 <= lng <= 180.0):
+                messagebox.showerror("输入错误", "纬度范围 -90~90，经度范围 -180~180", parent=dialog)
+                return
+            dialog.destroy()
+            self.log_message("正在发送手动输入的位置...")
+            self.send_location_button.config(state=tk.DISABLED, text="发送中...")
+            threading.Thread(target=self._do_send_manual_location, args=(lat, lng), daemon=True).start()
+
+        def on_cancel():
+            dialog.destroy()
+            self.send_location_button.config(state=tk.NORMAL, text="发送位置")
+
+        btn_frame = tk.Frame(dialog)
+        btn_frame.pack(pady=12)
+        tk.Button(btn_frame, text="发送", width=8, command=on_ok).pack(side=tk.LEFT, padx=10)
+        tk.Button(btn_frame, text="取消", width=8, command=on_cancel).pack(side=tk.LEFT, padx=10)
+
+        lat_entry.focus_set()
+        dialog.protocol("WM_DELETE_WINDOW", on_cancel)
+
+    def _do_send_manual_location(self, lat: float, lng: float):
+        """在子线程中发送手动输入的位置"""
+        try:
+            if self.client.send_location_message(lat, lng):
+                self.root.after(0, lambda: self.log_message(f"已发送位置: {lat:.6f},{lng:.6f} (来源: 手动输入)"))
+            else:
+                self.root.after(0, lambda: self.log_message("位置消息发送失败"))
+        except Exception as e:
+            self.root.after(0, lambda: self.log_message(f"发送位置失败: {e}"))
+        finally:
+            self.root.after(0, lambda: self.send_location_button.config(state=tk.NORMAL, text="发送位置"))
+    
+    def on_message_received(self, message):
+        """消息接收回调，根据子类型增强显示"""
+        if isinstance(message, dict):
+            subtype = message.get('subtype', 'text')
+            sender = message.get('from', '未知')
+            if subtype == 'loc':
+                lat = message.get('lat', 0.0)
+                lng = message.get('lng', 0.0)
+                map_url = message.get('map_url', '')
+                self.log_message(f"📍 [{sender}] 位置: {lat:.6f}, {lng:.6f}")
+                if map_url:
+                    self.log_message(f"   地图: {map_url}")
+            else:
+                self.log_message(f"收到消息 [{sender}]: {message.get('data', '')}")
+        else:
+            self.log_message(f"收到消息: {message}")
     
     def on_voice_received(self, voice_data: bytes):
         """语音接收回调"""
@@ -1301,10 +1508,15 @@ NRLLink_Client Demo
         messagebox.showinfo("关于", about_text.strip())
     
     def on_closing(self):
-        """窗口关闭处理 — 添加超时保护，防止 close() 阻塞导致窗口无法关闭"""
+        """窗口关闭处理 — 确保进程干净退出"""
+        # 1) 启动保底强制退出定时器（5秒后无条件终止进程）
+        import threading as _threading
+        _kill_timer = _threading.Timer(5.0, lambda: os._exit(0))
+        _kill_timer.daemon = True
+        _kill_timer.start()
+        
+        # 2) 后台关闭客户端（最多等 2 秒）
         if self.client:
-            # 在后台线程执行 close()，避免阻塞 GUI 主线程
-            import threading as _threading
             close_done = _threading.Event()
             def _close():
                 try:
@@ -1313,10 +1525,22 @@ NRLLink_Client Demo
                     pass
                 close_done.set()
             _threading.Thread(target=_close, daemon=True).start()
-            # 等待最多 2 秒，超时则强制销毁窗口
             close_done.wait(timeout=2.0)
         
-        self.root.destroy()
+        # 3) 刷新日志
+        try:
+            import logging
+            logging.shutdown()
+        except Exception:
+            pass
+        
+        # 4) 销毁窗口后退出
+        try:
+            self.root.destroy()
+        except Exception:
+            pass
+        
+        os._exit(0)
     
     def update_recent_configs_menu(self):
         """更新最近使用的配置菜单"""
