@@ -4,6 +4,9 @@
 
 基于[nrllink](https://github.com/hicaoc/nrllink)开源项目开发的Python客户端，实现业余无线电网络互联功能。
 
+### 本项目已经并入[78HAM](https://github.com/78ham)计划，作为 [78HAM-Desktop](https://github.com/78ham/78ham-Desktop)维护。
+### 此仓库将会在近期归档
+
 > **当前版本：Beta V1.4.2**
 
 注意：
